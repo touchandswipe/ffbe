@@ -205,7 +205,7 @@ function convertJSON( serialObj ) {
     return obj;
 }
 
-/*Initialise datapull from Google Tables*/
+/*Initialise datapull*/
 function initialize(fusionData) {
   /*Xtra Columns to hide by resolution*/
   if ( $( document ).width() >= 1600 ) {
@@ -219,8 +219,8 @@ function initialize(fusionData) {
 	if (fusionData.columns.indexOf("ID")==-1) {
 		/*LocalStorage Delete and Refresh*/
 		alert("Data structure has changed. Click OK to upgrade.");
-		localStorage.removeItem("msguideadvance");
-		localStorage.removeItem("msguideadvanceCount");
+		localStorage.removeItem("ffbeguideadv");
+		localStorage.removeItem("ffbeguideadvCount");
 		history.pushState(null, null, location.pathname);
 		location.reload(true);
 	} else {
@@ -228,6 +228,7 @@ function initialize(fusionData) {
 	bfPROsTable=$('#mytable').dataTable({
 		"data":fusionData.rows,
 		"columns": [
+			
 		{ "data": fusionData.columns.indexOf("ID") },
 		{ "data": fusionData.columns.indexOf("ID") }, /*used for icon file*/
 		{ "data": fusionData.columns.indexOf("Name") },
@@ -1061,36 +1062,30 @@ $(document).ready( function(e) {
     window.showOnlyFavs=false;
     
     /*LocalStorage Retreival and storage*/
-    if (localStorage.msguideadvance) {
+    if (localStorage.ffbeguideadv) {
     	/*Quick query to check for new entries*/
     	var serverUnitsCount=0;
-    	var localUnitsCount=(!localStorage.msguideadvanceCount) ? 0 : parseInt(localStorage.msguideadvanceCount);
-    	var query = "SELECT 'ID' FROM " + gTable;
-  	var encodedQuery = encodeURIComponent(query);
-  	/*Construct the URL*/
-	var url = [gURL];
-	url.push('?sql=' + encodedQuery);
-	url.push('&key=' + gKey);
-	url.push('&callback=?');
+    	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : parseInt(localStorage.ffbeguideadvCount);
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:Q";
 
 	/*Send the JSONP request*/
 	$.ajax({
-		url: url.join(''),
-		dataType: 'jsonp',
+		url: url;
 		success: function (quickData) {
-			serverUnitsCount=quickData.rows.length;
+			console.log("success: "+quickData);
+			serverUnitsCount=quickData.values.length;
 			/*Prompt to Sync*/
 			if (serverUnitsCount > localUnitsCount)
 				bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i> Sync Now</button> <button type="button" class="btn btn-default" id="syncCancel">Cancel</button></div>');
 			else {
-				guideData=LZString.decompressFromUTF16(localStorage.msguideadvance);
+				guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 				if (isValidJSON(guideData))
 					initialize(JSON.parse(guideData));
 				else {
 					/*LocalStorage Delete and Refresh*/
 					alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
-					localStorage.removeItem("msguideadvance");
-					localStorage.removeItem("msguideadvanceCount");
+					localStorage.removeItem("ffbeguideadv");
+					localStorage.removeItem("ffbeguideadvCount");
 					history.pushState(null, null, location.pathname);
 					location.reload(true);
 					}
@@ -1105,24 +1100,16 @@ $(document).ready( function(e) {
 		toggle:true
 	})
     
-    	/*Query Fusion Tables 1st Time*/
-    	var query = "SELECT * FROM " +
-  	gTable + " ORDER BY 'ID' ASC";
-  	var encodedQuery = encodeURIComponent(query);
-  	/*Construct the URL*/
-	var url = [gURL];
-	url.push('?sql=' + encodedQuery);
-	url.push('&key=' + gKey);
-	url.push('&callback=?');
+    	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:Q";
 
 	/*Send the JSONP request*/
 	$.ajax({
-		url: url.join(''),
-		dataType: 'jsonp',
+		url: url;
 		success: function (fusionData) {
+			console.log("success: "+fusionData);
 			/*Save in local storage*/
-			localStorage.setItem("msguideadvance",LZString.compressToUTF16(JSON.stringify(fusionData)));
-			localStorage.setItem("msguideadvanceCount",fusionData.rows.length);
+			localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
+			localStorage.setItem("ffbeguideadvCount",fusionData.rows.length);
 			initialize(fusionData);
 	  	}
 	})
@@ -1168,8 +1155,8 @@ $('#resetBtn').click( function(e) {
   		'title': 'Brave Frontier PROs Unit Guide Advance Sync'
 	});
     	/*LocalStorage Delete and Refresh*/
-	localStorage.removeItem("msguideadvance");
-	localStorage.removeItem("msguideadvanceCount");
+	localStorage.removeItem("ffbeguideadv");
+	localStorage.removeItem("ffbeguideadvCount");
 	history.pushState(null, null, location.pathname);
 	location.reload(true);
 })
@@ -1309,23 +1296,23 @@ $(document).on("click", "#syncDetectBtn", function(e){
 /*New units sync*/
 $(document).on("click", "#syncNewBtn", function(e){    
 	/*Force sync*/
-	localStorage.removeItem("msguideadvance");
-	localStorage.removeItem("msguideadvanceCount");
+	localStorage.removeItem("ffbeguideadv");
+	localStorage.removeItem("ffbeguideadvCount");
 	history.pushState(null, null, location.pathname);
 	location.reload(true);
 })
 
 /*Cancel sync*/
 $(document).on("click", "#syncCancel", function(e){    
-	guideData=LZString.decompressFromUTF16(localStorage.msguideadvance);
+	guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 	if (isValidJSON(guideData)) {
 		$('#alertmodal').modal('hide');
 		initialize(JSON.parse(guideData));
 	} else {
 		/*LocalStorage Delete and Refresh*/
 		alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
-		localStorage.removeItem("msguideadvance");
-		localStorage.removeItem("msguideadvanceCount");
+		localStorage.removeItem("ffbeguideadv");
+		localStorage.removeItem("ffbeguideadvCount");
 		history.pushState(null, null, location.pathname);
 		location.reload(true);
 	}
