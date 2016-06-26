@@ -984,7 +984,7 @@ $(document).ready( function(e) {
 			console.log("success: "+fusionData);
 			/*Save in local storage*/
 			localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
-			localStorage.setItem("ffbeguideadvCount",fusionData.rows.length);
+			localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
 			initialize(fusionData);
 	  	}
 	})
