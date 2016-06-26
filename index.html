@@ -213,15 +213,6 @@ function initialize(fusionData) {
   } else if ( ( $( document ).width() < 800 ) && ( $( document ).width() >= 500 ) ) { var xtraDefCol=[9,10,11,12,13,14]; var pLength=100;
   } else { var xtraDefCol=[9,10,11,12,13,14,15,16,17,18]; var pLength=50; }
   
-	/*Check for latest ver of Data with UBB*/
-	if (fusionData.columns.indexOf("ID")==-1) {
-		/*LocalStorage Delete and Refresh*/
-		alert("Data structure has changed. Click OK to upgrade.");
-		localStorage.removeItem("ffbeguideadv");
-		localStorage.removeItem("ffbeguideadvCount");
-		history.pushState(null, null, location.pathname);
-		location.reload(true);
-	} else {
 	var tData=fusionData.values.slice(1);
 	bbfeTable=$('#mytable').dataTable({
 		"data":tData,
@@ -338,7 +329,6 @@ function initialize(fusionData) {
 		    return true;
 		}
 	})
-	} /*End checking for right 7* dataset*/
 }/*End init fn*/
 
 /*Fav Modal Units Draw function*/
