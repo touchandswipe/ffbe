@@ -205,14 +205,6 @@ function convertJSON( serialObj ) {
 
 /*Initialise datapull*/
 function initialize(fusionData) {
-  /*Xtra Columns to hide by resolution*/
-  if ( $( document ).width() >= 1600 ) {
-    var xtraDefCol=[]; var pLength=100;
-  } else if ( ( $( document ).width() < 1600 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[12,13,14]; var pLength=100; 
-  } else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[9,10,11,12,13,14]; var pLength=100;
-  } else if ( ( $( document ).width() < 800 ) && ( $( document ).width() >= 500 ) ) { var xtraDefCol=[9,10,11,12,13,14]; var pLength=100;
-  } else { var xtraDefCol=[9,10,11,12,13,14,15,16,17,18]; var pLength=50; }
-  
 	var tData=fusionData.values.slice(1);
 	bbfeTable=$('#mytable').dataTable({
 		"data":tData,
@@ -261,12 +253,6 @@ function initialize(fusionData) {
 			    /*needed as show is not included in function*/
 			    $('#cardModal').modal('show');
 			}
-			/*check for compare param*/
-			var compareParam=urlParam('compare');
-			if ( (compareParam != "") && ( compareParam != null) ) {
-			    var tempArray = compareParam.split(',');
-			    openCompare(tempArray);
-			}
 			/*Open Favs via URL*/
 			var favParam=urlParam('favUnits');
 			if ( (favParam != "") && ( favParam != null) ) {
@@ -282,9 +268,9 @@ function initialize(fusionData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		{ "width": "225", "targets": [ 7,9,12 ] },
-		{ "visible": false, "targets": [ 12,13,14 ].concat(xtraDefCol) },
-		{ "searchable": false, "targets": [ 8,10,12,13,14,15,16,17,18 ] },
+		//{ "width": "225", "targets": [ 7,9,12 ] },
+		//{ "visible": false, "targets": [ 12,13,14 ] },
+		//{ "searchable": false, "targets": [ 8,10,12,13,14,15,16,17,18 ] },
 		/*using data instead of render to set DATA for cache */
 		{ "targets": [ 1 ], "width":"150",
 		"render": function (monster, type, cRow, full )  {
