@@ -287,34 +287,6 @@ function initialize(fusionData) {
 			}
 		}] /*End Customs*/
 	}) /*End Datatables Init*/
-
-	/*Custom filter for ID Range*/
-	$.fn.dataTable.ext.search.push (
-	    function( settings, data, dataIndex ) {
-		var selectedUnitVal = parseInt($('#selectunithide').val());
-		var selectedId = data[0] || 0; /*Use data UnitID*/
-		if ( ( selectedUnitVal == 0 ) || (( selectedId >= selectedUnitVal-99 ) && (selectedId <= selectedUnitVal )) )   
-		    { return true; }
-		return false;
-	})
-	
-	/*Custom filter for Fav*/
-	$.fn.dataTable.ext.search.push (
-	    function( settings, data, dataIndex ) {
-		var selectedId = data[0] || 0; /*Use data UnitID*/
-		if (showOnlyFavs) {
-		    for (i=0;i<favSelect.length;i++) {
-			if (selectedId == favSelect[i]) {
-			    return true;
-			}
-		    }
-		    if (i==favSelect.length) {
-			return false;
-		    }
-		} else {
-		    return true;
-		}
-	})
 }/*End init fn*/
 
 /*Fav Modal Units Draw function*/
