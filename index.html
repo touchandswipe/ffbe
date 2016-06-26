@@ -9,7 +9,6 @@
     <title>Final Fantasy Brave Exvius - Units Guide (Beta) - A community effort</title>
     <link rel="shortcut icon" href="https://googledrive.com/host/0B4hJr8BXxvFZZVVOZWswdnlnYTg/iconavatar128.png" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/colvis/1.1.0/css/dataTables.colVis.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -121,7 +120,6 @@ margin-left:-4px;
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script type='text/javascript' src='//cdn.datatables.net/1.10.0/js/jquery.dataTables.js'></script>
-<script type='text/javascript' src='//cdn.datatables.net/colvis/1.1.0/js/dataTables.colVis.min.js'></script>
 <script type='text/javascript' src='//cdn.datatables.net/plug-ins/be7019ee387/integration/bootstrap/3/dataTables.bootstrap.js'></script>
 <script src="//touchandswipe.github.io/bravefrontier/js/lz-string.min.js"></script>
 <script src="//touchandswipe.github.io/monsterstrike/js/msguidecommon.js"></script>
@@ -224,46 +222,29 @@ function initialize(fusionData) {
 		history.pushState(null, null, location.pathname);
 		location.reload(true);
 	} else {
-	deserialdata = convertJSON(fusionData);
-	bfPROsTable=$('#mytable').dataTable({
-		"data":fusionData.rows,
+	var tData=fusionData.values.slice(1);
+	bbfeTable=$('#mytable').dataTable({
+		"data":tData,
 		"columns": [
-			
-		{ "data": fusionData.columns.indexOf("ID") },
-		{ "data": fusionData.columns.indexOf("ID") }, /*used for icon file*/
-		{ "data": fusionData.columns.indexOf("Name") },
-		{ "data": fusionData.columns.indexOf("Series") },
-		{ "data": fusionData.columns.indexOf("Rarity") },
-		{ "data": fusionData.columns.indexOf("Element") },
-		{ "data": fusionData.columns.indexOf("Type") },
-	    { "data": fusionData.columns.indexOf("StrikeShot") },
-	    { "data": fusionData.columns.indexOf("StrikeShot Cooldown") },
-	    { "data": fusionData.columns.indexOf("BumpCombo1") },
-	    { "data": fusionData.columns.indexOf("BumpComboPower1") },
-	    { "data": fusionData.columns.indexOf("BumpComboType1") },
-	    { "data": fusionData.columns.indexOf("BumpCombo2") },
-	    { "data": fusionData.columns.indexOf("BumpComboPower2") },
-	    { "data": fusionData.columns.indexOf("BumpComboType2") },
-	    { "data": fusionData.columns.indexOf("Max_LUCK") },
-	    { "data": fusionData.columns.indexOf("Max_HP") },
-	    { "data": fusionData.columns.indexOf("Max_ATK") },
-	    { "data": fusionData.columns.indexOf("Max_SPD") } ],
+				{ title: "ID" },
+				{ title: "Name" },
+				{ title: "Rarity" },
+				{ title: "Job" },
+				{ title: "Gender" },
+				{ title: "Race" },
+				{ title: "Series" },
+				{ title: "Stats" },
+				{ title: "Bonus" },
+				{ title: "Weapons" },
+				{ title: "Armors" },
+				{ title: "MagicLvl" },
+				{ title: "Trait" },
+				{ title: "Magic" },
+				{ title: "Special" },
+				{ title: "LimitBreak" },
+				{ title: "TrustMastery" } ],
 		  "order": [[ 0, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-11 col-xs-7 col-sm-9"<"#cSearchBox"f>><"col-md-1 col-xs-5 col-sm-3"C>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
-		  "colVis": {   buttonText: "Show / Hide Columns",
-		  		overlayFade: 0,
-				restore: "Restore Default",
-				exclude: [ 'all' ],
-				groups: [
-			    {   title: "StrikeShot",
-				columns: [ 7,8 ] },
-			    {   title: "Bump Combo 1",
-				columns: [ 9,10,11 ] },
-			    {   title: "Bump Combo 2",
-				columns: [ 12,13,14 ] },
-			    {   title: "Max Stats",
-				columns: [ 15,16,17,18 ] } ]
-		  },
 		  "autoWidth": false,
 		  "deferRender": true,
 		  "search": { "search": urlParam('query') },
@@ -313,78 +294,21 @@ function initialize(fusionData) {
 		{ "width": "225", "targets": [ 7,9,12 ] },
 		{ "visible": false, "targets": [ 12,13,14 ].concat(xtraDefCol) },
 		{ "searchable": false, "targets": [ 8,10,12,13,14,15,16,17,18 ] },
-		{ "orderData": [ 5, 0 ], "targets": [ 5 ] },
-		{ "orderData": [ 4, 0 ], "targets": [ 4 ] },
-		{ "orderData": [ 3, 0 ], "targets": [ 3 ] },
 		/*using data instead of render to set DATA for cache */
-		{ "targets": [ 1 ],"orderable": false, "width":"40",
-		"render": function (imgSource, type, cRow, full )  {
-			return '<a href="#" class="favIconLink" value="'+cRow[fusionData.columns.indexOf("Name")]+'">'+'<img src="https://googledrive.com/host/0B4hJr8BXxvFZQk5YNzdVR3JFSXM/icon'+imgSource+'.jpg" width="35" height="35" title="'+cRow[fusionData.columns.indexOf("Name")]+'"/></a>';
-		    }
-		},
-		{ "targets": [ 2 ], "width":"150",
+		{ "targets": [ 1 ], "width":"150",
 		"render": function (monster, type, cRow, full )  {
 			return '<a href="#" class="unitName notranslate">'+monster+'</a>';
 		    }
 		},
 		/*Rarity*/
-		{ "targets":[ 4 ],
-		"render": function(rarity, type, row, full) {
-		    if (type ==='display') {
-			return rarity+' <i class="fa fa-star"></i>';
-		    } else {
-			return rarity;
-		    }
-		}
-		},
-		/*Numerical Stats*/
-		{ "targets":[ 8,10,13,15,16,17,18 ],
-		"type": "num",
-		/*NaN check*/
-		"render": function(nanCol, type, row, full) {
-			if (isNaN(nanCol)) {
-			    return "-";
-			} else { return nanCol; }
-		    }
-		},
-		/*skills*/
-		{ "targets":[ 7,9,11,12,14 ],
-		"type": "string","width":"10",
-		"render": function(cString, type, row, full) {
-			if (cString==""||cString==null)
-				return "None";
-			else
-				return cString;
-		}
-		},
-		/*set as num type for sort*/
-		{ "targets":[ 0 ], "type": "num","width": "20" },
-		/*Compare Column*/
-		{ "targets": [19],
-		"orderable": false,
-		"render": function(cBtn, type, cRow, full) {
-		    var rtnString='<div style="white-space:nowrap;"><a href="#" value="'+cRow[fusionData.columns.indexOf("Name")]+'" class="compareUnit"><div class="btn btn-success btn-sm"><i class="fa fa-plus"></i> <i class="fa fa-users"></i></div></a> ';
-		    if (favSelect.length!=0) {
-			for (var i=0;i<favSelect.length;i++) {
-			    if (cRow[fusionData.columns.indexOf("ID")] == Number(favSelect[i])) {
-				rtnString+='<a href="#" value="'+cRow[0]+'" class="addFav"><div class="btn btn-warning btn-sm"><i class="fa fa-star text-fav"></i></div></div>';
-				break;
-			    }
+		{ 	"targets":[ 2 ],
+			"render": function(rarity, type, row, full) {
+			    if (type ==='display')
+				return rarity+' <i class="fa fa-star"></i>';
+			    else
+				return rarity;
 			}
-			if (i==favSelect.length) {
-		    rtnString+='<a href="#" value="'+cRow[0]+'" class="addFav"><div class="btn btn-default btn-sm"><i class="fa fa-star text-muted"></i></div></div>';
-			}
-		  } else {
-	    rtnString+='<a href="#" value="'+cRow[0]+'" class="addFav"><div class="btn btn-default btn-sm"><i class="fa fa-star text-muted"></i></div></div>'; 
-		  }
-		  return rtnString;
-		}
-		},
-		/*Series*/
-		{ "targets":[ 3 ],
-		"render": function(seriesname, type, row, full) {
-		    return '<a href="#" class="serieslink">'+seriesname+'</a>';}
-		}]
+		}] /*End Customs*/
 	}) /*End Datatables Init*/
 
 	/*Custom filter for ID Range*/
@@ -996,56 +920,7 @@ cHTML+='<div class="form-inline"><select class="form-control input-sm sp2" id="s
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </div>
 <!--mainbody / Search box Custom-->
-<table id="mytable" class="table-bordered table-responsive table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;">
-	  <thead>
-	    <tr>
-		<th>ID</th>
-		<th>Icon</th>
-		<th>Name</th>
-		<th>Series</th>
-		<th><i class="fa fa-star"></i></th>
-		<th>Element</th>
-		<th>Type</th>
-		<th style="white-space:nowrap;">StrikeShot</th>
-		<th style="white-space:nowrap;">SS Cooldown</th>
-		<th style="white-space:nowrap;">Bump Combo 1</th>
-		<th style="white-space:nowrap;">BC1 Power</th>
-		<th style="white-space:nowrap;">BC1 Type</th>
-		<th style="white-space:nowrap;">Bump Combo 2</th>
-		<th style="white-space:nowrap;">BC2 Power</th>
-		<th style="white-space:nowrap;">BC2 Type</th>
-		<th>Max Luck</th>
-		<th>Max HP</th>
-		<th>Max ATK</th>
-		<th>Max SPD</th>
-		<th style="white-space:nowrap;background:#E6CCFF;">Features</th>
-	    </tr>
-	  </thead>
-	  <tfoot>
-	    <tr>
-		<th>ID</th>
-		<th>Icon</th>
-		<th>Name</th>
-		<th>Series</th>
-		<th><i class="fa fa-star"></i></th>
-		<th>Element</th>
-		<th>Type</th>
-		<th style="white-space:nowrap;">StrikeShot</th>
-		<th style="white-space:nowrap;">SS Cooldown</th>
-		<th style="white-space:nowrap;">Bump Combo 1</th>
-		<th style="white-space:nowrap;">BC1 Power</th>
-		<th style="white-space:nowrap;">BC1 Type</th>
-		<th style="white-space:nowrap;">Bump Combo 2</th>
-		<th style="white-space:nowrap;">BC2 Power</th>
-		<th style="white-space:nowrap;">BC2 Type</th>
-		<th>Max Luck</th>
-		<th>Max HP</th>
-		<th>Max ATK</th>
-		<th>Max SPD</th>
-		<th style="white-space:nowrap;background:#E6CCFF;">Features</th>
-	    </tr>
-	  </tfoot>
-</table>
+<table id="mytable" class="table-bordered table-responsive table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;"></table>
 
 <!-- ACTIVATION SCRIPTS -->
 <script type="text/javascript">
@@ -1070,7 +945,7 @@ $(document).ready( function(e) {
 
 	/*Send the JSONP request*/
 	$.ajax({
-		url: url;
+		url: url,
 		success: function (quickData) {
 			console.log("success: "+quickData);
 			serverUnitsCount=quickData.values.length;
@@ -1104,7 +979,7 @@ $(document).ready( function(e) {
 
 	/*Send the JSONP request*/
 	$.ajax({
-		url: url;
+		url: url,
 		success: function (fusionData) {
 			console.log("success: "+fusionData);
 			/*Save in local storage*/
@@ -1279,9 +1154,9 @@ $(document).on("click", "#importUnitsBtnGO", function(e){
 	/*Import new data to local storage*/
 	    localStorage.setItem("favourites",favSelect);
 	/*loader*/
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	/*Simply Redraw*/
-	    bfPROsTable.draw();
+	    bbfeTable.draw();
 	setTimeout( function() {
 	    bfpAlert("Import completion",'Import is now completed and the database is refreshed to reflect the new favourties.<div class="text-right"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>');
 	    window.scrollTo(0,0);
@@ -1320,16 +1195,16 @@ $(document).on("click", "#syncCancel", function(e){
 
 /*Filter Favourites*/
 $(document).on("click", "#filterFav", function(e){
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	    e.preventDefault();
 	    if (!showOnlyFavs) {
 	    showOnlyFavs=true;
-	    bfPROsTable.page.len( 100 ).draw();
+	    bbfeTable.page.len( 100 ).draw();
 	    window.scrollTo(0,0);
 	    $("#filterFav").html('<i class="fa fa-filter text-success"></i> <b>UN</b>-Filter ALL <i class="fa fa-star-o"></i>');
 	    } else {
 		showOnlyFavs=false;
-	    bfPROsTable.page.len( 100 ).draw();
+	    bbfeTable.page.len( 100 ).draw();
 	    window.scrollTo(0,0);
 	    $("#filterFav").html('<i class="fa fa-filter text-success"></i> Filter ALL <i class="fa fa-star-o"></i>');
 	    }
@@ -1339,17 +1214,17 @@ $(document).on("click", "#filterFav", function(e){
 $(document).on("click", "#deleteFav", function(e){
 	/*loader*/
 	    bfpAlert("Delete ALL favourites",'Deleting all favourites from local storage.<div class="progress progress-striped active"><div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">100% Complete</span></div></div>');
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	    /*reset ID range select*/
 	    $('#selectunithide').val(0);
 	    /*unfilter favs*/
 	    showOnlyFavs=false;
 	    /*reset searches sorts queries*/
-	    bfPROsTable
+	    bbfeTable
 		.search( '' )
 		.columns().search( '' );
-	    bfPROsTable.page.len(-1);
-	    bfPROsTable
+	    bbfeTable.page.len(-1);
+	    bbfeTable
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
@@ -1366,7 +1241,7 @@ $(document).on("click", "#deleteFav", function(e){
 		/*reset localstorage*/
 		localStorage.setItem("favourites",favSelect);
 	/*reset page length*/
-	    bfPROsTable.page.len(100).draw();
+	    bbfeTable.page.len(100).draw();
 	    setTimeout( function() {
 	    $('#alertmodal').modal('hide');
 	    window.scrollTo(0,0);
@@ -1375,12 +1250,12 @@ $(document).on("click", "#deleteFav", function(e){
 
 /*Series Query*/
     $(document).on("click", ".serieslink", function(e) {
-	var bfPROsTable = $('#mytable').DataTable();
+	var bbfeTable = $('#mytable').DataTable();
 	e.preventDefault();
-	    bfPROsTable
+	    bbfeTable
 		.columns( 3 )
 		.search( $(this).text() );
-	    bfPROsTable
+	    bbfeTable
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
@@ -1388,19 +1263,19 @@ $(document).on("click", "#deleteFav", function(e){
     })
 /*Batch Query*/
     $(document).on("click", ".batchlink", function(e) {
-	var bfPROsTable = $('#mytable').DataTable();
+	var bbfeTable = $('#mytable').DataTable();
     var state = { stateBatch: $(this).text() };
     history.pushState(state, "batch state", "?batch="+encodeURIComponent($(this).text()) );
 	e.preventDefault();
 	    /*clear search query field*/
-	    bfPROsTable
+	    bbfeTable
 	    .search('');
 	    /*search only batch column*/
-	    bfPROsTable
+	    bbfeTable
 		.columns( 4 )
 		.search( $(this).text()?'^'+$(this).text()+'$':$(this).text(), true, false);
 		/*sort and consolidated draw*/
-	    bfPROsTable
+	    bbfeTable
 		.column( 3 )
 		.order( 'asc' )
 		.draw();
@@ -1408,8 +1283,8 @@ $(document).on("click", "#deleteFav", function(e){
     })
 /*CustomSelect PageLength*/
     $(document).on("change", "#unitsPerPage", function(e){
-	    var bfPROsTable = $('#mytable').DataTable();
-	    bfPROsTable.page.len( $(this).val() ).draw()
+	    var bbfeTable = $('#mytable').DataTable();
+	    bbfeTable.page.len( $(this).val() ).draw()
 	})
 
 /*Page change scroll to top*/
@@ -1532,7 +1407,7 @@ $(document).on("click", ".selEleFilter, .selRareFilter", function(e){
 /*Execute Filter*/
 $(document).on("click", "#execFilter", function(e){
 	    e.preventDefault();
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	/*Unit Skills filter*/
 	regexArr=[];
 	$('.filSkills:checked').each( function(){
@@ -1540,9 +1415,9 @@ $(document).on("click", "#execFilter", function(e){
 	})
 	if (regexArr.length!=0) {
 		regexStr="^.*"+regexArr.join("\|^.*");
-		bfPROsTable.search( regexStr,true,false );
+		bbfeTable.search( regexStr,true,false );
 	} else {
-	    bfPROsTable.search( '' );
+	    bbfeTable.search( '' );
 	}
 	/*Filter by element multi-value via REGEX*/
 	regexArr=[];
@@ -1551,9 +1426,9 @@ $(document).on("click", "#execFilter", function(e){
 	})
 	if (regexArr.length!=0) {
 		regexStr="^"+regexArr.join("\|");
-		bfPROsTable.column( 6 ).search( regexStr,true,false );
+		bbfeTable.column( 6 ).search( regexStr,true,false );
 	} else {
-	    bfPROsTable.column( 6 ).search( '' );
+	    bbfeTable.column( 6 ).search( '' );
 	}
 	/*Filter by rarity multi-value via REGEX*/
 	regexArr=[];
@@ -1562,29 +1437,29 @@ $(document).on("click", "#execFilter", function(e){
 	})
 	if (regexArr.length!=0) {
 		regexStr="^"+regexArr.join("$\|")+"$";
-		bfPROsTable.column( 5 ).search( regexStr,true,false );
+		bbfeTable.column( 5 ).search( regexStr,true,false );
 	} else {
-	    bfPROsTable.column( 5 ).search( '' );
+	    bbfeTable.column( 5 ).search( '' );
 	}
 	/*Unit ID Range filter*/
 	$("#selectunithide").val($('input:radio[name="filUnitId"]:checked').val());
 	/*Server filter*/
 	switch ($('input:radio[name="filServer"]:checked').val()) {
 		case "All":
-		bfPROsTable.column( 49 ).search("");
-		bfPROsTable.column( 48 ).search("");
+		bbfeTable.column( 49 ).search("");
+		bbfeTable.column( 48 ).search("");
 		    break;
 		case "Japan":
-		bfPROsTable.column( 48 ).search("");
-		bfPROsTable.column( 49 ).search("TRUE");
+		bbfeTable.column( 48 ).search("");
+		bbfeTable.column( 49 ).search("TRUE");
 		    break;
 		case "Global":
-		bfPROsTable.column( 49 ).search("");
-		bfPROsTable.column( 48 ).search("TRUE");
+		bbfeTable.column( 49 ).search("");
+		bbfeTable.column( 48 ).search("TRUE");
 		    break;
 	}
 	/*Draw after all filters are made*/
-	    bfPROsTable.column( 0 ).order( 'desc' ).draw();
+	    bbfeTable.column( 0 ).order( 'desc' ).draw();
 	    $('#filterModal').modal('hide');
 	    window.scrollTo(0,0);
 })
@@ -1599,18 +1474,18 @@ $(document).on("click", "#execFilter", function(e){
 		});
 	    /*loader*/
 	    bfpAlert("Refresh",'Clearing all selections ... please wait<div class="progress progress-striped active"><div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">100% Complete</span></div></div>');
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	    /*reset ID range select*/
 	    $('#selectunithide').val(0);
 	    /*unfilter favs*/
 	    showOnlyFavs=false;
 	    /*reset searches sorts queries*/
-	    bfPROsTable
+	    bbfeTable
 		.search( '' );
-		bfPROsTable
+		bbfeTable
 		.columns().search( '' );
-	    bfPROsTable.page.len(-1);
-	    bfPROsTable
+	    bbfeTable.page.len(-1);
+	    bbfeTable
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
@@ -1625,7 +1500,7 @@ $(document).on("click", "#execFilter", function(e){
 	    /*reset compare array*/
 	    compareSelect=[];
 	    /*reset page length*/
-	    bfPROsTable.page.len(100).draw();
+	    bbfeTable.page.len(100).draw();
 	    /*reset pushstate*/
 	    history.pushState(null, null, location.pathname);
 	    /*change search field*/
@@ -1637,12 +1512,12 @@ $(document).on("click", "#execFilter", function(e){
 	})
 /*Binding Hashtags*/
     $(document).on("click", ".hashSelect", function(e){
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	    e.preventDefault();
-	    bfPROsTable
+	    bbfeTable
 		.column( 38 )
 		.search( $(this).attr("value") );
-	    bfPROsTable
+	    bbfeTable
 		.column( 0 )
 		.order( 'desc' )
 		.draw();
@@ -1650,12 +1525,12 @@ $(document).on("click", "#execFilter", function(e){
 	})
 /*Binding TOP by Element*/
     $(document).on("click", ".topUnits", function(e){
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	    e.preventDefault();
-	    bfPROsTable
+	    bbfeTable
 		.column( 6 )
 		.search( $(this).attr("value") );
-	    bfPROsTable
+	    bbfeTable
 		.column( 17 )
 		.order( 'desc' )
 		.draw();
@@ -1678,9 +1553,9 @@ var delay = (function(){
 /*Update URL based on search filters*/
     $(document).on("keyup", '.dataTables_filter input', function(e){
 	delay(function(){
-	var bfPROsTable = $('#mytable').DataTable();
+	var bbfeTable = $('#mytable').DataTable();
 	var sField='.dataTables_filter input';
-	bfPROsTable.search( $(sField).val() ).draw();
+	bbfeTable.search( $(sField).val() ).draw();
 	window.scrollTo(0,0);
 	/*Enter Key only*/
 	if (e.which == 13) {
@@ -1706,19 +1581,19 @@ var delay = (function(){
 	}
 	/*Search query state*/
 	if (state.stateFilter) {
-	    var bfPROsTable = $('#mytable').DataTable();
-	    bfPROsTable.search( state.stateFilter ).draw();
+	    var bbfeTable = $('#mytable').DataTable();
+	    bbfeTable.search( state.stateFilter ).draw();
 	}
 	/*Batch State*/
 	if (state.stateBatch) {
-	    var bfPROsTable = $('#mytable').DataTable();
+	    var bbfeTable = $('#mytable').DataTable();
 	    e.preventDefault();
-	    bfPROsTable
+	    bbfeTable
 	    .search('');
-	    bfPROsTable
+	    bbfeTable
 		.columns( 4 )
 		.search( state.stateBatch );
-	    bfPROsTable
+	    bbfeTable
 		.column( 3 )
 		.order( 'asc' )
 		.draw();
