@@ -206,13 +206,6 @@ function convertJSON( serialObj ) {
 /*Initialise datapull*/
 function initialize(fusionData) {
 	var tData=fusionData.values.slice(1);
-	/*split stats*/
-	for (var i in tData) {
-		console.log("before "+tData[i][7]);
-		var tRay=tData[i][7].split(",");
-		tData[i][7]=tRay;
-		console.log("after "+tData[i][7]);
-	}
 	bbfeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
@@ -229,17 +222,17 @@ function initialize(fusionData) {
 				{ title: "DEF", data:"7.3" },
 				{ title: "INT", data:"7.4" },
 				{ title: "SPR", data:"7.5" },
-				{ title: "Bonus" },
-				{ title: "Weapons" },
-				{ title: "Armors" },
-				{ title: "MagicLvl" },
-				{ title: "Trait" },
-				{ title: "Magic" },
-				{ title: "Special" },
-				{ title: "LimitBreak" },
-				{ title: "TrustMastery" },
-				{ title: "Global" },
-				{ title: "Japan" }
+				{ title: "Bonus", data:"8"},
+				{ title: "Weapons", data:"9" },
+				{ title: "Armors", data:"10" },
+				{ title: "MagicLvl", data:"11" },
+				{ title: "Trait", data:"12" },
+				{ title: "Magic", data:"13" },
+				{ title: "Special", data:"14" },
+				{ title: "LimitBreak", data:"15" },
+				{ title: "TrustMastery", data:"16" },
+				{ title: "Global", data:"17" },
+				{ title: "Japan", data:"18" }
 				],
 		  "order": [[ 0, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-11 col-xs-7 col-sm-9"<"#cSearchBox"f>><"col-md-1 col-xs-5 col-sm-3"C>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
