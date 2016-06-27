@@ -206,6 +206,10 @@ function convertJSON( serialObj ) {
 /*Initialise datapull*/
 function initialize(fusionData) {
 	var tData=fusionData.values.slice(1);
+	/*split stats*/
+	for (var i in tData) {
+		tData[i][7]=tData[i][7].split(',')
+	}
 	bbfeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
@@ -216,7 +220,12 @@ function initialize(fusionData) {
 				{ title: "Gender" },
 				{ title: "Race" },
 				{ title: "Series" },
-				{ title: "Stats" },
+				{ title: "HP", data:7.0 },
+				{ title: "MP", data:7.1 },
+				{ title: "ATK", data:7.2 },
+				{ title: "DEF", data:7.3 },
+				{ title: "INT", data:7.4 },
+				{ title: "SPR", data:7.5 },
 				{ title: "Bonus" },
 				{ title: "Weapons" },
 				{ title: "Armors" },
