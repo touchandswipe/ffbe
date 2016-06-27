@@ -208,7 +208,9 @@ function initialize(fusionData) {
 	var tData=fusionData.values.slice(1);
 	/*split stats*/
 	for (var i in tData) {
-		tData[i][7]=tData[i][7].split(',')
+		console.log("before "+tData[i][7]);
+		tData[i][7]=tData[i][7].split(",")
+		console.log("after "+tData[i][7]);
 	}
 	bbfeTable=$('#mytable').dataTable({
 		"data":tData,
