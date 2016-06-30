@@ -28,6 +28,9 @@ margin-left:-4px;
 	opacity: 0.2;
     	filter: alpha(opacity=20); /* For IE8 and earlier */
     }
+    .bottom {
+    	vertical-align:bottom;
+    }
     .evoCurrent {
 	-webkit-filter: drop-shadow(0px 0px 5px #AA00AA);
 	filter: drop-shadow(0px 0px 5px #AA00AA);
@@ -173,11 +176,11 @@ function initialize(data) {
 			foundArray[i][processPos[j]]=foundArray[i][processPos[j]].split(",")
 		}
 	}
-	/*art*/
+	/*artwork*/
 	var outHTML='<h2>Unit: '+uName+'</h2><div class="table-responsive"><table class="table">';
 	outHTML+='<tr>';
 	for (var i in foundArray) {
-		outHTML+='<td><img src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" alt="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/></td>';
+		outHTML+='<td class="bottom"><img src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" alt="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/></td>';
 	}
 	outHTML+='</tr>'
 	outHTML+='</table></div>';
