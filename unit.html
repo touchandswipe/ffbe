@@ -208,6 +208,8 @@ function initialize(data) {
 			outHTML+='<img src="'+imgprefix+'armor'+ +(i+1) + '.png" class="equip" />';
 		outHTML+='</td>';
 	}
+	outHTML+='</tr>';
+	outHTML+='</table></div>';
 	/*build traits*/
 	outHTML+='<h2>Traits</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
@@ -221,8 +223,6 @@ function initialize(data) {
 			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" />';
 		outHTML+='</td>';
 	}
-	outHTML+='</tr>';
-	outHTML+='</table></div>';
 	outHTML+='</tr>';
 	outHTML+='</table></div>';
 	/*output*/
