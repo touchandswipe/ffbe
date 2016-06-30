@@ -171,8 +171,16 @@ function initialize(data) {
 			foundArray[i][processPos[j]]=foundArray[i][processPos[j]].split(",")
 		}
 	}
+	/*art*/
+	var outHTML='<h2>Unit: '+uName+'</h2><div class="table-responsive"><table class="table">';
+	outHTML+='<tr>';
+	for (var i in foundArray) {
+		outHTML+='<td><img src="'+imgprefix+'unit/'+foundArray[i][1]+foundArray[i][2]+'.png" alt="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/></td>';
+	}
+	outHTML+='</tr>'
+	outHTML+='</table></div>';
 	/*build stats*/
-	var outHTML='<h2>Stats</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
+	outHTML='<h2>Stats</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
 	outHTML+='<thead><tr><th>Rarity</th><th>HP</th><th>MP</th><th>ATK</th><th>DEF</th><th>INT</th><th>SPR</th></tr></thead>';
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
