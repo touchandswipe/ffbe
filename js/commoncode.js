@@ -8,3 +8,13 @@ function urlParam(name){
        return decodeURIComponent(results[1]) || '';
     }
 }
+
+/*check valid json*/
+function isValidJSON(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
