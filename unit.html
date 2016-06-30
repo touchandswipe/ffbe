@@ -180,15 +180,7 @@ function initialize(data) {
 	}
 	/*build display*/
 	var outHTML='<h2>Stats</h2><div class="table-responsive"><table class="table">';
-	outHTML+='<th>
-	<td>Rarity</td>
-	<td>HP</td>
-	<td>MP</td>
-	<td>ATK</td>
-	<td>DEF</td>
-	<td>INT</td>
-	<td>SPR</td>
-	</th>';
+	outHTML+='<th><td>Rarity</td><td>HP</td><td>MP</td><td>ATK</td><td>DEF</td><td>INT</td><td>SPR</td></th>';
 	for (var i in foundArray) {
 		outHTML+='<td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
 		for (var j in foundArray[i][7]) {
