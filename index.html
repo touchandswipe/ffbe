@@ -210,7 +210,7 @@ function initialize(fusionData) {
 	for (var i in tData) {
 		tData[i][7]=tData[i][7].split(",");
 	};
-	bbfeTable=$('#mytable').dataTable({
+	ffbeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
 				{ title: "ID" },
@@ -785,7 +785,7 @@ cHTML+='<div class="form-inline"><select class="form-control input-sm sp2" id="s
 	    <span class="icon-bar"></span>
 	    <span class="icon-bar"></span>
 	  </button>
-	  <a class="navbar-brand" href="http://bravefrontierpros.tumblr.com"><img src="https://googledrive.com/host/0B4hJr8BXxvFZZkZKQzkwUXpXdkU/logo_ms.png" class="img-circle logoShdw" width="64" alt="Monster Strike PROs"/></a>
+	  <a class="navbar-brand" href="http://bravefrontierpros.tumblr.com"><img src="http://ffbe.summonerscentral.com/img/ffbeicon.png" class="img-circle logoShdw" width="64" alt="Monster Strike PROs"/></a>
 	</div>
 	
 	<!-- Collapse Nav-->
@@ -1099,9 +1099,9 @@ $(document).on("click", "#importUnitsBtnGO", function(e){
 	/*Import new data to local storage*/
 	    localStorage.setItem("favourites",favSelect);
 	/*loader*/
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	/*Simply Redraw*/
-	    bbfeTable.draw();
+	    ffbeTable.draw();
 	setTimeout( function() {
 	    bfpAlert("Import completion",'Import is now completed and the database is refreshed to reflect the new favourties.<div class="text-right"><button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div>');
 	    window.scrollTo(0,0);
@@ -1140,16 +1140,16 @@ $(document).on("click", "#syncCancel", function(e){
 
 /*Filter Favourites*/
 $(document).on("click", "#filterFav", function(e){
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	    e.preventDefault();
 	    if (!showOnlyFavs) {
 	    showOnlyFavs=true;
-	    bbfeTable.page.len( 100 ).draw();
+	    ffbeTable.page.len( 100 ).draw();
 	    window.scrollTo(0,0);
 	    $("#filterFav").html('<i class="fa fa-filter text-success"></i> <b>UN</b>-Filter ALL <i class="fa fa-star-o"></i>');
 	    } else {
 		showOnlyFavs=false;
-	    bbfeTable.page.len( 100 ).draw();
+	    ffbeTable.page.len( 100 ).draw();
 	    window.scrollTo(0,0);
 	    $("#filterFav").html('<i class="fa fa-filter text-success"></i> Filter ALL <i class="fa fa-star-o"></i>');
 	    }
@@ -1159,17 +1159,17 @@ $(document).on("click", "#filterFav", function(e){
 $(document).on("click", "#deleteFav", function(e){
 	/*loader*/
 	    bfpAlert("Delete ALL favourites",'Deleting all favourites from local storage.<div class="progress progress-striped active"><div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">100% Complete</span></div></div>');
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	    /*reset ID range select*/
 	    $('#selectunithide').val(0);
 	    /*unfilter favs*/
 	    showOnlyFavs=false;
 	    /*reset searches sorts queries*/
-	    bbfeTable
+	    ffbeTable
 		.search( '' )
 		.columns().search( '' );
-	    bbfeTable.page.len(-1);
-	    bbfeTable
+	    ffbeTable.page.len(-1);
+	    ffbeTable
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
@@ -1186,7 +1186,7 @@ $(document).on("click", "#deleteFav", function(e){
 		/*reset localstorage*/
 		localStorage.setItem("favourites",favSelect);
 	/*reset page length*/
-	    bbfeTable.page.len(100).draw();
+	    ffbeTable.page.len(100).draw();
 	    setTimeout( function() {
 	    $('#alertmodal').modal('hide');
 	    window.scrollTo(0,0);
@@ -1195,12 +1195,12 @@ $(document).on("click", "#deleteFav", function(e){
 
 /*Series Query*/
     $(document).on("click", ".serieslink", function(e) {
-	var bbfeTable = $('#mytable').DataTable();
+	var ffbeTable = $('#mytable').DataTable();
 	e.preventDefault();
-	    bbfeTable
+	    ffbeTable
 		.columns( 3 )
 		.search( $(this).text() );
-	    bbfeTable
+	    ffbeTable
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
@@ -1208,19 +1208,19 @@ $(document).on("click", "#deleteFav", function(e){
     })
 /*Batch Query*/
     $(document).on("click", ".batchlink", function(e) {
-	var bbfeTable = $('#mytable').DataTable();
+	var ffbeTable = $('#mytable').DataTable();
     var state = { stateBatch: $(this).text() };
     history.pushState(state, "batch state", "?batch="+encodeURIComponent($(this).text()) );
 	e.preventDefault();
 	    /*clear search query field*/
-	    bbfeTable
+	    ffbeTable
 	    .search('');
 	    /*search only batch column*/
-	    bbfeTable
+	    ffbeTable
 		.columns( 4 )
 		.search( $(this).text()?'^'+$(this).text()+'$':$(this).text(), true, false);
 		/*sort and consolidated draw*/
-	    bbfeTable
+	    ffbeTable
 		.column( 3 )
 		.order( 'asc' )
 		.draw();
@@ -1228,8 +1228,8 @@ $(document).on("click", "#deleteFav", function(e){
     })
 /*CustomSelect PageLength*/
     $(document).on("change", "#unitsPerPage", function(e){
-	    var bbfeTable = $('#mytable').DataTable();
-	    bbfeTable.page.len( $(this).val() ).draw()
+	    var ffbeTable = $('#mytable').DataTable();
+	    ffbeTable.page.len( $(this).val() ).draw()
 	})
 
 /*Page change scroll to top*/
@@ -1352,7 +1352,7 @@ $(document).on("click", ".selEleFilter, .selRareFilter", function(e){
 /*Execute Filter*/
 $(document).on("click", "#execFilter", function(e){
 	    e.preventDefault();
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	/*Unit Skills filter*/
 	regexArr=[];
 	$('.filSkills:checked').each( function(){
@@ -1360,9 +1360,9 @@ $(document).on("click", "#execFilter", function(e){
 	})
 	if (regexArr.length!=0) {
 		regexStr="^.*"+regexArr.join("\|^.*");
-		bbfeTable.search( regexStr,true,false );
+		ffbeTable.search( regexStr,true,false );
 	} else {
-	    bbfeTable.search( '' );
+	    ffbeTable.search( '' );
 	}
 	/*Filter by element multi-value via REGEX*/
 	regexArr=[];
@@ -1371,9 +1371,9 @@ $(document).on("click", "#execFilter", function(e){
 	})
 	if (regexArr.length!=0) {
 		regexStr="^"+regexArr.join("\|");
-		bbfeTable.column( 6 ).search( regexStr,true,false );
+		ffbeTable.column( 6 ).search( regexStr,true,false );
 	} else {
-	    bbfeTable.column( 6 ).search( '' );
+	    ffbeTable.column( 6 ).search( '' );
 	}
 	/*Filter by rarity multi-value via REGEX*/
 	regexArr=[];
@@ -1382,29 +1382,29 @@ $(document).on("click", "#execFilter", function(e){
 	})
 	if (regexArr.length!=0) {
 		regexStr="^"+regexArr.join("$\|")+"$";
-		bbfeTable.column( 5 ).search( regexStr,true,false );
+		ffbeTable.column( 5 ).search( regexStr,true,false );
 	} else {
-	    bbfeTable.column( 5 ).search( '' );
+	    ffbeTable.column( 5 ).search( '' );
 	}
 	/*Unit ID Range filter*/
 	$("#selectunithide").val($('input:radio[name="filUnitId"]:checked').val());
 	/*Server filter*/
 	switch ($('input:radio[name="filServer"]:checked').val()) {
 		case "All":
-		bbfeTable.column( 49 ).search("");
-		bbfeTable.column( 48 ).search("");
+		ffbeTable.column( 49 ).search("");
+		ffbeTable.column( 48 ).search("");
 		    break;
 		case "Japan":
-		bbfeTable.column( 48 ).search("");
-		bbfeTable.column( 49 ).search("TRUE");
+		ffbeTable.column( 48 ).search("");
+		ffbeTable.column( 49 ).search("TRUE");
 		    break;
 		case "Global":
-		bbfeTable.column( 49 ).search("");
-		bbfeTable.column( 48 ).search("TRUE");
+		ffbeTable.column( 49 ).search("");
+		ffbeTable.column( 48 ).search("TRUE");
 		    break;
 	}
 	/*Draw after all filters are made*/
-	    bbfeTable.column( 0 ).order( 'desc' ).draw();
+	    ffbeTable.column( 0 ).order( 'desc' ).draw();
 	    $('#filterModal').modal('hide');
 	    window.scrollTo(0,0);
 })
@@ -1415,22 +1415,22 @@ $(document).on("click", "#execFilter", function(e){
 		/*Google analytics*/
 		ga('send', 'pageview', {
 	  		'page': '/vurl/refresh',
-	  		'title': 'BBFE Refresh'
+	  		'title': 'ffbe Refresh'
 		});
 	    /*loader*/
 	    bfpAlert("Refresh",'Clearing all selections ... please wait<div class="progress progress-striped active"><div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">100% Complete</span></div></div>');
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	    /*reset ID range select*/
 	    $('#selectunithide').val(0);
 	    /*unfilter favs*/
 	    showOnlyFavs=false;
 	    /*reset searches sorts queries*/
-	    bbfeTable
+	    ffbeTable
 		.search( '' );
-		bbfeTable
+		ffbeTable
 		.columns().search( '' );
-	    bbfeTable.page.len(-1);
-	    bbfeTable
+	    ffbeTable.page.len(-1);
+	    ffbeTable
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
@@ -1445,7 +1445,7 @@ $(document).on("click", "#execFilter", function(e){
 	    /*reset compare array*/
 	    compareSelect=[];
 	    /*reset page length*/
-	    bbfeTable.page.len(100).draw();
+	    ffbeTable.page.len(100).draw();
 	    /*reset pushstate*/
 	    history.pushState(null, null, location.pathname);
 	    /*change search field*/
@@ -1457,12 +1457,12 @@ $(document).on("click", "#execFilter", function(e){
 	})
 /*Binding Hashtags*/
     $(document).on("click", ".hashSelect", function(e){
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	    e.preventDefault();
-	    bbfeTable
+	    ffbeTable
 		.column( 38 )
 		.search( $(this).attr("value") );
-	    bbfeTable
+	    ffbeTable
 		.column( 0 )
 		.order( 'desc' )
 		.draw();
@@ -1470,12 +1470,12 @@ $(document).on("click", "#execFilter", function(e){
 	})
 /*Binding TOP by Element*/
     $(document).on("click", ".topUnits", function(e){
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	    e.preventDefault();
-	    bbfeTable
+	    ffbeTable
 		.column( 6 )
 		.search( $(this).attr("value") );
-	    bbfeTable
+	    ffbeTable
 		.column( 17 )
 		.order( 'desc' )
 		.draw();
@@ -1498,9 +1498,9 @@ var delay = (function(){
 /*Update URL based on search filters*/
     $(document).on("keyup", '.dataTables_filter input', function(e){
 	delay(function(){
-	var bbfeTable = $('#mytable').DataTable();
+	var ffbeTable = $('#mytable').DataTable();
 	var sField='.dataTables_filter input';
-	bbfeTable.search( $(sField).val() ).draw();
+	ffbeTable.search( $(sField).val() ).draw();
 	window.scrollTo(0,0);
 	/*Enter Key only*/
 	if (e.which == 13) {
@@ -1526,19 +1526,19 @@ var delay = (function(){
 	}
 	/*Search query state*/
 	if (state.stateFilter) {
-	    var bbfeTable = $('#mytable').DataTable();
-	    bbfeTable.search( state.stateFilter ).draw();
+	    var ffbeTable = $('#mytable').DataTable();
+	    ffbeTable.search( state.stateFilter ).draw();
 	}
 	/*Batch State*/
 	if (state.stateBatch) {
-	    var bbfeTable = $('#mytable').DataTable();
+	    var ffbeTable = $('#mytable').DataTable();
 	    e.preventDefault();
-	    bbfeTable
+	    ffbeTable
 	    .search('');
-	    bbfeTable
+	    ffbeTable
 		.columns( 4 )
 		.search( state.stateBatch );
-	    bbfeTable
+	    ffbeTable
 		.column( 3 )
 		.order( 'asc' )
 		.draw();
