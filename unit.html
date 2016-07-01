@@ -5,7 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="description" content="Final Fantasy Brave Exvius - Units Guide (Beta) - A community effort" />
     <meta name="author" content="Sam GreenPuck" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Final Fantasy Brave Exvius - Units Guide (Beta) - A community effort</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
@@ -65,31 +64,6 @@ margin-left:-4px;
     .min50 {
     	width:50px;
     }
-    .evoCurrent {
-	-webkit-filter: drop-shadow(0px 0px 5px #AA00AA);
-	filter: drop-shadow(0px 0px 5px #AA00AA);
-    }
-    .va {vertical-align:middle;}
-    .text-fav {color:#FFFFFF;}
-    .kdb-r {
-    background:#FFCC00;
-    color:#000000;
-    padding:0 3px 0 3px;
-    }
-    .kdb-d {
-    background:#CC0000;
-    color:#FFFFFF;
-    font-size:10px;
-    padding:2px 3px 2px 3px;
-    }
-    .release {
-    border: 1px solid #CCCCCC;
-    display: inline-block;
-    border-radius: 5px;
-    padding:2px 5px;
-    }
-    .shareLink {background:#FFDB4D;}
-    .sp2 {margin:2px;}
     .clear {clear:both;}
 </style>
 <!-- START JSON Code-->
@@ -192,6 +166,14 @@ var glSkills={};
 var imgprefix="http://ffbe.summonerscentral.com/img/";
 var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:V";
+if (navigator.userAgent.match(/Android/i)
+  || navigator.userAgent.match(/webOS/i)
+  || navigator.userAgent.match(/iPhone/i)
+  || navigator.userAgent.match(/iPad/i)
+  || navigator.userAgent.match(/iPod/i)
+  || navigator.userAgent.match(/BlackBerry/i)
+  || navigator.userAgent.match(/Windows Phone/i))
+	document.write('<meta name="viewport" content="width=500, user-scalable=yes" />');
 /*initialise build*/
 function initialize(data) {
 	/*affinity*/
