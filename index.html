@@ -123,7 +123,7 @@ function initialize(fusionData) {
 			/*Unbind Search*/
 			$('.dataTables_filter input').off();
 			/*custom replace search field*/
-			$('.dataTables_filter').html('<div class="input-group input-group-sm text-center" style="width:100%;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" placeholder="e.g. Name, Series, ID. ENTER to update browser URL."></div>');
+			$('.dataTables_filter').html('<div class="input-group input-group-sm text-center" style="width:100%;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" placeholder="e.g. Rain or FFBE"></div>');
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
@@ -131,19 +131,6 @@ function initialize(fusionData) {
 			$('#mytable').show();
 			/*hide loader*/
 			$('#progressModal').modal('hide');
-			/*check for card param*/
-			var cardParam=urlParam('monsterid');
-			if ( (cardParam != "") && ( cardParam != null) ) {
-			    openCard(cardParam);
-			    /*needed as show is not included in function*/
-			    $('#cardModal').modal('show');
-			}
-			/*Open Favs via URL*/
-			var favParam=urlParam('favUnits');
-			if ( (favParam != "") && ( favParam != null) ) {
-				sharedFavSelect=favParam.split(',');
-				openFav(sharedFavSelect,"Shared units by other players",true);
-			}
 		  },
 		  "pageLength": 100,
 		  "language": {
@@ -293,7 +280,6 @@ $(document).ready( function(e) {
 	$.ajax({
 		url: url,
 		success: function (quickData) {
-			console.log("success: "+quickData);
 			serverUnitsCount=quickData.values.length;
 			/*Prompt to Sync*/
 			if (serverUnitsCount > localUnitsCount)
