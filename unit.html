@@ -204,7 +204,6 @@ function initialize(data) {
 	outHTML+='</tr>'
 	outHTML+='</table></div>';
 	/*general info*/
-	outHTML+='<div class="row">';
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-4"><table class="table table-bordered table-responsive">';
 	outHTML+='<tr><td class="sHead">Gender</td><td>'+foundArray[0][4]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">Job</td><td>'+foundArray[0][3]+'</td></tr>';
@@ -230,7 +229,6 @@ function initialize(data) {
 		outHTML+='</tr>'
 	}
 	outHTML+='</table></div>';
-	outHTML+='</div>';
 	/*build stats*/
 	outHTML+='<h2>Stats <span class="text-primary">(Bonus)</span></h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<thead><tr><th><i class="fa fa-star-o"></i></th><th>HP</th><th>MP</th><th>ATK</th><th>DEF</th><th>MAG</th><th>SPR</th></tr></thead>';
@@ -286,7 +284,6 @@ function initialize(data) {
 	outHTML+='</tr>';
 	outHTML+='</table>';
 	/*Limits Magic*/
-	outHTML+='<div class="row">';
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2><img src="'+imgprefix+'limit.png" width="60"/> Limit Break</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<thead><tr><th class="min50"><i class="fa fa-star-o"></i></th><th>Limit Break</th><th>Cost</th><th>Max Lv</th></tr></thead>';
 	for (var i in foundArray) {
@@ -331,7 +328,6 @@ function initialize(data) {
 		outHTML+='</tr>';
 	}
 	outHTML+='</table></div>';
-	outHTML+='</div>';
 	/*Special*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special</h2><table class="table table-striped table-responsive table-bordered">';
 	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
