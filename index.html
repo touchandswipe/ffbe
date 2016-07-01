@@ -113,7 +113,7 @@ function initialize(fusionData) {
 				],
 		  "order": [[ 0, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
-		  "autoWidth": false,
+		  "autoWidth": true,
 		  "deferRender": true,
 		  "search": { "search": urlParam('query') },
 		  "drawCallback": function( settings ) {
@@ -156,7 +156,6 @@ function initialize(fusionData) {
 		//{ "width": "225", "targets": [ 7,9,12 ] },
 		//{ "visible": false, "targets": [ 12,13,14 ] },
 		//{ "searchable": false, "targets": [ 8,10,12,13,14,15,16,17,18 ] },
-		/*using data instead of render to set DATA for cache */
 		{ "targets": [ 1 ],
 		"render": function (unit, type, cRow, full )  {
 			return '<a href="unit.html?q='+unit+'" class="unitName notranslate">'+unit+'</a>';
@@ -426,8 +425,16 @@ $('#mytable').on( 'page.dt', function (e) {
 	    setTimeout( function() {
 	    $('#alertmodal').modal('hide');
 	    window.scrollTo(0,0);
-	    },2000);
+	    },500);
 	})
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  }
+})();
 
 /*Update URL based on search filters*/
     $(document).on("keyup", '.dataTables_filter input', function(e){
@@ -442,42 +449,6 @@ $('#mytable').on( 'page.dt', function (e) {
 	    history.pushState(state, "Fstate", "?query="+encodeURIComponent($(sField).val()) );
 	}
 	}, 450 );
-    })
-    
-/*POP state*/
-    $(window).on('popstate', function(e) {
-	var state = e.originalEvent.state;
-	/*card state*/
-	if (state.stateUnit) {
-	    $('#compareModal').modal('hide');
-	    openCard( state.stateUnit );
-	}
-	/*comp state*/
-	if (state.stateCompare) {
-	    var tempArray = ( state.stateCompare ).split(',');
-	    $('#cardModal').modal('hide');
-	    openCompare(tempArray);
-	}
-	/*Search query state*/
-	if (state.stateFilter) {
-	    var ffbeTable = $('#mytable').DataTable();
-	    ffbeTable.search( state.stateFilter ).draw();
-	}
-	/*Batch State*/
-	if (state.stateBatch) {
-	    var ffbeTable = $('#mytable').DataTable();
-	    e.preventDefault();
-	    ffbeTable
-	    .search('');
-	    ffbeTable
-		.columns( 4 )
-		.search( state.stateBatch );
-	    ffbeTable
-		.column( 3 )
-		.order( 'asc' )
-		.draw();
-	    window.scrollTo(0,0);
-	}
     })
 })
 </script>
