@@ -105,8 +105,11 @@ function initialize(fusionData) {
 				//{ title: "Special", data:"14" },
 				//{ title: "LimitBreak", data:"15" },
 				//{ title: "TrustMastery", data:"16" },
-				{ title: "Global", data:"17" },
-				{ title: "Japan", data:"18" }
+				{ title: "Hits", data:"17" },
+				{ title: "Drop Check", data:"18" },
+				{ title: "Materia", data:"19" },
+				{ title: "Global", data:"20" },
+				{ title: "Japan", data:"21" }
 				],
 		  "order": [[ 0, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-11 col-xs-7 col-sm-9"<"#cSearchBox"f>><"col-md-1 col-xs-5 col-sm-3"C>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
@@ -286,7 +289,7 @@ $(document).ready( function(e) {
     	/*Quick query to check for new entries*/
     	var serverUnitsCount=0;
     	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : parseInt(localStorage.ffbeguideadvCount);
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:V";
 
 	/*Send the JSONP request*/
 	$.ajax({
