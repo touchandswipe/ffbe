@@ -31,7 +31,7 @@ margin-left:-4px;
     .sHead {
     	font-weight:bold;
     	background:#EEE;
-    	width:200px;
+    	width:150px;
     }
     .skillIcon {
     	width:40px;
@@ -212,12 +212,12 @@ function initialize(data) {
 	outHTML+='<tr><td class="sHead">Job</td><td>'+foundArray[0][3]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">Race</td><td>'+foundArray[0][5]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">FF Series</td><td>'+foundArray[0][6]+'</td></tr>';
-	outHTML+='<tr><td class="sHead">Rarity</td><td>'+allRarities[0]+'<i class="fa fa-star text-warning"></i> to '+allRarities[allRarities.length-1]+'<i class="fa fa-star text-warning"></i></td></tr>';
+	outHTML+='<tr><td class="sHead">Rarity</td><td>'+allRarities[0]+'<i class="fa fa-star text-warning"></i> -> '+allRarities[allRarities.length-1]+'<i class="fa fa-star text-warning"></i></td></tr>';
 	outHTML+='<tr><td class="sHead">Trust Mastery</td><td>'+foundArray[0][16]+'</td></tr>';
 	outHTML+='</table></div>';
 	/*hits dropchecks*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-8"><table class="table table-striped table-bordered table-responsive">';
-	outHTML+='<thead><tr><th>Rarity</th><th>Hits</th><th>DropCheck</th><th>Materia</th><th>Global</th><th>Japan</th></tr></thead>';
+	outHTML+='<thead><tr><th>Rarity</th><th>Hits</th><th>Drop Check</th><th>Materia</th><th>Global</th><th>Japan</th></tr></thead>';
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
 		for (var j=17;j<22;j++)
