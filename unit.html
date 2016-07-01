@@ -250,7 +250,7 @@ function initialize(data) {
 	outHTML+='</table></div>';
 	/*Magic*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Magic</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
-	outHTML+='<thead><tr><th>LVL Unlock</th><th>Min Rarity</th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
+	outHTML+='<thead><tr><th>LVL</th><th><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
 	var hRarity=0;
 	var hRarePos=0;
 	for (var i in foundArray) {
@@ -268,7 +268,7 @@ function initialize(data) {
 		if (glSkills.hasOwnProperty(tMagic[0])) {
 			var tMagObj=glSkills[tMagic[0]];
 			outHTML+='<td>'+tMagic[1]+'</td>';
-			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
+			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
 			outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 			outHTML+='<td>'+tMagic[0]+'</td>';
 			outHTML+='<td>'+tMagObj["element"]+" "+tMagObj["effect"]+'</td>';
@@ -282,8 +282,8 @@ function initialize(data) {
 	}
 	outHTML+='</table></div></div>';
 	/*Special*/
-	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
-	outHTML+='<thead><tr><th>LVL Unlock</th><th>Min Rarity</th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special</h2><table class="table table-striped table-responsive table-bordered">';
+	outHTML+='<thead><tr><th>LVL</th><th><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
 	/*split and process output*/
 	for (var j in foundArray[hRarePos][14]) {
 		var tMagic=foundArray[hRarePos][14][j].split("~");
@@ -293,7 +293,7 @@ function initialize(data) {
 		if (glSkills.hasOwnProperty(tMagic[0])) {
 			var tMagObj=glSkills[tMagic[0]];
 			outHTML+='<td>'+tMagic[1]+'</td>';
-			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
+			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
 			outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 			outHTML+='<td>'+tMagic[0]+'</td>';
 			outHTML+='<td>'+tMagObj["element"]+" "+tMagObj["effect"]+'</td>';
@@ -305,7 +305,7 @@ function initialize(data) {
 		}
 		outHTML+='</tr>';
 	}
-	outHTML+='</table></div></div>';
+	outHTML+='</table></div>';
 	/*output*/
 	$("#unitContent").html(outHTML);
 }
