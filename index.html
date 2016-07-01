@@ -285,12 +285,11 @@ function initialize(fusionData) {
 <script type="text/javascript">
 $(document).ready( function(e) {
     /*LocalStorage Retreival and storage*/
+    var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:V";
     if (localStorage.ffbeguideadv) {
     	/*Quick query to check for new entries*/
     	var serverUnitsCount=0;
     	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : parseInt(localStorage.ffbeguideadvCount);
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:V";
-
 	/*Send the JSONP request*/
 	$.ajax({
 		url: url,
@@ -322,9 +321,6 @@ $(document).ready( function(e) {
 		backdrop:'static',
 		toggle:true
 	})
-    
-    	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
-
 	/*Send the JSONP request*/
 	$.ajax({
 		url: url,
