@@ -18,8 +18,9 @@ margin-top:-8px;
 margin-left:-4px;
 }
     .equip {
-    	width:35px;
-    	height:35px;
+    	width:70%;
+    	min-width:30px;
+    	height:auto;
     }
     .equipNo {
 	-webkit-filter: grayscale(100%);
@@ -163,6 +164,7 @@ margin-left:-4px;
 <!-- ACTIVATION SCRIPTS -->
 <script type="text/javascript">
 var glSkills={};
+var lbMax={2:5,3:10,4:15,5:20,6:25};
 var imgprefix="http://ffbe.summonerscentral.com/img/";
 var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:V";
@@ -215,14 +217,14 @@ function initialize(data) {
 	outHTML+='<tr><td class="sHead">Job</td><td>'+foundArray[0][3]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">Race</td><td>'+foundArray[0][5]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">FF Series</td><td>'+foundArray[0][6]+'</td></tr>';
-	outHTML+='<tr><td class="sHead">Rarity</td><td>'+allRarities[0]+'<i class="fa fa-star text-warning"></i> - '+allRarities[allRarities.length-1]+'<i class="fa fa-star text-warning"></i></td></tr>';
+	outHTML+='<tr><td class="sHead">Rarity</td><td>'+allRarities[0]+'<i class="fa fa-star-o text-warning"></i> - '+allRarities[allRarities.length-1]+'<i class="fa fa-star-o text-warning"></i></td></tr>';
 	outHTML+='<tr><td class="sHead">Trust Mastery</td><td>'+foundArray[0][16]+'</td></tr>';
 	outHTML+='</table></div>';
 	/*hits dropchecks affinity*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-8"><table class="table table-striped table-bordered table-responsive">';
 	outHTML+='<thead><tr><th>Rarity</th><th>Affinity</th><th>Hits</th><th>Drop Check</th><th>Materia</th><th>Global</th><th>Japan</th></tr></thead>';
 	for (var i in foundArray) {
-		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
+		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star-o"></i></td>';
 		outHTML+='<td>';
 		for (var j=0;j<4;j++) {
 			 if (foundArray[i][11][j]!=0) {
@@ -236,18 +238,18 @@ function initialize(data) {
 	}
 	outHTML+='</table></div>';
 	/*build stats*/
-	outHTML+='<h2>Stats</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
+	outHTML+='<h2>Stats</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<thead><tr><th>Rarity</th><th>HP</th><th>MP</th><th>ATK</th><th>DEF</th><th>MAG</th><th>SPR</th></tr></thead>';
 	for (var i in foundArray) {
-		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
+		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star-o"></i></td>';
 		for (var j in foundArray[i][7]) {
 			outHTML+='<td>'+foundArray[i][7][j]+' <span class="text-primary">('+foundArray[i][8][j]+')</span></td>';
 		}
 		outHTML+='</tr>'
 	}
-	outHTML+='</table></div>';
+	outHTML+='</table>';
 	/*build weapons*/
-	outHTML+='<h2>Weapons</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
+	outHTML+='<h2>Weapons</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
 	for (var i=0;i<=15;i++) {
 		if (i==8)
@@ -260,9 +262,9 @@ function initialize(data) {
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
-	outHTML+='</table></div>';
+	outHTML+='</table>';
 	/*build armor*/
-	outHTML+='<h2>Armors</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
+	outHTML+='<h2>Armors</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
 	for (var i=0;i<=7;i++) {
 		outHTML+='<td>';
@@ -273,9 +275,9 @@ function initialize(data) {
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
-	outHTML+='</table></div>';
+	outHTML+='</table>';
 	/*build resistances*/
-	outHTML+='<h2>Resistances</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
+	outHTML+='<h2>Resistances</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
 	for (var i=0;i<=15;i++) {
 		if (i==8)
@@ -288,9 +290,20 @@ function initialize(data) {
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
-	outHTML+='</table></div>';
-	/*Magic*/
-	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Magic</h2><table class="table table-responsive table-striped table-bordered">';
+	outHTML+='</table>';
+	/*Limits Magic*/
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2><img src="'+imgprefix+'limit.png"/> Limit Break</h2><table class="table table-responsive table-striped table-bordered">';
+	outHTML+='<thead><tr><th class="min50"><i class="fa fa-star-o"></i></th><th>Limit Break</th><th>Cost</th><th>Max Lv</th></tr></thead>';
+	for (var i in foundArray) {
+		outHTML+='<tr>';
+		outHTML+='<td class="min50">'+foundArray[i][2]+'<i class="fa fa-star-o"></i></td>';
+		outHTML+='<td>'+foundArray[i][15][0]+'</td>';
+		outHTML+='<td>'+foundArray[i][15][1]+'</td>';
+		outHTML+='<td>'+lbMax[foundArray[i][2]]+'</td>';
+		outHTML+='</tr>';
+	}
+	outHTML+='</table>';
+	outHTML+='<h2>Magic</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
 	var hRarity=0;
 	var hRarePos=0;
