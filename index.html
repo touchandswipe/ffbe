@@ -103,9 +103,8 @@ function initialize(fusionData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		//{ "width": "225", "targets": [ 7,9,12 ] },
-		//{ "visible": false, "targets": [ 12,13,14 ] },
-		"visible": false, "targets": [].concat(xtraDefCol) },
+		{ "visible": false, "targets": xtraDefCol },
+		{ "searchable": false, "targets": [5,6,7,8,9,10,11,12,13,14] },
 		{ "targets": [ 1 ],
 		"render": function (unit, type, cRow, full )  {
 			return '<a href="unit.html?q='+unit+'" class="unitName notranslate">'+unit+'</a>';
