@@ -20,7 +20,7 @@ filter: drop-shadow(0px 0px 5px #0033FF);
 margin-top:-8px;
 margin-left:-4px;
 }
-    .affix { position:fixed;left:0px;top:40px;width:100%;z-index:50;background:#E6CCFF;padding:30px 10px 0px 10px;margin:0;box-shadow: 0 4px 4px -2px #888888;; }
+    .affix { position:fixed;left:0px;top:50px;width:100%;z-index:50;background:#E6CCFF;height:75px;padding:30px 10px 0px 10px;margin:0;box-shadow: 0 4px 4px -2px #888888;; }
     .affix-top { position:static; }
     .evoShdw {
 	-webkit-filter: grayscale(100%);
@@ -123,7 +123,7 @@ function initialize(fusionData) {
 			/*Unbind Search*/
 			$('.dataTables_filter input').off();
 			/*custom replace search field*/
-			$('.dataTables_filter').html('<div class="input-group input-group-sm pull-left" style="width:95%;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" placeholder="e.g. Name, Series, ID. ENTER to update browser URL."></div>');
+			$('.dataTables_filter').html('<div class="input-group input-group-sm text-center" style="width:100%;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" placeholder="e.g. Name, Series, ID. ENTER to update browser URL."></div>');
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
