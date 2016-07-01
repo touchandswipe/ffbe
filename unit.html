@@ -18,7 +18,7 @@ margin-top:-8px;
 margin-left:-4px;
 }
     .equip {
-    	width:70%;
+    	width:20%;
     	min-width:30px;
     	height:auto;
     }
@@ -190,7 +190,7 @@ function initialize(data) {
 			foundArray.push(data[i]);
 	}
 	/*Process stringed arrays*/
-	var processPos=[7,8,9,10,11,12,13,14,15];
+	var processPos=[7,8,9,10,11,12,13,14];
 	for (var i in foundArray) {
 		/*split values into array*/
 		for (j in processPos) {
@@ -292,9 +292,10 @@ function initialize(data) {
 	outHTML+='</tr>';
 	outHTML+='</table>';
 	/*Limits Magic*/
-	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2><img src="'+imgprefix+'limit.png"/> Limit Break</h2><table class="table table-responsive table-striped table-bordered">';
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2><img src="'+imgprefix+'limit.png" width="60"/> Limit Break</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<thead><tr><th class="min50"><i class="fa fa-star-o"></i></th><th>Limit Break</th><th>Cost</th><th>Max Lv</th></tr></thead>';
 	for (var i in foundArray) {
+		foundArray[i][15]=foundArray[i][15].split("~");
 		outHTML+='<tr>';
 		outHTML+='<td class="min50">'+foundArray[i][2]+'<i class="fa fa-star-o"></i></td>';
 		outHTML+='<td>'+foundArray[i][15][0]+'</td>';
