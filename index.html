@@ -114,7 +114,7 @@ function initialize(fusionData) {
 		{ "targets": [1],
 		"render": function (unit, type, cRow, full )  {
 			if (type ==='display')
-				return '<a href="unit.html?q='+cRow[1]+'" class="unitName notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" /></a>';
+				return '<a href="unit.html?q='+cRow[1]+'" class="notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" title="'+cRow[1]+' '+cRow[2]+'stars" /></a>';
 			else
 				return unit;
 		    }
