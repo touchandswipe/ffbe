@@ -108,7 +108,7 @@ function initialize(fusionData) {
 		{ "searchable": false, "targets": [5,6,7,8,9,10,11,12,13,14] },
 		{ "targets": [0],
 		"render": function (unit, type, cRow, full )  {
-			return '<a href="unit.html?q='+cRow[1]+'" class="unitName notranslate"><img src="'+imgprefix+cRow[1].toLowerCase()+cRow[2]+'.png" width="50"/></a>';
+			return '<a href="unit.html?q='+cRow[1]+'" class="unitName notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" width="50"/></a>';
 		    }
 		},
 		{ "targets": [ 1 ],
