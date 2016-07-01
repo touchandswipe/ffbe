@@ -15,9 +15,13 @@
 <style type="text/css">
 	.logoShdw {
 	-webkit-filter: drop-shadow(0px 0px 6px #0033FF);
-	filter: drop-shadow(0px 0px 5px #0033FF);
+	filter: drop-shadow(0px 0px 5px #0066FF);
 	margin-top:-8px;
 	margin-left:-4px;
+	}
+	.unitImg {
+		height=60px;
+		width=auto;
 	}
 	.affix { position:fixed;left:0px;top:50px;width:100%;z-index:50;background:#E6CCFF;height:75px;padding:30px 10px 0px 10px;margin:0;box-shadow: 0 4px 4px -2px #888888;; }
 	.affix-top { position:static; }
@@ -106,16 +110,16 @@ function initialize(fusionData) {
 		  "columnDefs":[
 		{ "visible": false, "targets": xtraDefCol },
 		{ "searchable": false, "targets": [5,6,7,8,9,10,11,12,13,14] },
-		{ "targets": [0],
+		{ "targets": [1],
 		"render": function (unit, type, cRow, full )  {
-			return '<a href="unit.html?q='+cRow[1]+'" class="unitName notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" width="50"/></a>';
+			return '<a href="unit.html?q='+cRow[1]+'" class="unitName notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" /></a>';
 		    }
 		},
-		{ "targets": [ 1 ],
+/*		{ "targets": [ 1 ],
 		"render": function (unit, type, cRow, full )  {
 			return '<a href="unit.html?q='+unit+'" class="unitName notranslate">'+unit+'</a>';
 		    }
-		},
+		}, */
 		/*Rarity*/
 		{ 	"targets":[ 2 ],
 			"render": function(rarity, type, row, full) {
