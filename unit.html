@@ -199,7 +199,7 @@ function initialize(data) {
 	outHTML+='</table></div>';
 	/*build stats*/
 	outHTML+='<h2>Stats</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
-	outHTML+='<thead><tr><th>Rarity</th><th>HP</th><th>MP</th><th>ATK</th><th>DEF</th><th>INT</th><th>SPR</th></tr></thead>';
+	outHTML+='<thead><tr><th>Rarity</th><th>HP</th><th>MP</th><th>ATK</th><th>DEF</th><th>MAG</th><th>SPR</th></tr></thead>';
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
 		for (var j in foundArray[i][7]) {
@@ -278,7 +278,7 @@ function initialize(data) {
 			outHTML+='<td>'+tMagObj["mp"]+'</td>';
 		} else {
 			outHTML+='<td>'+tMagic[1]+'</td>';
-			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
+			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
 			outHTML+='<td class="text-danger" colspan="5">No skill records found</td>';
 		}
 		outHTML+='</tr>';
@@ -303,8 +303,8 @@ function initialize(data) {
 			outHTML+='<td>'+tMagObj["mp"]+'</td>';
 		} else {
 			outHTML+='<td>'+tMagic[1]+'</td>';
-			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
-			outHTML+='<td class="text-danger" colspan="5">No skill records found</td>';
+			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
+			outHTML+='<td class="text-danger" colspan="4">No skill records found</td>';
 		}
 		outHTML+='</tr>';
 	}
