@@ -28,6 +28,10 @@ margin-left:-4px;
 	opacity: 0.2;
     	filter: alpha(opacity=20); /* For IE8 and earlier */
     }
+    .sHead {
+    	font-weight:bold;
+    	background:#EEE;
+    }
     .skillIcon {
     	width:40px;
     	height:40px;
@@ -202,7 +206,7 @@ function initialize(data) {
 	outHTML+='</tr>'
 	outHTML+='</table></div>';
 	/*general info*/
-	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><table class="table table-striped table-bordered table-responsive">';
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><table class="table table-bordered table-responsive">';
 	outHTML+='<tr><td class="sHead">Gender</td><td>'+foundArray[0][4]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">Job</td><td>'+foundArray[0][3]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">Race</td><td>'+foundArray[0][5]+'</td></tr>';
@@ -211,10 +215,10 @@ function initialize(data) {
 	outHTML+='</table></div>';
 	/*hits dropchecks*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><table class="table table-striped table-bordered table-responsive">';
-	outHTML+='<thead><tr><th>Rarity</th><th>Hits</th><th>DropCheck</th><th>Materia</th></tr></thead>';
+	outHTML+='<thead><tr><th>Rarity</th><th>Hits</th><th>DropCheck</th><th>Materia</th><th>Global</th><th>Japan</th></tr></thead>';
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
-		for (var j=19;j<22;j++)
+		for (var j=17;j<22;j++)
 			outHTML+='<td>'+foundArray[i][j]+'</td>';
 		outHTML+='</tr>'
 	}
