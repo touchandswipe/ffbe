@@ -28,6 +28,18 @@ margin-left:-4px;
 	opacity: 0.2;
     	filter: alpha(opacity=20); /* For IE8 and earlier */
     }
+    .affwhite {
+    	color:#CCC;
+    }
+    .affblack {
+    	color:#000;
+    }
+    .affgreen {
+    	color:;#52BE80;
+    }
+    .affblue {
+    	color:#3498DB;
+    }
     .sHead {
     	font-weight:bold;
     	background:#EEE;
@@ -39,6 +51,9 @@ margin-left:-4px;
     }
     .middle{
 	text-align: center;
+    }
+    h2 {
+    	clear:both;
     }
     td {
 	vertical-align: middle !important;
@@ -175,6 +190,8 @@ var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LF
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:V";
 /*initialise build*/
 function initialize(data) {
+	/*affinity*/
+	var affClass=["affwhite","affblack","affgreen","affblue"];
 	var uName=urlParam("q");
 	if (uName=="")
 		var uName="Rain";
@@ -215,11 +232,18 @@ function initialize(data) {
 	outHTML+='<tr><td class="sHead">Rarity</td><td>'+allRarities[0]+'<i class="fa fa-star text-warning"></i> - '+allRarities[allRarities.length-1]+'<i class="fa fa-star text-warning"></i></td></tr>';
 	outHTML+='<tr><td class="sHead">Trust Mastery</td><td>'+foundArray[0][16]+'</td></tr>';
 	outHTML+='</table></div>';
-	/*hits dropchecks*/
+	/*hits dropchecks affinity*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-8"><table class="table table-striped table-bordered table-responsive">';
-	outHTML+='<thead><tr><th>Rarity</th><th>Hits</th><th>Drop Check</th><th>Materia</th><th>Global</th><th>Japan</th></tr></thead>';
+	outHTML+='<thead><tr><th>Rarity</th><th>Affinity</th><th>Hits</th><th>Drop Check</th><th>Materia</th><th>Global</th><th>Japan</th></tr></thead>';
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
+		outHTML+='<td>';
+		for (var j=0;j<5;j++) {
+			 if (foundArray[i][11][j]!=0) {
+			 	outHTML+='<i class="fa fa-circle '+affClass[j]+'"></i>'+foundArray[i][11][j]+" ";
+			 }
+		}
+		outHTML+='</td>';
 		for (var j=17;j<22;j++)
 			outHTML+='<td>'+foundArray[i][j]+'</td>';
 		outHTML+='</tr>'
