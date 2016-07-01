@@ -260,14 +260,14 @@ function initialize(data) {
 		outHTML+='<tr>';
 		/*match glskills*/
 		if (glSkills.hasOwnProperty(tMagic[0])) {
-			var tMagicObj=glSkills[tMagic[0]];
+			var tMagObj=glSkills[tMagic[0]];
 			outHTML+='<td>'+tMagic[1]+'</td>';
 			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
 			outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 			outHTML+='<td>'+tMagic[0]+'</td>';
-			outHTML+='<td>'+tMagicObj["element"]+'</td>';
-			outHTML+='<td>'+tMagicObj["effect"]+'</td>';
-			outHTML+='<td>'+tMagicObj["mp"]+'</td>';
+			outHTML+='<td>'+tMagObj["element"]+'</td>';
+			outHTML+='<td>'+tMagObj["effect"]+'</td>';
+			outHTML+='<td>'+tMagObj["mp"]+'</td>';
 		} else {
 			outHTML+='<td>'+tMagic[1]+'</td>';
 			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
@@ -286,14 +286,14 @@ function initialize(data) {
 		outHTML+='<tr>';
 		/*match glskills*/
 		if (glSkills.hasOwnProperty(tMagic[0])) {
-			var tMagicObj=glSkills[tMagic[0]];
+			var tMagObj=glSkills[tMagic[0]];
 			outHTML+='<td>'+tMagic[1]+'</td>';
 			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
 			outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 			outHTML+='<td>'+tMagic[0]+'</td>';
-			outHTML+='<td>'+tMagicObj["element"]+'</td>';
-			outHTML+='<td>'+tMagicObj["effect"]+'</td>';
-			outHTML+='<td>'+tMagicObj["mp"]+'</td>';
+			outHTML+='<td>'+tMagObj["element"]+'</td>';
+			outHTML+='<td>'+tMagObj["effect"]+'</td>';
+			outHTML+='<td>'+tMagObj["mp"]+'</td>';
 		} else {
 			outHTML+='<td>'+tMagic[1]+'</td>';
 			outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star"></i></td>';
