@@ -157,6 +157,8 @@ margin-left:-4px;
 <script type="text/javascript">
 var glSkills={};
 var imgprefix="http://ffbe.summonerscentral.com/img/";
+var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
 /*initialise build*/
 function initialize(data) {
 	var uName=urlParam("q");
@@ -357,8 +359,6 @@ function dataCheckLoad() {
 $(document).ready( function(e) {
     /*LocalStorage Retreival and storage*/
     /*Grab skills*/
-	var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
 	$.ajax({
 			url: URLskills,
 			success: function (data) {
