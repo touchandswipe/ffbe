@@ -20,8 +20,8 @@
 	margin-left:-4px;
 	}
 	.unitImg {
-		height=60px;
-		width=auto;
+		height:50px;
+		width:auto;
 	}
 	.affix { position:fixed;left:0px;top:50px;width:100%;z-index:50;background:#E6CCFF;height:75px;padding:30px 10px 0px 10px;margin:0;box-shadow: 0 4px 4px -2px #888888;; }
 	.affix-top { position:static; }
@@ -64,7 +64,7 @@ function initialize(fusionData) {
 		"data":tData,
 		"columns": [
 				{ title: "ID",data:"0" },
-				{ title: "Name", data:"1" },
+				{ title: "Unit", data:"1" },
 				{ title: "Rarity", data:"2" },
 				{ title: "Job", data:"3" },
 				{ title: "Series", data:"6" },
@@ -108,11 +108,14 @@ function initialize(fusionData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		{ "visible": false, "targets": xtraDefCol },
+		{ "visible": false, "targets": [0].concat(xtraDefCol) },
 		{ "searchable": false, "targets": [5,6,7,8,9,10,11,12,13,14] },
 		{ "targets": [1],
 		"render": function (unit, type, cRow, full )  {
-			return '<a href="unit.html?q='+cRow[1]+'" class="unitName notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" /></a>';
+			if (type ==='display')
+				return '<a href="unit.html?q='+cRow[1]+'" class="unitName notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" /></a>';
+			else
+				return unit;
 		    }
 		},
 /*		{ "targets": [ 1 ],
