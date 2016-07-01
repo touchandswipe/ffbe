@@ -18,3 +18,9 @@ function isValidJSON(str) {
     }
     return true;
 }
+
+/*Bootstrap alerts*/
+function bfpAlert(aTitle,aBody) {
+    $("#alertSpace").html('<i class="fa fa-fire-extinguisher"></i> <strong>'+aTitle+':</strong> '+aBody);
+    $("#alertmodal").modal("show");
+}
