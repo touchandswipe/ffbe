@@ -241,7 +241,7 @@ function initialize(data) {
 	outHTML+='</tr>';
 	outHTML+='</table></div>';
 	/*Magic*/
-	outHTML+='<h2>Magic</h2><div class="col-xs-12 col-sm-12 col-md-6"><div class="table-responsive"><table class="table table-striped table-bordered">';
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Magic</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
 	outHTML+='<thead><tr><th>LVL Unlock</th><th>Min Rarity</th><th>Icon</th><th>Magic</th><th>Element</th><th>Description</th><th>MP</th></tr></thead>';
 	var hRarity=0;
 	var hRarePos=0;
@@ -275,7 +275,7 @@ function initialize(data) {
 	}
 	outHTML+='</table></div></div>';
 	/*Special*/
-	outHTML+='<h2>Special</h2><div class="col-xs-12 col-sm-12 col-md-6"><div class="table-responsive"><table class="table table-striped table-bordered">';
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
 	outHTML+='<thead><tr><th>LVL Unlock</th><th>Min Rarity</th><th>Icon</th><th>Magic</th><th>Element</th><th>Description</th><th>MP</th></tr></thead>';
 	/*split and process output*/
 	for (var j in foundArray[hRarePos][14]) {
@@ -306,6 +306,24 @@ function initialize(data) {
 
 $(document).ready( function(e) {
     /*LocalStorage Retreival and storage*/
+    /*Grab skills*/
+	var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
+	$.ajax({
+			url: URLskills,
+			success: function (data) {
+				/*parse*/
+				for (var i=1;i<data.length;i++) {
+					var tObj={};
+					tObj["element"]=data[i][1];
+					tObj["effect"]=data[i][2];
+					tObj["mp"]=data[i][3];
+					tObj["icon"]=imgprefix+"skills/"+data[i][4]+".png";
+					glSkills[data[i][0]]=tObj;
+					alert(JSON.stringy(glSkills);
+				}
+				console.log("skills parsed processed.");
+			}
+	})
     var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
     if (localStorage.ffbeguideadv) {
     	/*Quick query to check for new entries*/
@@ -354,24 +372,6 @@ $(document).ready( function(e) {
 	  	}
 	})
 } /*End localstorage checknload*/
-
-/*Grab skills*/
-var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
-$.ajax({
-		url: URLskills,
-		success: function (data) {
-			/*parse*/
-			for (var i=1;i<data.length;i++) {
-				var tObj={};
-				tObj["element"]=data[i][1];
-				tObj["effect"]=data[i][2];
-				tObj["mp"]=data[i][3];
-				tObj["icon"]=imgprefix+"skills/"+data[i][4]+".png";
-				glSkills[data[i][0]]=tObj;
-			}
-			console.log("skills parsed processed.");
-		}
-})
 
 /*RESET*/
 $('#resetBtn').click( function(e) {
