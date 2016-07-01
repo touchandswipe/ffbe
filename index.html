@@ -19,6 +19,7 @@
 	margin-top:-8px;
 	margin-left:-4px;
 	}
+	.yellow {color:#ffc300};
 	.unitImg {
 		height:50px;
 		width:auto;
@@ -56,10 +57,10 @@ function initialize(fusionData) {
   /*Xtra Columns to hide by resolution*/
   if ( $( document ).width() >= 1800 ) {
     var xtraDefCol=[]; var pLength=100;
-  } else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=50; 
-  } else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=50;
-  } else if ( ( $( document ).width() < 800 ) && ( $( document ).width() >= 500 ) ) { var xtraDefCol=[11,12,13,14]; var pLength=50;
-  } else { var xtraDefCol=[5,6,7,8,9,10,11,12,13,14]; var pLength=50; }
+  } else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=25; 
+  } else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=25;
+  } else if ( ( $( document ).width() < 800 ) && ( $( document ).width() >= 500 ) ) { var xtraDefCol=[11,12,13,14]; var pLength=25;
+  } else { var xtraDefCol=[5,6,7,8,9,10,11,12,13,14]; var pLength=25; }
 	ffbeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
@@ -118,16 +119,11 @@ function initialize(fusionData) {
 				return unit;
 		    }
 		},
-/*		{ "targets": [ 1 ],
-		"render": function (unit, type, cRow, full )  {
-			return '<a href="unit.html?q='+unit+'" class="unitName notranslate">'+unit+'</a>';
-		    }
-		}, */
 		/*Rarity*/
 		{ 	"targets":[ 2 ],
 			"render": function(rarity, type, row, full) {
 			    if (type ==='display')
-				return rarity+' <i class="fa fa-star"></i>';
+				return rarity+' <i class="fa fa-star yellow"></i>';
 			    else
 				return rarity;
 			}
