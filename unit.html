@@ -264,8 +264,8 @@ function initialize(data) {
 	}
 	outHTML+='</tr>';
 	outHTML+='</table></div>';
-	/*build traits*/
-	outHTML+='<h2>Traits</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
+	/*build resistances*/
+	outHTML+='<h2>Resistances</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
 	for (var i=0;i<=15;i++) {
 		if (i==8)
@@ -274,7 +274,7 @@ function initialize(data) {
 		if (foundArray[foundArray.length-1][12][i]==0)
 			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip equipNo" />';
 		else
-			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" />';
+			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br><b>'+foundArray[foundArray.length-1][12][i]+'</b>';
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
