@@ -167,7 +167,7 @@ margin-left:-4px;
 var glSkills={};
 var imgprefix="http://ffbe.summonerscentral.com/img/";
 var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
-	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
+var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
 /*initialise build*/
 function initialize(data) {
 	var uName=urlParam("q");
@@ -176,10 +176,8 @@ function initialize(data) {
 	var foundArray=[];
 	/*match rain*/
 	for (i=1;i<data.length;i++) {
-		if (data[i][1]==uName) {
-			console.log("match found "+data[i][1]);
+		if (data[i][1]==uName)
 			foundArray.push(data[i]);
-		}
 	}
 	/*Process stringed arrays*/
 	var processPos=[7,8,9,10,11,12,13,14]
@@ -189,13 +187,37 @@ function initialize(data) {
 			foundArray[i][processPos[j]]=foundArray[i][processPos[j]].split(",")
 		}
 	}
+	/*grab rarity*/
+	var allRarities=[];
+	for (var i in foundArray) {
+		allRarities.push(foundArray[i][2])
+	}
+	allRarities.sort(function(a, b){return a-b});
 	/*artwork*/
-	var outHTML='<h2>Unit: '+uName+'</h2><div class="table-responsive"><table class="table">';
+	var outHTML='<h2><b>'+uName+'</b></h2><div class="table-responsive"><table class="table">';
 	outHTML+='<tr>';
 	for (var i in foundArray) {
 		outHTML+='<td class="middle"><img src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" title="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/></td>';
 	}
 	outHTML+='</tr>'
+	outHTML+='</table></div>';
+	/*general info*/
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><table class="table table-striped table-bordered table-responsive">';
+	outHTML+='<tr><td class="sHead">Gender</td><td>'+foundArray[0][4]+'</td></tr>';
+	outHTML+='<tr><td class="sHead">Job</td><td>'+foundArray[0][3]+'</td></tr>';
+	outHTML+='<tr><td class="sHead">Race</td><td>'+foundArray[0][5]+'</td></tr>';
+	outHTML+='<tr><td class="sHead">FF Series</td><td>'+foundArray[0][6]+'</td></tr>';
+	outHTML+='<tr><td class="sHead">Trust Mastery</td><td>'+foundArray[0][16]+'</td></tr>';
+	outHTML+='</table></div>';
+	/*hits dropchecks*/
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><table class="table table-striped table-bordered table-responsive">';
+	outHTML+='<thead><tr><th>Rarity</th><th>Hits</th><th>DropCheck</th><th>Materia</th></tr></thead>';
+	for (var i in foundArray) {
+		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star"></i></td>';
+		for (var j=19;j<22;j++)
+			outHTML+='<td>'+foundArray[i][j]+'</td>';
+		outHTML+='</tr>'
+	}
 	outHTML+='</table></div>';
 	/*build stats*/
 	outHTML+='<h2>Stats</h2><div class="table-responsive"><table class="table table-striped table-bordered">';
