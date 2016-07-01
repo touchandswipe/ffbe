@@ -48,6 +48,13 @@ function initialize(fusionData) {
 	for (var i in tData) {
 		tData[i][7]=tData[i][7].split(",");
 	};
+  /*Xtra Columns to hide by resolution*/
+  if ( $( document ).width() >= 1800 ) {
+    var xtraDefCol=[]; var pLength=100;
+  } else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=50; 
+  } else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=50;
+  } else if ( ( $( document ).width() < 800 ) && ( $( document ).width() >= 500 ) ) { var xtraDefCol=[11,12,13,14]; var pLength=50;
+  } else { var xtraDefCol=[5,6,7,8,9,10,11,12,13,14]; var pLength=50; }
 	ffbeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
@@ -55,8 +62,6 @@ function initialize(fusionData) {
 				{ title: "Name" },
 				{ title: "Rarity" },
 				{ title: "Job" },
-				{ title: "Gender" },
-				{ title: "Race" },
 				{ title: "Series" },
 				{ title: "HP", data:"7.0" },
 				{ title: "MP", data:"7.1" },
@@ -64,18 +69,8 @@ function initialize(fusionData) {
 				{ title: "DEF", data:"7.3" },
 				{ title: "MAG", data:"7.4" },
 				{ title: "SPR", data:"7.5" },
-				//{ title: "Bonus", data:"8"},
-				//{ title: "Weapons", data:"9" },
-				//{ title: "Armors", data:"10" },
-				//{ title: "MagicLvl", data:"11" },
-				//{ title: "Trait", data:"12" },
-				//{ title: "Magic", data:"13" },
-				//{ title: "Special", data:"14" },
-				//{ title: "LimitBreak", data:"15" },
-				//{ title: "TrustMastery", data:"16" },
 				{ title: "Hits", data:"17" },
 				{ title: "Drop Check", data:"18" },
-				{ title: "Materia", data:"19" },
 				{ title: "Global", data:"20" },
 				{ title: "Japan", data:"21" }
 				],
@@ -100,7 +95,7 @@ function initialize(fusionData) {
 			/*hide loader*/
 			$('#progressModal').modal('hide');
 		  },
-		  "pageLength": 100,
+		  "pageLength": pLength,
 		  "language": {
 		      "search": "",
 		      "infoFiltered": " - filtered from _MAX_ Total Units",
@@ -110,7 +105,7 @@ function initialize(fusionData) {
 		  "columnDefs":[
 		//{ "width": "225", "targets": [ 7,9,12 ] },
 		//{ "visible": false, "targets": [ 12,13,14 ] },
-		//{ "searchable": false, "targets": [ 8,10,12,13,14,15,16,17,18 ] },
+		"visible": false, "targets": [].concat(xtraDefCol) },
 		{ "targets": [ 1 ],
 		"render": function (unit, type, cRow, full )  {
 			return '<a href="unit.html?q='+unit+'" class="unitName notranslate">'+unit+'</a>';
