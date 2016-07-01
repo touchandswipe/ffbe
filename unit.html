@@ -366,18 +366,12 @@ function dataCheckLoad() {
 					localStorage.removeItem("ffbeguideadvCount");
 					history.pushState(null, null, location.pathname);
 					location.reload(true);
-					}
 				}
-	  		}
+			}
+			$('#progressModal').modal('hide');
+	  	}
 	})
     	} else {
-		/*Init loader if no localstorage*/
-		$('#progressModal').modal({
-			keyboard:false,
-			backdrop:'static',
-			toggle:true
-		})
-		/*AJAX*/
 		$.ajax({
 			url: url,
 			success: function (fusionData) {
@@ -393,8 +387,12 @@ function dataCheckLoad() {
 }
 
 $(document).ready( function(e) {
-    /*LocalStorage Retreival and storage*/
-    /*Grab skills*/
+    /*load data*/
+	$('#progressModal').modal({
+		keyboard:false,
+		backdrop:'static',
+		toggle:true
+	})
 	$.ajax({
 			url: URLskills,
 			success: function (data) {
