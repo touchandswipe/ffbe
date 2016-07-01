@@ -304,28 +304,8 @@ function initialize(data) {
 	$("#unitContent").html(outHTML);
 }
 
-$(document).ready( function(e) {
-    /*LocalStorage Retreival and storage*/
-    /*Grab skills*/
-	var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
-	$.ajax({
-			url: URLskills,
-			success: function (data) {
-				/*parse*/
-				for (var i=1;i<data.length;i++) {
-					var tObj={};
-					tObj["element"]=data[i][1];
-					tObj["effect"]=data[i][2];
-					tObj["mp"]=data[i][3];
-					tObj["icon"]=imgprefix+"skills/"+data[i][4]+".png";
-					glSkills[data[i][0]]=tObj;
-					alert(JSON.stringy(glSkills));
-				}
-				console.log("skills parsed processed.");
-			}
-	})
-    var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
-    if (localStorage.ffbeguideadv) {
+function dataCheckLoad() {
+	if (localStorage.ffbeguideadv) {
     	/*Quick query to check for new entries*/
     	var serverUnitsCount=0;
     	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : parseInt(localStorage.ffbeguideadvCount);
@@ -352,26 +332,49 @@ $(document).ready( function(e) {
 					}
 				}
 	  		}
-	});
-    } else {
-	/*Init loader if no localstorage*/
-	$('#progressModal').modal({
-		keyboard:false,
-		backdrop:'static',
-		toggle:true
 	})
-	/*AJAX*/
+    	} else {
+		/*Init loader if no localstorage*/
+		$('#progressModal').modal({
+			keyboard:false,
+			backdrop:'static',
+			toggle:true
+		})
+		/*AJAX*/
+		$.ajax({
+			url: url,
+			success: function (fusionData) {
+				console.log("success: "+fusionData);
+				/*Save in local storage*/
+				localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
+				localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
+				initialize(fusionData.values);
+		  	}
+		})
+	} /*End localstorage checknload*/
+}
+
+$(document).ready( function(e) {
+    /*LocalStorage Retreival and storage*/
+    /*Grab skills*/
+	var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:E";
+	var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:S";
 	$.ajax({
-		url: url,
-		success: function (fusionData) {
-			console.log("success: "+fusionData);
-			/*Save in local storage*/
-			localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
-			localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
-			initialize(fusionData.values);
-	  	}
+			url: URLskills,
+			success: function (data) {
+				/*parse*/
+				for (var i=1;i<data.values.length;i++) {
+					var tObj={};
+					tObj["element"]=data.values[i][1];
+					tObj["effect"]=data.values[i][2];
+					tObj["mp"]=data.values[i][3];
+					tObj["icon"]=imgprefix+"skills/"+data.values[i][4]+".png";
+					glSkills[data.values[i][0]]=tObj;
+				}
+				console.log("skills parsed processed.");
+				dataCheckLoad();
+			}
 	})
-} /*End localstorage checknload*/
 
 /*RESET*/
 $('#resetBtn').click( function(e) {
