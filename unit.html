@@ -241,7 +241,7 @@ function initialize(data) {
 	}
 	outHTML+='</table>';
 	/*build weapons*/
-	outHTML+='<h2>Weapons</h2><table class="table table-responsive table-striped table-bordered">';
+	outHTML+='<div class="col-md-12"><h2>Weapons</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
 	for (var i=0;i<=15;i++) {
 		if (i==8)
@@ -254,9 +254,9 @@ function initialize(data) {
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
-	outHTML+='</table>';
+	outHTML+='</table></div>';
 	/*build armor*/
-	outHTML+='<h2>Armors</h2><table class="table table-responsive table-striped table-bordered">';
+	outHTML+='<div class="col-md-12"><h2>Armors</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
 	for (var i=0;i<=7;i++) {
 		outHTML+='<td>';
@@ -267,9 +267,9 @@ function initialize(data) {
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
-	outHTML+='</table>';
+	outHTML+='</table></div>';
 	/*build resistances*/
-	outHTML+='<h2>Resistances</h2><table class="table table-responsive table-striped table-bordered">';
+	outHTML+='<div class="col-md-12"><h2>Resistances</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
 	for (var i=0;i<=15;i++) {
 		if (i==8)
@@ -282,7 +282,7 @@ function initialize(data) {
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
-	outHTML+='</table>';
+	outHTML+='</table></div>';
 	/*Limits Magic*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2><img src="'+imgprefix+'limit.png" width="60"/> Limit Break</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<thead><tr><th class="min50"><i class="fa fa-star-o"></i></th><th>Limit Break</th><th>Cost</th><th>Max Lv</th></tr></thead>';
