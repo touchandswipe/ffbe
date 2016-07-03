@@ -196,13 +196,13 @@ function initialize(data) {
 	}
 	allRarities.sort(function(a, b){return a-b});
 	/*artwork*/
-	var outHTML='<h2><b>'+uName+'</b></h2><div class="table-responsive"><table class="table">';
+	var outHTML='<div class="col-md-12"><h2><b>'+uName+'</b></h2><div class="table-responsive"><table class="table">';
 	outHTML+='<tr>';
 	for (var i in foundArray) {
 		outHTML+='<td class="middle"><img src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" title="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/></td>';
 	}
 	outHTML+='</tr>'
-	outHTML+='</table></div>';
+	outHTML+='</table></div></div>';
 	/*general info*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-4"><table class="table table-bordered table-responsive">';
 	outHTML+='<tr><td class="sHead">Gender</td><td>'+foundArray[0][4]+'</td></tr>';
