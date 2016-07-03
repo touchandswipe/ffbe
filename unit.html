@@ -396,7 +396,6 @@ function dataCheckLoad() {
 					location.reload(true);
 				}
 			}
-			//$('#progressModal').modal('hide');
 	  	}
 	})
     	} else {
@@ -407,19 +406,13 @@ function dataCheckLoad() {
 				localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
 				localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
 				initialize(fusionData.values);
-				//$('#progressModal').modal('hide');
 		  	}
 		})
 	} /*End localstorage checknload*/
 }
 
 $(document).ready( function(e) {
-    /*load data
-	$('#progressModal').modal({
-		keyboard:false,
-		backdrop:'static',
-		toggle:true
-	}) */
+    /*load data*/
 	$.ajax({
 			url: URLskills,
 			success: function (data) {
@@ -552,22 +545,6 @@ $(document).on("click", "#syncCancel", function(e){
 </div></div>
 
 </div> <!-- /container -->
-
-<!-- Modal for Progress-->
-<div class="modal fade" id="progressModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-body">
-	<div class="text-center">
-	    <h3 class="text-primary"><b>Summoning units</b></h3>
-	    <i class="fa fa-spinner fa-spin fa-5x"></i>
-	    <h4 class="text-primary">A moment please ...</h4>
-	    <h5>(Note: Images will continue to load progressively after.)</h5>
-	</div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- Alert Modal -->
 <div class="modal fade" id="alertmodal" tabindex="-1" role="dialog">
