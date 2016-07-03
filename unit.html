@@ -305,11 +305,16 @@ function initialize(data) {
 		if (foundArray[i][2] > hRarity)
 			hRarePos=i
 	}
-	console.log("rarity "+hRarePos);	
 	/*split and process output*/
 	for (var j in foundArray[hRarePos][13]) {
-		var tMagic=foundArray[hRarePos][13][j].split("~");
-		console.log(tMagic);
+		foundArray[hRarePos][13][j]=foundArray[hRarePos][14][j].split("~");
+	}
+	/*custom 2nd dimension sort*/
+	foundArray[hRarePos][13].sort( function(a,b){
+		return a[1] - b[1]
+	})
+	for (var j in foundArray[hRarePos][13]) {
+		var tMagic=foundArray[hRarePos][13][j];
 		outHTML+='<tr>';
 		/*match glskills*/
 		if (glSkills.hasOwnProperty(tMagic[0])) {
@@ -372,7 +377,6 @@ function dataCheckLoad() {
 	$.ajax({
 		url: url,
 		success: function (quickData) {
-			console.log("success: "+quickData);
 			serverUnitsCount=quickData.values.length;
 			/*Prompt to Sync*/
 			if (serverUnitsCount > localUnitsCount)
@@ -397,7 +401,6 @@ function dataCheckLoad() {
 		$.ajax({
 			url: url,
 			success: function (fusionData) {
-				console.log("success: "+fusionData);
 				/*Save in local storage*/
 				localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
 				localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
