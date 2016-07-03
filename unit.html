@@ -333,8 +333,14 @@ function initialize(data) {
 	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
 	/*split and process output*/
 	for (var j in foundArray[hRarePos][14]) {
-		var tMagic=foundArray[hRarePos][14][j].split("~");
-		console.log(tMagic);
+		foundArray[hRarePos][14][j]=foundArray[hRarePos][14][j].split("~");
+	}
+	/*custom 2nd dimension sort*/
+	foundArray[hRarePos][14].sort( function(a,b){
+		return a[1] - b[1]
+	})
+	for (var j in foundArray[hRarePos][14]) {
+		var tMagic=foundArray[hRarePos][14][j];
 		outHTML+='<tr>';
 		/*match glskills*/
 		if (glSkills.hasOwnProperty(tMagic[0])) {
