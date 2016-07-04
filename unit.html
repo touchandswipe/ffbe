@@ -29,6 +29,7 @@ margin-left:-4px;
 	opacity: 0.2;
     	filter: alpha(opacity=20); /* For IE8 and earlier */
     }
+    .yellow {color:#ffc300;}
     .affwhite {
     	color:#CCC;
     	padding-right:3px;
@@ -194,7 +195,7 @@ function initialize(data) {
 	var outHTML='<div class="col-md-12"><h1><b>'+uName+'</b></h1><div class="table-responsive"><table class="table">';
 	outHTML+='<tr>';
 	for (var i in foundArray) {
-		outHTML+='<td class="middle"><img src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" title="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/><br>'+foundArray[i][2]+'<i class="fa fa-star yellow"></i></td>';
+		outHTML+='<td class="middle"><img src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" title="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/><br><b>'+foundArray[i][2]+'</b><i class="fa fa-star yellow"></i></td>';
 	}
 	outHTML+='</tr>'
 	outHTML+='</table></div></div>';
