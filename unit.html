@@ -279,7 +279,7 @@ function initialize(data) {
 		if (foundArray[foundArray.length-1][12][i]==0)
 			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br>-';
 		else
-			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br><b>'+foundArray[foundArray.length-1][12][i]+'</b>';
+			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br>'+foundArray[foundArray.length-1][12][i]+'%';
 		outHTML+='</td>';
 	}
 	outHTML+='</tr>';
