@@ -215,10 +215,14 @@ function initialize(data) {
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star-o"></i></td>';
 		outHTML+='<td>';
-		for (var j=0;j<4;j++) {
-			 if (foundArray[i][11][j]!=0) {
-			 	outHTML+='<i class="fa fa-circle '+affClass[j]+'"></i>'+foundArray[i][11][j]+" ";
-			 }
+		if (foundArray[i][11]!="" || foundArray[i][11]!=null) {
+			for (var j=0;j<4;j++) {
+				 if (foundArray[i][11][j]!=0) {
+				 	outHTML+='<i class="fa fa-circle '+affClass[j]+'"></i>'+foundArray[i][11][j]+" ";
+				 }
+			}
+		} else {
+			outHTML+='None'
 		}
 		outHTML+='</td>';
 		for (var j=18;j<23;j++)
@@ -565,7 +569,7 @@ $(document).on("click", "#syncCancel", function(e){
 <div class="modal fade" id="alertmodal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h3 class="modal-title text-danger"><i class="fa fa-fire"></i> Lugina Grumbles Grumbles</h3></div>
+    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h3 class="modal-title text-danger"><i class="fa fa-fire"></i> Mog Grumbles Grumbles</h3></div>
       <div class="modal-body">
 	<div id="alertSpace" class="alert"></div>
       </div>
