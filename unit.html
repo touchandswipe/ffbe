@@ -304,7 +304,7 @@ function initialize(data) {
 	}
 	outHTML+='</table>';
 	outHTML+='<h2>Magic</h2><table class="table table-responsive table-striped table-bordered">';
-	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th class="visible-md visible-lg">Element</th><th class="visible-md visible-lg">Range</th><th>Effects</th><th>MP</th></tr></thead>';
+	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th class="visible-lg">Element</th><th class="visible-lg">Range</th><th>Effects</th><th>MP</th></tr></thead>';
 	var hRarity=0;
 	var hRarePos=0;
 	for (var i in foundArray) {
@@ -333,9 +333,9 @@ function initialize(data) {
 				outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
 				outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 				outHTML+='<td>'+tMagic[0]+'</td>';
-				outHTML+='<td class="visible-md visible-lg">'+tMagObj["element"]+'</td>';
-				outHTML+='<td class="visible-md visible-lg">'+tMagObj["range"]+'</td>';
-				outHTML+='<td><span class="visible-xs-inline visible-sm-inline">'+tMagObj["range"]+' '+tMagObj["element"]+'</span> '+tMagObj["effect"]+'</td>';
+				outHTML+='<td class="visible-lg">'+tMagObj["element"]+'</td>';
+				outHTML+='<td class="visible-lg">'+tMagObj["range"]+'</td>';
+				outHTML+='<td><span class="hidden-lg">'+tMagObj["range"]+' '+tMagObj["element"]+'</span> '+tMagObj["effect"]+'</td>';
 				outHTML+='<td>'+tMagObj["mp"]+'</td>';
 			} else {
 				outHTML+='<td>'+tMagic[1]+'</td>';
@@ -348,7 +348,7 @@ function initialize(data) {
 	outHTML+='</table></div>';
 	/*Special*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special Abilities</h2><table class="table table-striped table-responsive table-bordered">';
-	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Ability</th><th class="visible-md visible-lg">Element</th><th class="visible-md visible-lg">Range</th><th>Effects</th><th>MP</th></tr></thead>';
+	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Ability</th><th class="visible-lg">Element</th><th class="visible-lg">Range</th><th>Effects</th><th>MP</th></tr></thead>';
 	if (foundArray[hRarePos][14]=="" || foundArray[hRarePos][14]==null) {
 		outHTML+='<td class="text-danger" colspan="8">No Special Abilities</td>';;
 	} else {	
@@ -370,9 +370,9 @@ function initialize(data) {
 				outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
 				outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 				outHTML+='<td>'+tMagic[0]+'</td>';
-				outHTML+='<td class="visible-md visible-lg">'+tMagObj["element"]+'</td>';
-				outHTML+='<td class="visible-md visible-lg">'+tMagObj["range"]+'</td>';
-				outHTML+='<td><span class="visible-xs-inline visible-sm-inline">'+tMagObj["range"]+' '+tMagObj["element"]+'</span> '+tMagObj["effect"]+'</td>';
+				outHTML+='<td class="visible-lg">'+tMagObj["element"]+'</td>';
+				outHTML+='<td class="visible-lg">'+tMagObj["range"]+'</td>';
+				outHTML+='<td><span class="hidden-lg">'+tMagObj["range"]+' '+tMagObj["element"]+'</span> '+tMagObj["effect"]+'</td>';
 				outHTML+='<td>'+tMagObj["mp"]+'</td>';
 			} else {
 				outHTML+='<td>'+tMagic[1]+'</td>';
