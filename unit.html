@@ -215,7 +215,7 @@ function initialize(data) {
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star-o"></i></td>';
 		outHTML+='<td>';
-		if (foundArray[i][11]!="" || foundArray[i][11]!=null) {
+		if (foundArray[i][11].length > 0) {
 			for (var j=0;j<4;j++) {
 				 if (foundArray[i][11][j]!=0) {
 				 	outHTML+='<i class="fa fa-circle '+affClass[j]+'"></i>'+foundArray[i][11][j]+" ";
