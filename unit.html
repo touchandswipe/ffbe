@@ -328,7 +328,9 @@ function initialize(data) {
 				outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
 				outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 				outHTML+='<td>'+tMagic[0]+'</td>';
-				outHTML+='<td>'+tMagObj["element"]+" "+tMagObj["effect"]+'</td>';
+				outHTML+='<td>'+tMagObj["element"]+'</td>';
+				outHTML+='<td>'+tMagObj["range"]+'</td>';
+				outHTML+='<td>'+tMagObj["effect"]+'</td>';
 				outHTML+='<td>'+tMagObj["mp"]+'</td>';
 			} else {
 				outHTML+='<td>'+tMagic[1]+'</td>';
@@ -340,7 +342,7 @@ function initialize(data) {
 	}
 	outHTML+='</table></div>';
 	/*Special*/
-	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special</h2><table class="table table-striped table-responsive table-bordered">';
+	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special Abilities</h2><table class="table table-striped table-responsive table-bordered">';
 	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
 	if (foundArray[hRarePos][14]=="" || foundArray[hRarePos][14]==null) {
 		outHTML+='<td class="text-danger" colspan="6">No Magic Skills</td>';;
@@ -363,7 +365,9 @@ function initialize(data) {
 				outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
 				outHTML+='<td><img src="'+tMagObj["icon"]+'" class="skillIcon" /></td>';
 				outHTML+='<td>'+tMagic[0]+'</td>';
-				outHTML+='<td>'+tMagObj["element"]+" "+tMagObj["effect"]+'</td>';
+				outHTML+='<td>'+tMagObj["element"]+'</td>';
+				outHTML+='<td>'+tMagObj["range"]+'</td>';
+				outHTML+='<td>'+tMagObj["effect"]+'</td>';
 				outHTML+='<td>'+tMagObj["mp"]+'</td>';
 			} else {
 				outHTML+='<td>'+tMagic[1]+'</td>';
@@ -430,8 +434,9 @@ $(document).ready( function(e) {
 					var tObj={};
 					tObj["element"]=data.values[i][1];
 					tObj["effect"]=data.values[i][2];
-					tObj["mp"]=data.values[i][3];
-					tObj["icon"]=imgprefix+"skills/"+data.values[i][4]+".png";
+					tObj["range"]=data.values[i][3];
+					tObj["mp"]=data.values[i][4];
+					tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
 					glSkills[data.values[i][0]]=tObj;
 				}
 				console.log("skills parsed processed.");
