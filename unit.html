@@ -299,7 +299,7 @@ function initialize(data) {
 	}
 	outHTML+='</table>';
 	outHTML+='<h2>Magic</h2><table class="table table-responsive table-striped table-bordered">';
-	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
+	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Element</th><th>Range</th><th>Effects</th><th>MP</th></tr></thead>';
 	var hRarity=0;
 	var hRarePos=0;
 	for (var i in foundArray) {
@@ -343,7 +343,7 @@ function initialize(data) {
 	outHTML+='</table></div>';
 	/*Special*/
 	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Special Abilities</h2><table class="table table-striped table-responsive table-bordered">';
-	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Effects</th><th>MP</th></tr></thead>';
+	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Magic</th><th>Element</th><th>Range</th><th>Effects</th><th>MP</th></tr></thead>';
 	if (foundArray[hRarePos][14]=="" || foundArray[hRarePos][14]==null) {
 		outHTML+='<td class="text-danger" colspan="6">No Magic Skills</td>';;
 	} else {	
