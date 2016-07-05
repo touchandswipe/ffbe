@@ -215,14 +215,14 @@ function initialize(data) {
 	for (var i in foundArray) {
 		outHTML+='<tr><td>'+foundArray[i][2]+'<i class="fa fa-star-o"></i></td>';
 		outHTML+='<td>';
-		if (foundArray[i][11].length > 0) {
+		if (foundArray[i][11][0]==0 && foundArray[i][11][1]==0 && foundArray[i][11][2]==0 && foundArray[i][11][3]==0 ) {
+			outHTML+='None'
+		} else {
 			for (var j=0;j<4;j++) {
 				 if (foundArray[i][11][j]!=0) {
 				 	outHTML+='<i class="fa fa-circle '+affClass[j]+'"></i>'+foundArray[i][11][j]+" ";
 				 }
 			}
-		} else {
-			outHTML+='None'
 		}
 		outHTML+='</td>';
 		for (var j=18;j<23;j++)
