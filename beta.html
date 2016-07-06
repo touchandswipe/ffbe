@@ -59,9 +59,9 @@ function initialize(fusionData) {
 	var cName="";
 	for (var i in tData) {
 		if (tData[i][1]!=cName)
-			tData[i].push("Y");
+			tData[i].push("letitrip");
 		else
-			tData[i].push("N");
+			tData[i].push("");
 		cName=tData[i][1];
 	}
 	/*Xtra Columns to hide by resolution*/
@@ -98,8 +98,10 @@ function initialize(fusionData) {
 		  "autoWidth": true,
 		  "deferRender": true,
 		  "search": { "search": urlParam('query') },
-		  "drawCallback": function( settings ) {
-			$('.statsInfo').tooltip(); },
+		  "preDrawCallback": function( settings ) {
+			    $('#mytable').columns(23).search("letitrip");
+			    console.log("search done");
+		  }
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
 			/*Unbind Search*/
@@ -122,7 +124,7 @@ function initialize(fusionData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		{ "visible": false, "targets": [].concat(xtraDefCol) },
+		{ "visible": false, "targets": [23].concat(xtraDefCol) },
 		{ "searchable": false, "targets": [7,8,9,10,11,12,13,14,15,16] },
 		{ "targets": [0],
 		"render": function (unit, type, cRow, full )  {
