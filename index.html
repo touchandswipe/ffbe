@@ -142,7 +142,7 @@ function initialize(fusionData) {
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
 		{ "visible": false, "targets": [17].concat(xtraDefCol) },
-		{ "searchable": false, "targets": [7,8,9,10,11,12,13,14,15,16] },
+		{ "searchable": false, "targets": [7,8,9,10,11,12,13,14] },
 		{ "targets": [0],
 		"render": function (unit, type, cRow, full )  {
 			if (type ==='display')
@@ -322,7 +322,6 @@ $(document).ready( function(e) {
 	$.ajax({
 		url: url,
 		success: function (fusionData) {
-			console.log("success: "+fusionData);
 			/*Save in local storage*/
 			localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
 			
@@ -399,7 +398,6 @@ $(document).on("click","#switchBtn", function(e) {
 /*server units*/
 $(document).on("click", "#globalOnly,#japanOnly", function(e) {
 	var colSearch=parseInt($(this).attr("data-col"));
-	console.log(colSearch);
 	var ffbeTable = $('#mytable').DataTable();
 	ffbeTable.columns(colSearch).search("Y");
 	/*top rarities reset*/
