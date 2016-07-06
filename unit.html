@@ -164,6 +164,7 @@ var lbMax={2:5,3:10,4:15,5:20,6:25};
 var imgprefix="http://ffbe.summonerscentral.com/img/";
 var URLskillsChk="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:A";
 var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:F";
+var urlChk = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:A";
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:W";
 /*initialise build*/
 function initialize(data) {
@@ -396,14 +397,14 @@ function dataCheckLoad() {
 	    	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : parseInt(localStorage.ffbeguideadvCount);
 		/*Send the JSONP request*/
 		$.ajax({
-			url: url,
+			url: urlChk,
 			success: function (quickData) {
 				serverUnitsCount=quickData.values.length;
 				/*Prompt to Sync*/
 				if (serverUnitsCount > localUnitsCount)
 					bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i> Sync Now</button> <button type="button" class="btn btn-default" id="syncCancel">Cancel</button></div>');
 				else {
-					guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
+					var guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 					if (isValidJSON(guideData))
 						initialize(JSON.parse(guideData).values);
 					else {
@@ -445,6 +446,7 @@ function skillsStorageParse(data) {
 		tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
 		glSkills[data.values[i][0]]=tObj;
 	}
+	console.log("skills parsed success");
 	dataCheckLoad();
 }
 
@@ -517,7 +519,7 @@ $(document).on("click", "#syncNewBtn", function(e){ l
 
 /*Cancel sync*/
 $(document).on("click", "#syncCancel", function(e){    
-	guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
+	var guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 	if (isValidJSON(guideData)) {
 		$('#alertmodal').modal('hide');
 		initialize(JSON.parse(guideData));
