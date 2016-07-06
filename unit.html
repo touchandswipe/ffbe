@@ -391,7 +391,9 @@ function initialize(data) {
 }
 
 function dataCheckLoad() {
+	console.log("datacheckload called");
 	if (localStorage.ffbeguideadv) {
+		console.log("datacheckload called - localstorage found");
 	    	/*Quick query to check for new entries*/
 	    	var serverUnitsCount=0;
 	    	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : +(localStorage.ffbeguideadvCount);
@@ -420,6 +422,7 @@ function dataCheckLoad() {
 		  	}
 		})
     	} else {
+    		console.log("datacheckload called - local storage NOT found");
 		$.ajax({
 			url: url,
 			success: function (fusionData) {
