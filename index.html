@@ -113,6 +113,14 @@ function initialize(fusionData) {
 				return unit;
 		    }
 		},
+		{ "targets": [1],
+		"render": function (name, type, cRow, full )  {
+			if (type ==='display')
+				return '<a href="unit.html?q='+cRow[1]+'" class="notranslate">'+name+'</a>';
+			else
+				return name;
+		    }
+		},
 		/*Rarity*/
 		{ 	"targets":[ 2 ],
 			"render": function(rarity, type, row, full) {
