@@ -47,6 +47,22 @@ function initialize(fusionData) {
 	for (var i in tData) {
 		tData[i][7]=tData[i][7].split(",");
 	};
+	/*sort for finding highest rarity*/tData
+	tData.sort(function (x, y) {
+	    if (x[1] > y[1])
+	    	return -1;
+	    if (x[1] < y[1])
+	    	return 1;
+	    return x[2] - y[2];
+	});
+	var cName="";
+	for (var i in tData) {
+		if (tData[i][1]!=cName)
+			tData[i][1].push("Y");
+		else
+			tData[i][1].push("N");
+		cName=tData[i][1];
+	}
 	/*Xtra Columns to hide by resolution*/
 	if ( $( document ).width() >= 1800 ) {
 	var xtraDefCol=[]; var pLength=100;
@@ -73,7 +89,8 @@ function initialize(fusionData) {
 				{ title: "Hits", data:"18" },
 				{ title: "Drop Check", data:"19" },
 				{ title: "Global", data:"21" },
-				{ title: "Japan", data:"22" }
+				{ title: "Japan", data:"22" },
+				{ title: "TOP Rarity", data:"23" }
 				],
 		  "order": [[ 0, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
@@ -87,7 +104,7 @@ function initialize(fusionData) {
 			/*Unbind Search*/
 			$('.dataTables_filter input').off();
 			/*custom replace search field*/
-			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div> <div class="btn btn-default" data-status="1" id="switchBtn">Switch</div>');
+			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div> <div class="btn btn-default" data-status="Y" id="switchBtn">Switch</div>');
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
@@ -132,15 +149,6 @@ function initialize(fusionData) {
 			}
 		}] /*End Customs*/
 	}) /*End Datatables Init*/
-	$.fn.dataTable.ext.search.push (
-	    function( settings, data, dataIndex ) {
-		if ($("#switchBtn").attr("data-status")==1) {
-			console.log("custom filter running");
-			var ffbeTable=$('#myTable').DataTable();
-			var 
-		}
-		return false;
-	})
 }/*End init fn*/
 
 </script>
@@ -354,11 +362,6 @@ $(document).on("change", "#unitsPerPage", function(e){
 /*switch button*/
 $(document).on("click","#switchBtn", function(e) {
 	console.log("clicked");
-	if ($(this).attr("data-status")==1)
-		$(this).attr("data-status",0)
-	else
-		$(this).attr("data-status",1)
-	console.log("toggle done"+$(this).attr("data-status"));
 })
 
 /*Page change scroll to top*/
