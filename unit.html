@@ -432,10 +432,7 @@ function dataCheckLoad() {
 }
 
 /*skills parsing func*/
-function skillsStorageParse(data) {
-	/*Save in local storage*/
-	localStorage.setItem("ffbeguideskills",JSON.stringify(data));
-	localStorage.setItem("ffbeguideskillsCount",data.values.length);
+function skillsParse(data) {
 	/*parse*/
 	for (var i=1;i<data.values.length;i++) {
 		var tObj={};
@@ -472,10 +469,26 @@ $(document).ready( function(e) {
 					/*fetch latest skills*/
 					$.ajax({
 						url: URLskills,
-						success: function (data) {
-							skillsStorageParse(data);
+						success: function(data) {
+							/*Save in local storage*/
+							localStorage.setItem("ffbeguideskills",JSON.stringify(data));
+							localStorage.setItem("ffbeguideskillsCount",data.values.length);
+							skillsParse(data);
 					  	}
 					})
+				} else {
+					/*load localstorage*/
+					var skillsLocal=localStorage.ffbeguideskills;
+					if (isValidJSON(skillsLocal))
+						initialize(JSON.parse(skillsLocal));
+					else {
+						/*LocalStorage Delete and Refresh*/
+						alert("Corrupted data detected in Skills. Proceed to Fix.");
+						localStorage.removeItem("ffbeguideskills");
+						localStorage.removeItem("ffbeguideskillsCount");
+						history.pushState(null, null, location.pathname);
+						location.reload(true);
+					}
 				}
 			}
 	})
@@ -484,6 +497,9 @@ $(document).ready( function(e) {
 	$.ajax({
 			url: URLskills,
 			success: function (data) {
+				/*Save in local storage*/
+				localStorage.setItem("ffbeguideskills",JSON.stringify(data));
+				localStorage.setItem("ffbeguideskillsCount",data.values.length);
 				skillsStorageParse(data);
 			}
 	})
