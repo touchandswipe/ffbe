@@ -86,7 +86,7 @@ function initialize(fusionData) {
 			/*Unbind Search*/
 			$('.dataTables_filter input').off();
 			/*custom replace search field*/
-			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div>');
+			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div> <div class="btn btn-default" id="switchBtn">Switch</div>');
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
@@ -336,10 +336,21 @@ $(document).on("click", "#syncCancel", function(e){
 })
 
 /*CustomSelect PageLength*/
-    $(document).on("change", "#unitsPerPage", function(e){
-	    var ffbeTable = $('#mytable').DataTable();
-	    ffbeTable.page.len( $(this).val() ).draw()
-	})
+$(document).on("change", "#unitsPerPage", function(e){
+    var ffbeTable = $('#mytable').DataTable();
+    ffbeTable.page.len( $(this).val() ).draw()
+})
+
+/*switch button*/
+$("#switchBtn").on("click", function(e) {
+	console.log("clicked");
+	var ffbeTable = $('#mytable').DataTable();
+	ffbeTable
+		.columns(1)
+		.unique()
+		.draw();
+	console.log("draw done");
+})
 
 /*Page change scroll to top*/
 $('#mytable').on( 'page.dt', function (e) {
