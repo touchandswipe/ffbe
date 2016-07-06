@@ -97,7 +97,25 @@ function initialize(fusionData) {
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
 		  "autoWidth": true,
 		  "deferRender": true,
-		  "search": { "search": "letitrip "+urlParam('query') },
+		  //"search": { "search": "letitrip "+urlParam('query') },
+		  "searchCols": [
+			null,
+			{ "search": urlParam('query') },
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			{ "search": "letitrip"} ],
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
 			/*Unbind Search*/
