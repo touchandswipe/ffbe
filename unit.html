@@ -391,9 +391,7 @@ function initialize(data) {
 }
 
 function dataCheckLoad() {
-	console.log("datacheckload called");
 	if (localStorage.ffbeguideadv) {
-		console.log("datacheckload called - localstorage found");
 	    	/*Quick query to check for new entries*/
 	    	var serverUnitsCount=0;
 	    	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : +(localStorage.ffbeguideadvCount);
@@ -402,7 +400,6 @@ function dataCheckLoad() {
 			url: urlChk,
 			success: function (quickData) {
 				serverUnitsCount=quickData.values.length;
-				console.log(serverUnitsCount+" local is "+localUnitsCount);
 				/*Prompt to Sync*/
 				if (serverUnitsCount > localUnitsCount)
 					bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i> Sync Now</button> <button type="button" class="btn btn-default" id="syncCancel">Cancel</button></div>');
@@ -422,7 +419,6 @@ function dataCheckLoad() {
 		  	}
 		})
     	} else {
-    		console.log("datacheckload called - local storage NOT found");
 		$.ajax({
 			url: url,
 			success: function (fusionData) {
@@ -447,7 +443,6 @@ function skillsParse(data) {
 		tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
 		glSkills[data.values[i][0]]=tObj;
 	}
-	console.log("skills parsed success");
 	dataCheckLoad();
 }
 
@@ -457,7 +452,6 @@ $(document).ready( function(e) {
     	/*Quick query to check for new entries*/
     	var serverSkillsCount=0;
     	var localSkillsCount=(!localStorage.ffbeguideskillsCount) ? 0 : +(localStorage.ffbeguideskillsCount);
-    	console.log("local count "+localSkillsCount);
     	/*fetch 1 column quickly*/
     	$.ajax({
 			url: URLskillsChk,
@@ -477,25 +471,14 @@ $(document).ready( function(e) {
 							/*Save in local storage*/
 							localStorage.setItem("ffbeguideskills",JSON.stringify(data));
 							localStorage.setItem("ffbeguideskillsCount",data.values.length);
-							/*parse*/
-							for (var i=1;i<data.values.length;i++) {
-								var tObj={};
-								tObj["element"]=data.values[i][1];
-								tObj["range"]=data.values[i][2];
-								tObj["effect"]=data.values[i][3];
-								tObj["mp"]=data.values[i][4];
-								tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
-								glSkills[data.values[i][0]]=tObj;
-							}
-							console.log("skills parsed success");
-							dataCheckLoad();
+							skillsParse(data);
 					  	}
 					})
 				} else {
 					/*load localstorage*/
 					var skillsLocal=localStorage.ffbeguideskills;
 					if (isValidJSON(skillsLocal))
-						initialize(JSON.parse(skillsLocal));
+						skillsParse(JSON.parse(skillsLocal));
 					else {
 						/*LocalStorage Delete and Refresh*/
 						alert("Corrupted data detected in Skills. Proceed to Fix.");
@@ -515,18 +498,7 @@ $(document).ready( function(e) {
 				/*Save in local storage*/
 				localStorage.setItem("ffbeguideskills",JSON.stringify(data));
 				localStorage.setItem("ffbeguideskillsCount",data.values.length);
-				/*parse*/
-				for (var i=1;i<data.values.length;i++) {
-					var tObj={};
-					tObj["element"]=data.values[i][1];
-					tObj["range"]=data.values[i][2];
-					tObj["effect"]=data.values[i][3];
-					tObj["mp"]=data.values[i][4];
-					tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
-					glSkills[data.values[i][0]]=tObj;
-				}
-				console.log("skills parsed success");
-				dataCheckLoad();
+				skillsParse(data);
 			}
 	})
     } /*End of Skillscheck and load*/
