@@ -47,12 +47,13 @@ function initialize(fusionData) {
 	for (var i in tData) {
 		tData[i][7]=tData[i][7].split(",");
 	};
-  /*Xtra Columns to hide by resolution*/
-  if ( $( document ).width() >= 1800 ) {
-    var xtraDefCol=[]; var pLength=100;
-  } else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=25; 
-  } else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=25;
-  } else { var xtraDefCol=[4,5,7,8,9,10,11,12,13,14,15,16]; var pLength=25; }
+	/*Xtra Columns to hide by resolution*/
+	if ( $( document ).width() >= 1800 ) {
+	var xtraDefCol=[]; var pLength=100;
+	} else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=25; 
+	} else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=25;
+	} else { var xtraDefCol=[4,5,7,8,9,10,11,12,13,14,15,16]; var pLength=25; }
+  	/*dtables init*/
 	ffbeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
@@ -86,7 +87,7 @@ function initialize(fusionData) {
 			/*Unbind Search*/
 			$('.dataTables_filter input').off();
 			/*custom replace search field*/
-			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div> <div class="btn btn-default" id="switchBtn">Switch</div>');
+			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div> <div class="btn btn-default" data-status="1" id="switchBtn">Switch</div>');
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
@@ -131,6 +132,15 @@ function initialize(fusionData) {
 			}
 		}] /*End Customs*/
 	}) /*End Datatables Init*/
+	$.fn.dataTable.ext.search.push (
+	    function( settings, data, dataIndex ) {
+		if ($("#switchBtn").attr("data-status")==1) {
+			console.log("custom filter running");
+			var ffbeTable=$('#myTable').DataTable();
+			var 
+		}
+		return false;
+	})
 }/*End init fn*/
 
 </script>
@@ -344,12 +354,11 @@ $(document).on("change", "#unitsPerPage", function(e){
 /*switch button*/
 $(document).on("click","#switchBtn", function(e) {
 	console.log("clicked");
-	var ffbeTable = $('#mytable').DataTable();
-	ffbeTable
-		.columns(1)
-		.unique()
-		.draw();
-	console.log("draw done");
+	if ($(this).attr("data-status")==1)
+		$(this).attr("data-status",0)
+	else
+		$(this).attr("data-status",1)
+	console.log("toggle done"+$(this).attr("data-status"));
 })
 
 /*Page change scroll to top*/
