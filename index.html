@@ -398,7 +398,8 @@ $(document).on("click","#switchBtn", function(e) {
 
 /*server units*/
 $(document).on("click", "#globalOnly,#japanOnly", function(e) {
-	var colSearch=$(this).attr("data-col");
+	var colSearch=parseInt($(this).attr("data-col"));
+	console.log(colSearch);
 	var ffbeTable = $('#mytable').DataTable();
 	ffbeTable.columns(colSearch).search("Y");
 	/*top rarities reset*/
