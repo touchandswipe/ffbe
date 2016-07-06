@@ -97,7 +97,7 @@ function initialize(fusionData) {
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
 		  "autoWidth": true,
 		  "deferRender": true,
-		  "search": { "search": urlParam('query') },
+		  "search": { "search": "letitrip "+urlParam('query') },
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
 			/*Unbind Search*/
@@ -395,10 +395,8 @@ $('#mytable').on( 'page.dt', function (e) {
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
-	    /*reset compare array*/
-	    compareSelect=[];
 	    /*reset page length*/
-	    ffbeTable.page.len(100).draw();
+	    ffbeTable.page.len(50).draw();
 	    /*reset pushstate*/
 	    history.pushState(null, null, location.pathname);
 	    /*change search field*/
