@@ -53,8 +53,9 @@ function initialize(fusionData) {
 	    	return -1;
 	    if (x[1] < y[1])
 	    	return 1;
-	    return x[2] - y[2];
+	    return y[2] - x[2];
 	});
+	/*mark highest*/
 	var cName="";
 	for (var i in tData) {
 		if (tData[i][1]!=cName)
