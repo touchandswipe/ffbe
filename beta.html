@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Final Fantasy Brave Exvius - Units Guide (Beta) - A community effort" />
+    <meta name="author" content="Sam GreenPuck" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <title>Final Fantasy Brave Exvius - Units Guide (Beta) - A community effort</title>
+    <link rel="shortcut icon" href="https://googledrive.com/host/0B4hJr8BXxvFZZVVOZWswdnlnYTg/iconavatar128.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<style type="text/css">
+	.logoShdw {
+		-webkit-filter: drop-shadow(0px 0px 6px #CCC);
+		filter: drop-shadow(0px 0px 5px #CCC);
+		margin-top:-8px;
+		margin-left:-4px;
+	}
+	table#mytable tr td:first-child{text-align:center;}
+	.yellow {color:#ffc300;}
+	.unitImg {
+		height:60px;
+		width:auto;
+	}
+	.affix { position:fixed;left:0px;top:50px;width:100%;z-index:50;background:#E6CCFF;height:95px;padding:30px 10px 0px 10px;margin:0;box-shadow: 0 4px 4px -2px #888888;; }
+	.affix-top { position:static; }
+	.va {vertical-align:middle;}
+	.clear {clear:both;}
+</style>
+<!-- START JSON Code-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script type='text/javascript' src='https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js'></script>
+<script type='text/javascript' src='https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js'></script>
+<script src="//touchandswipe.github.io/bravefrontier/js/lz-string-1.3.3-min.js"></script>
+<script src="js/commoncode.js"></script>
+<script type="text/javascript">
+var imgprefix="http://ffbe.summonerscentral.com/img/";
+/*Initialise datapull*/
+function initialize(fusionData) {
+	var tData=fusionData.values.slice(1);
+	/*split stats*/
+	for (var i in tData) {
+		tData[i][7]=tData[i][7].split(",");
+	};
+  /*Xtra Columns to hide by resolution*/
+  if ( $( document ).width() >= 1800 ) {
+    var xtraDefCol=[]; var pLength=100;
+  } else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=25; 
+  } else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=25;
+  } else { var xtraDefCol=[4,5,7,8,9,10,11,12,13,14,15,16]; var pLength=25; }
+	ffbeTable=$('#mytable').dataTable({
+		"data":tData,
+		"columns": [
+				{ title: "Unit",data:"0" },
+				{ title: "Name", data:"1" },
+				{ title: "Rarity", data:"2" },
+				{ title: "Job", data:"3" },
+				{ title: "Gender", data:"4" },
+				{ title: "Race", data:"5" },
+				{ title: "Series", data:"6" },
+				{ title: "HP", data:"7.0" },
+				{ title: "MP", data:"7.1" },
+				{ title: "ATK", data:"7.2" },
+				{ title: "DEF", data:"7.3" },
+				{ title: "MAG", data:"7.4" },
+				{ title: "SPR", data:"7.5" },
+				{ title: "Hits", data:"18" },
+				{ title: "Drop Check", data:"19" },
+				{ title: "Global", data:"21" },
+				{ title: "Japan", data:"22" }
+				],
+		  "order": [[ 0, "asc" ]],
+		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
+		  "autoWidth": true,
+		  "deferRender": true,
+		  "search": { "search": urlParam('query') },
+		  "drawCallback": function( settings ) {
+			$('.statsInfo').tooltip(); },
+		  "initComplete": function( settings, json ) {
+		    var DTapi = this.api();
+			/*Unbind Search*/
+			$('.dataTables_filter input').off();
+			/*custom replace search field*/
+			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div>');
+			$('.searchAffix').affix({
+			  offset: { top: 180 }
+			});
+			/*Show Table upon DRAW and remove progress bar*/
+			$('#mytable').show();
+			/*hide loader*/
+			$('#progressModal').modal('hide');
+		  },
+		  "pageLength": pLength,
+		  "language": {
+		      "search": "",
+		      "infoFiltered": " - filtered from _MAX_ Total Units",
+		      "zeroRecords": "No units found matching criteria.",
+		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
+		  /*Parsing Fields via Datatables*/
+		  "columnDefs":[
+		{ "visible": false, "targets": [].concat(xtraDefCol) },
+		{ "searchable": false, "targets": [7,8,9,10,11,12,13,14,15,16] },
+		{ "targets": [0],
+		"render": function (unit, type, cRow, full )  {
+			if (type ==='display')
+				return '<a href="unit.html?q='+cRow[1]+'" class="notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" title="'+cRow[1]+' '+cRow[2]+'stars" /></a>';
+			else
+				return unit;
+		    }
+		},
+		{ "targets": [1],
+		"render": function (name, type, cRow, full )  {
+			if (type ==='display')
+				return '<a href="unit.html?q='+cRow[1]+'" class="notranslate">'+name+'</a>';
+			else
+				return name;
+		    }
+		},
+		/*Rarity*/
+		{ 	"targets":[ 2 ],
+			"render": function(rarity, type, row, full) {
+			    if (type ==='display')
+				return rarity+' <i class="fa fa-star yellow"></i>';
+			    else
+				return rarity;
+			}
+		}] /*End Customs*/
+	}) /*End Datatables Init*/
+}/*End init fn*/
+
+</script>
+
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48617906-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</head>
+
+<!-- MAIN BODY CONTENT -->
+<body>
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	    <span class="sr-only">Toggle navigation</span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="http://ffbe.summonerscentral.com/guide/"><img src="http://ffbe.summonerscentral.com/img/ffbeicon.png" class="img-circle logoShdw" width="64" alt="Final Fantasy Brave Exvius"/></a>
+	</div>
+	
+	<!-- Collapse Nav-->
+	<div class="navbar-collapse collapse">
+	<!-- RIGHT NAV -->
+	<button id="refreshBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Clear filters" style="margin-right:5px;"><i class="fa fa-lg fa-refresh fa-spin"></i></button>
+   	<button id="resetBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Sync latest data" style="margin-right:5px;"><i class="fa fa-cloud-download fa-lg"></i> Sync</button>
+	   <form class="navbar-form navbar-right" role="search" style="padding:0 20px 0 5px;">
+		  <div class="form-group">
+			<select id="unitsPerPage" class="form-control">
+			    <option value="50">50 / pg</option>
+			    <option value="100" selected="selected">100 / pg</option>
+			    <option value="200">200 / pg</option>
+			    <option value="300">300 / pg</option>
+			</select>
+		  </div>
+	    </form>
+    
+    </div><!--/.nav-collapse -->
+</div>
+</div>
+
+<!-- Mainbody -->
+<div class="container-fluid">
+<div style="height:60px;"></div>
+<!-- Google Manual labnol.org responsive ads-->
+<div class="text-center" style="margin-bottom:5px;">
+<div id="google-ads-1"></div>
+<script type="text/javascript"> 
+ 
+    /* Calculate the width of available ad space */
+    ad = document.getElementById('google-ads-1');
+ 
+    if (ad.getBoundingClientRect().width) {
+	adWidth = ad.getBoundingClientRect().width; // for modern browsers 
+    } else {
+	adWidth = ad.offsetWidth; // for old IE 
+    }
+ 
+    /* Replace ca-pub-XXX with your AdSense Publisher ID */ 
+    google_ad_client = "ca-pub-2145833818900192";
+ 
+    /* Replace 1234567890 with the AdSense Ad Slot ID */ 
+    google_ad_slot = "1402210464";
+  
+    /* Do not change anything after this line */
+    if ( adWidth >= 728 )
+      google_ad_size = ["728", "90"];  /* Leaderboard 728x90 */
+    else if ( adWidth >= 468 )
+      google_ad_size = ["468", "60"];  /* Banner (468 x 60) */
+    else if ( adWidth >= 336 )
+      google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+    else if ( adWidth >= 300 )
+      google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+    else if ( adWidth >= 250 )
+      google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+    else if ( adWidth >= 200 )
+      google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+    else if ( adWidth >= 180 )
+      google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+    else
+      google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+ 
+    document.write (
+     '<ins class="adsbygoogle" style="display:inline-block;width:' 
+      + google_ad_size[0] + 'px;height:' 
+      + google_ad_size[1] + 'px" data-ad-client="' 
+      + google_ad_client + '" data-ad-slot="' 
+      + google_ad_slot + '"></ins>'
+    );
+  
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</div>
+<!--mainbody / Search box Custom-->
+<table id="mytable" class="table-bordered table-responsive table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;"></table>
+
+<!-- ACTIVATION SCRIPTS -->
+<script type="text/javascript">
+$(document).ready( function(e) {
+    /*LocalStorage Retreival and storage*/
+    var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:W";
+    if (localStorage.ffbeguideadv) {
+    	/*Quick query to check for new entries*/
+    	var serverUnitsCount=0;
+    	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : parseInt(localStorage.ffbeguideadvCount);
+	/*Send the JSONP request*/
+	$.ajax({
+		url: url,
+		success: function (quickData) {
+			serverUnitsCount=quickData.values.length;
+			/*Prompt to Sync*/
+			if (serverUnitsCount > localUnitsCount)
+				bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i> Sync Now</button> <button type="button" class="btn btn-default" id="syncCancel">Cancel</button></div>');
+			else {
+				guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
+				if (isValidJSON(guideData))
+					initialize(JSON.parse(guideData));
+				else {
+					/*LocalStorage Delete and Refresh*/
+					alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
+					localStorage.removeItem("ffbeguideadv");
+					localStorage.removeItem("ffbeguideadvCount");
+					history.pushState(null, null, location.pathname);
+					location.reload(true);
+					}
+				}
+	  		}
+	});
+    } else {
+	/*Init loader if no localstorage*/
+	$('#progressModal').modal({
+		keyboard:false,
+		backdrop:'static',
+		toggle:true
+	})
+	/*Send the JSONP request*/
+	$.ajax({
+		url: url,
+		success: function (fusionData) {
+			console.log("success: "+fusionData);
+			/*Save in local storage*/
+			localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
+			
+			localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
+			initialize(fusionData);
+	  	}
+	})
+} /*End Else*/
+
+/*RESET*/
+$('#resetBtn').click( function(e) {
+	/*Google analytics*/
+	ga('send', 'pageview', {
+  		'page': '/vurl/syncUnitGuideAdvance',
+  		'title': 'FFBE Reset Data'
+	});
+    	/*LocalStorage Delete and Refresh*/
+	localStorage.removeItem("ffbeguideadv");
+	localStorage.removeItem("ffbeguideadvCount");
+	history.pushState(null, null, location.pathname);
+	location.reload(true);
+})
+
+/*New units detect*/
+$(document).on("click", "#syncDetectBtn", function(e){    
+    bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i>Sync Now</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button></div>');
+})
+
+/*New units sync*/
+$(document).on("click", "#syncNewBtn", function(e){    
+	/*Force sync*/
+	localStorage.removeItem("ffbeguideadv");
+	localStorage.removeItem("ffbeguideadvCount");
+	history.pushState(null, null, location.pathname);
+	location.reload(true);
+})
+
+/*Cancel sync*/
+$(document).on("click", "#syncCancel", function(e){    
+	guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
+	if (isValidJSON(guideData)) {
+		$('#alertmodal').modal('hide');
+		initialize(JSON.parse(guideData));
+	} else {
+		/*LocalStorage Delete and Refresh*/
+		alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
+		localStorage.removeItem("ffbeguideadv");
+		localStorage.removeItem("ffbeguideadvCount");
+		history.pushState(null, null, location.pathname);
+		location.reload(true);
+	}
+})
+
+/*CustomSelect PageLength*/
+    $(document).on("change", "#unitsPerPage", function(e){
+	    var ffbeTable = $('#mytable').DataTable();
+	    ffbeTable.page.len( $(this).val() ).draw()
+	})
+
+/*Page change scroll to top*/
+$('#mytable').on( 'page.dt', function (e) {
+    window.scrollTo(0,0);
+})
+
+/*Bind REFRESH*/
+    $(document).on("click", "#refreshBtn", function(e){
+	    e.preventDefault();
+		/*Google analytics*/
+		ga('send', 'pageview', {
+	  		'page': '/vurl/refresh',
+	  		'title': 'ffbe Refresh'
+		});
+	    /*loader*/
+	    bfpAlert("Refresh",'Clearing all selections ... please wait<div class="progress progress-striped active"><div class="progress-bar progress-bar-success"  role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 100%"><span class="sr-only">100% Complete</span></div></div>');
+	    var ffbeTable = $('#mytable').DataTable();
+	    /*reset ID range select*/
+	    $('#selectunithide').val(0);
+	    /*unfilter favs*/
+	    showOnlyFavs=false;
+	    /*reset searches sorts queries*/
+	    ffbeTable
+		.search( '' );
+		ffbeTable
+		.columns().search( '' );
+	    ffbeTable.page.len(-1);
+	    ffbeTable
+		.column( 0 )
+		.order( 'asc' )
+		.draw();
+	    /*reset compare array*/
+	    compareSelect=[];
+	    /*reset page length*/
+	    ffbeTable.page.len(100).draw();
+	    /*reset pushstate*/
+	    history.pushState(null, null, location.pathname);
+	    /*change search field*/
+	    $('.dataTables_filter input').val('');
+	    setTimeout( function() {
+	    $('#alertmodal').modal('hide');
+	    window.scrollTo(0,0);
+	    },500);
+	})
+
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  }
+})();
+
+/*Update URL based on search filters*/
+    $(document).on("keyup", '.dataTables_filter input', function(e){
+	delay(function(){
+	var ffbeTable = $('#mytable').DataTable();
+	var sField='.dataTables_filter input';
+	ffbeTable.search( $(sField).val() ).draw();
+	window.scrollTo(0,0);
+	/*Enter Key only*/
+	if (e.which == 13) {
+	    var state = { stateFilter: $(sField).val() };
+	    history.pushState(state, "Fstate", "?query="+encodeURIComponent($(sField).val()) );
+	}
+	}, 450 );
+    })
+})
+</script>
+
+<!-- Google Responsive Ad -->
+<div class="text-center clear" style="width:100%;margin:0 auto;">
+<!-- Google Manual labnol.org responsive ads-->
+<div id="google-ads-2"></div>
+<script type="text/javascript"> 
+ 
+    /* Calculate the width of available ad space */
+    ad = document.getElementById('google-ads-2');
+ 
+    if (ad.getBoundingClientRect().width) {
+	adWidth = ad.getBoundingClientRect().width; // for modern browsers 
+    } else {
+	adWidth = ad.offsetWidth; // for old IE 
+    }
+ 
+    /* Replace ca-pub-XXX with your AdSense Publisher ID */ 
+    google_ad_client = "ca-pub-2145833818900192";
+ 
+    /* Replace 1234567890 with the AdSense Ad Slot ID */ 
+    google_ad_slot = "1402210464";
+  
+    /* Do not change anything after this line */
+    if ( adWidth >= 728 )
+      google_ad_size = ["728", "90"];  /* Leaderboard 728x90 */
+    else if ( adWidth >= 468 )
+      google_ad_size = ["468", "60"];  /* Banner (468 x 60) */
+    else if ( adWidth >= 336 )
+      google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+    else if ( adWidth >= 300 )
+      google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+    else if ( adWidth >= 250 )
+      google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+    else if ( adWidth >= 200 )
+      google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+    else if ( adWidth >= 180 )
+      google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+    else
+      google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+ 
+    document.write (
+     '<ins class="adsbygoogle" style="display:inline-block;width:' 
+      + google_ad_size[0] + 'px;height:' 
+      + google_ad_size[1] + 'px" data-ad-client="' 
+      + google_ad_client + '" data-ad-slot="' 
+      + google_ad_slot + '"></ins>'
+    );
+  
+    (adsbygoogle = window.adsbygoogle || []).push({});
+ 
+</script>
+</div>
+
+<!-- disqus discussion -->
+<div class="row"><div class="col-xs-12">
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+	var disqus_shortname = 'finalfantasybraveexvius';
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div></div>
+</div> <!-- /container -->
+
+<!-- Modal for Progress-->
+<div class="modal fade" id="progressModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+	<div class="text-center">
+	    <h3 class="text-primary"><b>Summoning units</b></h3>
+	    <i class="fa fa-spinner fa-spin fa-5x"></i>
+	    <h4 class="text-primary">A moment please ...</h4>
+	    <h5>(Note: Images will continue to load progressively after.)</h5>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Alert Modal -->
+<div class="modal fade" id="alertmodal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h3 class="modal-title text-danger"><i class="fa fa-fire"></i> Lugina Grumbles Grumbles</h3></div>
+      <div class="modal-body">
+	<div id="alertSpace" class="alert"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
