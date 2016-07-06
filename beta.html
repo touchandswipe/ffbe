@@ -384,11 +384,11 @@ $(document).on("change", "#unitsPerPage", function(e){
 $(document).on("click","#switchBtn", function(e) {
 	var ffbeTable = $('#mytable').DataTable();
 	if ($(this).attr("data-status")=="Y") {
-		ffbeTable.columns(23).search("").draw();
+		ffbeTable.columns(17).search("").draw();
 		$(this).text("TOP Rarities");
 		$(this).attr("data-status","N");
 	} else {
-		ffbeTable.columns(23).search("letitrip").draw();
+		ffbeTable.columns(17).search("letitrip").draw();
 		$(this).text("ALL Rarities");
 		$(this).attr("data-status","Y");
 	}
