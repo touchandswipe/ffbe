@@ -56,8 +56,8 @@ function initialize(fusionData) {
 	ffbeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
-				{ title: "ID",data:"0" },
-				{ title: "Unit", data:"1" },
+				{ title: "Unit",data:"0" },
+				{ title: "Name", data:"1" },
 				{ title: "Rarity", data:"2" },
 				{ title: "Job", data:"3" },
 				{ title: "Gender", data:"4" },
@@ -103,9 +103,9 @@ function initialize(fusionData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		{ "visible": false, "targets": [0].concat(xtraDefCol) },
+		{ "visible": false, "targets": [].concat(xtraDefCol) },
 		{ "searchable": false, "targets": [7,8,9,10,11,12,13,14,15,16] },
-		{ "targets": [1],
+		{ "targets": [0],
 		"render": function (unit, type, cRow, full )  {
 			if (type ==='display')
 				return '<a href="unit.html?q='+cRow[1]+'" class="notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" title="'+cRow[1]+' '+cRow[2]+'stars" /></a>';
