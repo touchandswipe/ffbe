@@ -399,6 +399,10 @@ $(document).on("click","#switchBtn", function(e) {
 $(document).on("click", "#globalOnly,#japanOnly", function(e) {
 	var colSearch=parseInt($(this).attr("data-col"));
 	var ffbeTable = $('#mytable').DataTable();
+	/*reset searches sorts queries*/
+	ffbeTable.search( '' );
+	ffbeTable.columns().search( '' );
+	/*exe search*/
 	ffbeTable.columns(colSearch).search("Y");
 	/*top rarities reset*/
 	ffbeTable.columns(17).search("letitrip").draw();
