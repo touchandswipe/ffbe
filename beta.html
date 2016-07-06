@@ -98,10 +98,6 @@ function initialize(fusionData) {
 		  "autoWidth": true,
 		  "deferRender": true,
 		  "search": { "search": urlParam('query') },
-		  "preDrawCallback": function( settings ) {
-			    $('#mytable').columns(23).search("letitrip");
-			    console.log("search done");
-		  },
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
 			/*Unbind Search*/
@@ -111,6 +107,8 @@ function initialize(fusionData) {
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
+			/*show unique units*/
+			$('#mytable').columns(23).search("letitrip");
 			/*Show Table upon DRAW and remove progress bar*/
 			$('#mytable').show();
 			/*hide loader*/
