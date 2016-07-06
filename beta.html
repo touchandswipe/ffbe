@@ -107,6 +107,8 @@ function initialize(fusionData) {
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
+			/*show unique units*/
+			$('#mytable').columns(17).search("letitrip").draw();
 			/*Show Table upon DRAW and remove progress bar*/
 			$('#mytable').show();
 			/*hide loader*/
@@ -120,7 +122,7 @@ function initialize(fusionData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		{ "visible": false, "targets": [23].concat(xtraDefCol) },
+		{ "visible": false, "targets": [17].concat(xtraDefCol) },
 		{ "searchable": false, "targets": [7,8,9,10,11,12,13,14,15,16] },
 		{ "targets": [0],
 		"render": function (unit, type, cRow, full )  {
