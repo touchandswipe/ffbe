@@ -58,9 +58,9 @@ function initialize(fusionData) {
 	var cName="";
 	for (var i in tData) {
 		if (tData[i][1]!=cName)
-			tData[i][1].push("Y");
+			tData[i].push("Y");
 		else
-			tData[i][1].push("N");
+			tData[i].push("N");
 		cName=tData[i][1];
 	}
 	/*Xtra Columns to hide by resolution*/
