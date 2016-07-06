@@ -122,7 +122,7 @@ function initialize(fusionData) {
 			/*Unbind Search*/
 			$('.dataTables_filter input').off();
 			/*custom replace search field*/
-			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div> <div class="btn btn-default" data-status="Y" id="switchBtn">Switch</div>');
+			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div>');
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
@@ -205,6 +205,7 @@ function initialize(fusionData) {
 	<!-- RIGHT NAV -->
 	<button id="refreshBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Clear filters" style="margin-right:5px;"><i class="fa fa-lg fa-refresh fa-spin"></i></button>
    	<button id="resetBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Sync latest data" style="margin-right:5px;"><i class="fa fa-cloud-download fa-lg"></i> Sync</button>
+   	<button class="btn nav-tt navbar-right btn-primary navbar-btn" data-status="Y" id="switchBtn" style="margin-right:5px;">ALL Rarities</button>
 	   <form class="navbar-form navbar-right" role="search" style="padding:0 20px 0 5px;">
 		  <div class="form-group">
 			<select id="unitsPerPage" class="form-control">
@@ -381,7 +382,16 @@ $(document).on("change", "#unitsPerPage", function(e){
 
 /*switch button*/
 $(document).on("click","#switchBtn", function(e) {
-	console.log("clicked");
+	var ffbeTable = $('#mytable').DataTable();
+	if ($(this).attr("data-status")=="Y") {
+		ffbeTable.columns(23).search("").draw();
+		$(this).text("TOP Rarities");
+		$(this).attr("data-status","N");
+	} else {
+		ffbeTable.columns(23).search("letitrip").draw();
+		$(this).text("ALL Rarities");
+		$(this).attr("data-status","Y");
+	}
 })
 
 /*Page change scroll to top*/
