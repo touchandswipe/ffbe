@@ -47,12 +47,30 @@ function initialize(fusionData) {
 	for (var i in tData) {
 		tData[i][7]=tData[i][7].split(",");
 	};
-  /*Xtra Columns to hide by resolution*/
-  if ( $( document ).width() >= 1800 ) {
-    var xtraDefCol=[]; var pLength=100;
-  } else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=25; 
-  } else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=25;
-  } else { var xtraDefCol=[4,5,7,8,9,10,11,12,13,14,15,16]; var pLength=25; }
+	/*sort for finding highest rarity*/
+	tData.sort(function (x, y) {
+	    if (x[1] > y[1])
+	    	return -1;
+	    if (x[1] < y[1])
+	    	return 1;
+	    return y[2] - x[2];
+	});
+	/*mark highest*/
+	var cName="";
+	for (var i in tData) {
+		if (tData[i][1]!=cName)
+			tData[i].push("letitrip");
+		else
+			tData[i].push("N");
+		cName=tData[i][1];
+	}
+	/*Xtra Columns to hide by resolution*/
+	if ( $( document ).width() >= 1800 ) {
+	var xtraDefCol=[]; var pLength=100;
+	} else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; var pLength=25; 
+	} else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[]; var pLength=25;
+	} else { var xtraDefCol=[4,5,7,8,9,10,11,12,13,14,15,16]; var pLength=25; }
+  	/*dtables init*/
 	ffbeTable=$('#mytable').dataTable({
 		"data":tData,
 		"columns": [
@@ -72,15 +90,33 @@ function initialize(fusionData) {
 				{ title: "Hits", data:"18" },
 				{ title: "Drop Check", data:"19" },
 				{ title: "Global", data:"21" },
-				{ title: "Japan", data:"22" }
+				{ title: "Japan", data:"22" },
+				{ title: "TOP Rarity", data:"23" }
 				],
 		  "order": [[ 0, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
 		  "autoWidth": true,
 		  "deferRender": true,
-		  "search": { "search": urlParam('query') },
-		  "drawCallback": function( settings ) {
-			$('.statsInfo').tooltip(); },
+		  //"search": { "search": "letitrip "+urlParam('query') },
+		  "searchCols": [
+			null,
+			{ "search": urlParam('query') },
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			null,
+			{ "search": "letitrip"} ],
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
 			/*Unbind Search*/
@@ -90,6 +126,8 @@ function initialize(fusionData) {
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
+			/*show unique units*/
+			//$('#mytable').columns(17).search("letitrip").draw();
 			/*Show Table upon DRAW and remove progress bar*/
 			$('#mytable').show();
 			/*hide loader*/
@@ -103,7 +141,7 @@ function initialize(fusionData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Units Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		{ "visible": false, "targets": [].concat(xtraDefCol) },
+		{ "visible": false, "targets": [17].concat(xtraDefCol) },
 		{ "searchable": false, "targets": [7,8,9,10,11,12,13,14,15,16] },
 		{ "targets": [0],
 		"render": function (unit, type, cRow, full )  {
@@ -167,6 +205,7 @@ function initialize(fusionData) {
 	<!-- RIGHT NAV -->
 	<button id="refreshBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Clear filters" style="margin-right:5px;"><i class="fa fa-lg fa-refresh fa-spin"></i></button>
    	<button id="resetBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Sync latest data" style="margin-right:5px;"><i class="fa fa-cloud-download fa-lg"></i> Sync</button>
+   	<button class="btn nav-tt navbar-right btn-primary navbar-btn" data-status="Y" id="switchBtn" style="margin-right:5px;">ALL Rarities</button>
 	   <form class="navbar-form navbar-right" role="search" style="padding:0 20px 0 5px;">
 		  <div class="form-group">
 			<select id="unitsPerPage" class="form-control">
@@ -336,10 +375,24 @@ $(document).on("click", "#syncCancel", function(e){
 })
 
 /*CustomSelect PageLength*/
-    $(document).on("change", "#unitsPerPage", function(e){
-	    var ffbeTable = $('#mytable').DataTable();
-	    ffbeTable.page.len( $(this).val() ).draw()
-	})
+$(document).on("change", "#unitsPerPage", function(e){
+    var ffbeTable = $('#mytable').DataTable();
+    ffbeTable.page.len( $(this).val() ).draw()
+})
+
+/*switch button*/
+$(document).on("click","#switchBtn", function(e) {
+	var ffbeTable = $('#mytable').DataTable();
+	if ($(this).attr("data-status")=="Y") {
+		ffbeTable.columns(17).search("").draw();
+		$(this).text("TOP Rarities");
+		$(this).attr("data-status","N");
+	} else {
+		ffbeTable.columns(17).search("letitrip").draw();
+		$(this).text("ALL Rarities");
+		$(this).attr("data-status","Y");
+	}
+})
 
 /*Page change scroll to top*/
 $('#mytable').on( 'page.dt', function (e) {
@@ -371,10 +424,8 @@ $('#mytable').on( 'page.dt', function (e) {
 		.column( 0 )
 		.order( 'asc' )
 		.draw();
-	    /*reset compare array*/
-	    compareSelect=[];
 	    /*reset page length*/
-	    ffbeTable.page.len(100).draw();
+	    ffbeTable.page.len(50).draw();
 	    /*reset pushstate*/
 	    history.pushState(null, null, location.pathname);
 	    /*change search field*/
