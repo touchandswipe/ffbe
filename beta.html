@@ -342,7 +342,7 @@ $(document).on("change", "#unitsPerPage", function(e){
 })
 
 /*switch button*/
-$("#switchBtn").on("click", function(e) {
+$(document).on("click","#switchBtn", function(e) {
 	console.log("clicked");
 	var ffbeTable = $('#mytable').DataTable();
 	ffbeTable
