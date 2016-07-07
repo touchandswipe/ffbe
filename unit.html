@@ -95,6 +95,12 @@ margin-left:-4px;
 	  </button>
 	  <a class="navbar-brand" href="http://ffbe.summonerscentral.com"><img src="http://ffbe.summonerscentral.com/img/ffbeicon.png" class="img-circle logoShdw" width="64" title="Final Fantasy Brave Exvius"/></a>
 	</div>
+	<!-- Collapse Nav-->
+	<div class="navbar-collapse collapse">
+	<!-- RIGHT NAV -->
+   	<button id="refreshSkills" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Update Latest Skills" style="margin-right:5px;"><i class="fa fa-cloud-download fa-lg"></i> Update Skills</button>
+	</div><!--/.nav-collapse -->
+	
 </div>
 </div>
 
@@ -505,15 +511,15 @@ $(document).ready( function(e) {
     } /*End of Skillscheck and load*/
 
 /*RESET*/
-$('#resetBtn').click( function(e) {
+$('#refreshSkills').click( function(e) {
 	/*Google analytics*/
 	ga('send', 'pageview', {
-  		'page': '/vurl/syncUnitGuideAdvance',
-  		'title': 'FFBE Reset Data'
+  		'page': '/vurl/syncUnitGuideAdvance_FFBE_Refresh_Skills',
+  		'title': 'FFBE Refresh Skills'
 	});
     	/*LocalStorage Delete and Refresh*/
-	localStorage.removeItem("ffbeguideadv");
-	localStorage.removeItem("ffbeguideadvCount");
+	localStorage.removeItem("ffbeguideskills");
+	localStorage.removeItem("ffbeguideskillsCount");
 	history.pushState(null, null, location.pathname);
 	location.reload(true);
 })
