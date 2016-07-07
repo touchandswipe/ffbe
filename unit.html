@@ -521,7 +521,7 @@ $('#refreshSkills').click( function(e) {
 	localStorage.removeItem("ffbeguideskills");
 	localStorage.removeItem("ffbeguideskillsCount");
 	history.pushState(null, null, location.pathname);
-	location.reload(true);
+	location.replace(location.href+location.search);
 })
 
 /*New units detect*/
