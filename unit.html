@@ -520,7 +520,7 @@ $('#refreshSkills').click( function(e) {
     	/*LocalStorage Delete and Refresh*/
 	localStorage.removeItem("ffbeguideskills");
 	localStorage.removeItem("ffbeguideskillsCount");
-	history.pushState(null, null, location.pathname);
+	//history.pushState(null, null, location.pathname);
 	alert(location.href+location.search);
 	location.replace(location.href+location.search);
 })
