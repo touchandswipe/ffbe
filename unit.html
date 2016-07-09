@@ -193,12 +193,10 @@ function initialize(data) {
 			foundArray[i][processPos[j]]=foundArray[i][processPos[j]].split(",")
 		}
 	}
-	/*grab rarity*/
-	var allRarities=[];
-	for (var i in foundArray) {
-		allRarities.push(foundArray[i][2])
-	}
-	allRarities.sort(function(a, b){return a-b});
+	/*Sort low to high rarity*/
+	foundArray.sort(function (x, y) {
+		return (x[2]-y[2])
+	});
 	/*artwork*/
 	var outHTML='<div class="col-md-12"><h1><b>'+uName+'</b></h1><div class="table-responsive"><table class="table">';
 	outHTML+='<tr>';
@@ -213,7 +211,7 @@ function initialize(data) {
 	outHTML+='<tr><td class="sHead">Job</td><td>'+foundArray[0][3]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">Race</td><td>'+foundArray[0][5]+'</td></tr>';
 	outHTML+='<tr><td class="sHead">FF Series</td><td>'+foundArray[0][6]+'</td></tr>';
-	outHTML+='<tr><td class="sHead">Min - Max <i class="fa fa-star-o"></i></td><td>'+allRarities[0]+'<i class="fa fa-star-o text-warning"></i> - '+allRarities[allRarities.length-1]+'<i class="fa fa-star-o text-warning"></i></td></tr>';
+	outHTML+='<tr><td class="sHead">Min - Max <i class="fa fa-star-o"></i></td><td>'+foundArray[0][2]+'<i class="fa fa-star-o text-warning"></i> - '+foundArray[foundArray.length-1][2]+'<i class="fa fa-star-o text-warning"></i></td></tr>';
 	outHTML+='<tr><td class="sHead">Trust Mastery</td><td>'+foundArray[0][17]+'</td></tr>';
 	outHTML+='</table></div>';
 	$("#unitContent").append(outHTML);
@@ -284,15 +282,23 @@ function initialize(data) {
 	/*build resistances*/
 	outHTML='<div class="col-md-12"><h2>Resistances</h2><table class="table table-responsive table-striped table-bordered">';
 	outHTML+='<tr class="text-center">';
-	for (var i=0;i<=15;i++) {
-		if (i==8)
-			outHTML+='</tr><tr class="text-center">';
-		outHTML+='<td>';
-		if (foundArray[foundArray.length-1][12][i]==0)
-			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br>-';
-		else
-			outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br>'+foundArray[foundArray.length-1][12][i]+'%';
-		outHTML+='</td>';
+	if (foundArray[foundArray.length-1][12]!="") {
+		for (var i=0;i<=15;i++) {
+			if (i==8)
+				outHTML+='</tr><tr class="text-center">';
+			outHTML+='<td>';
+			if (foundArray[foundArray.length-1][12][i]==0)
+				outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br>-';
+			else
+				outHTML+='<img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br>'+foundArray[foundArray.length-1][12][i]+'%';
+			outHTML+='</td>';
+		}
+	} else {
+		for (var i=0;i<=15;i++) {
+			if (i==8)
+				outHTML+='</tr><tr class="text-center">';
+			outHTML+='<td><img src="'+imgprefix+'trait'+ +(i+1) + '.png" class="equip" /><br>-</td>';
+		}
 	}
 	outHTML+='</tr>';
 	outHTML+='</table></div>';
