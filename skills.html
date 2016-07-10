@@ -308,7 +308,7 @@ function skillsParse(data) {
 		var tObj={};
 		tObj["name"]=data.values[i][0];
 		tObj["element"]=data.values[i][1];
-		tObj["effect"]=data.values[i][2]+" "+data.values[i][3];
+		tObj["effect"]="<b>"+data.values[i][2]+"</b> "+data.values[i][3];
 		tObj["mp"]=data.values[i][4];
 		tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
 		glSkills.push(tObj);
