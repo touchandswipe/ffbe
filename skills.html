@@ -434,6 +434,14 @@ $(document).on("click", "#syncCancel", function(e){
 	}
 })
 
+var delay = (function(){
+  var timer = 0;
+  return function(callback, ms){
+    clearTimeout (timer);
+    timer = setTimeout(callback, ms);
+  }
+})();
+
 /*Update URL based on search filters*/
     $(document).on("keyup", '.dataTables_filter input', function(e){
 	delay(function(){
