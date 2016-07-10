@@ -180,7 +180,7 @@ function initialize() {
 /*dtables init*/
 console.log(JSON.stringify(glSkills));
 	var ffbeTable=$('#skillsTable').dataTable({
-		"data":glSkills,
+		"ajax":glSkills,
 		"columns": [
 		    	/*{
 		          "className":      'details-control',
@@ -188,7 +188,7 @@ console.log(JSON.stringify(glSkills));
 		          "data":           null,
 		          "defaultContent": ''
 		        }, */
-			{ title: "icon", data:"icon" },
+			{ title: "Icon", data:"icon" },
 			{ title: "Skill", data:"name" },
 			{ title: "Element", data:"element" },
 			{ title: "Eange", data:"range" },
@@ -293,7 +293,7 @@ function skillsParse(data) {
 		tObj["effect"]=data.values[i][3];
 		tObj["mp"]=data.values[i][4];
 		tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
-		glSkills.push(tObj);
+		glSkills["data"].push(tObj);
 	}
 	dataCheckLoad();
 }
