@@ -55,6 +55,9 @@ margin-left:-4px;
     	width:50px;
     	height:50px;
     }
+    .unitIcon {
+    	height:70px;
+    }
     .middle{
 	text-align: center;
     }
@@ -202,7 +205,7 @@ function initialize(data) {
 	var outHTML='<div class="col-md-12"><h1><b>'+uName+'</b></h1><div class="table-responsive"><table class="table">';
 	outHTML+='<tr>';
 	for (var i in foundArray) {
-		outHTML+='<td class="middle"><img src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" title="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/><br><b>'+foundArray[i][2]+'</b><i class="fa fa-star yellow"></i></td>';
+		outHTML+='<td class="middle"><img class="unitIcon" src="'+imgprefix+'unit/'+foundArray[i][1].toLowerCase()+foundArray[i][2]+'.png" title="'+foundArray[i][1]+' '+foundArray[i][2]+'stars"/><br><b>'+foundArray[i][2]+'</b><i class="fa fa-star yellow"></i></td>';
 	}
 	outHTML+='</tr>'
 	outHTML+='</table></div></div>';
@@ -348,7 +351,7 @@ function initialize(data) {
 			} else {
 				outHTML+='<td>'+tMagic[1]+'</td>';
 				outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
-				outHTML+='<td class="text-danger" colspan="6">No skill records found</td>';
+				outHTML+='<td class="text-danger" colspan="6">No skill records found - '+tMagic[0]+'</td>';
 			}
 			outHTML+='</tr>';
 		}
@@ -385,7 +388,7 @@ function initialize(data) {
 			} else {
 				outHTML+='<td>'+tMagic[1]+'</td>';
 				outHTML+='<td>'+tMagic[2]+'<i class="fa fa-star-o"></i></td>';
-				outHTML+='<td class="text-danger" colspan="6">No skill records found</td>';
+				outHTML+='<td class="text-danger" colspan="6">No skill records found - '+tMagic[0]+'</td>';
 			}
 			outHTML+='</tr>';
 		}
