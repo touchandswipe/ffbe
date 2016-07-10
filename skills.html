@@ -178,7 +178,8 @@ var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV
 /*initialise build*/
 function initialize() {
 /*dtables init*/
-	ffbeTable=$('#skillsTable').dataTable({
+console.log(JSON.stringify(glSkills));
+	var ffbeTable=$('#skillsTable').dataTable({
 		"data":glSkills,
 		"columns": [
 		    	/*{
