@@ -168,7 +168,7 @@ margin-left:-4px;
 
 <!-- ACTIVATION SCRIPTS -->
 <script type="text/javascript">
-var glSkills=[];
+var glSkills={};
 var lbMax={1:3,2:5,3:10,4:15,5:20,6:25};
 var imgprefix="http://ffbe.summonerscentral.com/img/";
 var URLskillsChk="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:A";
@@ -178,7 +178,6 @@ var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV
 /*initialise build*/
 function initialize() {
 /*dtables init*/
-console.log(JSON.stringify(glSkills));
 	var ffbeTable=$('#skillsTable').dataTable({
 		"ajax":glSkills,
 		"columns": [
