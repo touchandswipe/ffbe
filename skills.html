@@ -217,12 +217,12 @@ function initialize(tData) {
 			{ title: "Icon", data:"icon" },
 			{ title: "Skill", data:"name" },
 			{ title: "Element", data:"element" },
-			{ title: "Eange", data:"range" },
 			{ title: "Effect", data:"effect" },
+			{ title: "MP", data:"mp" }
 		],
 		  "order": [[ 1, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
-		  "autoWidth": false,
+		  "autoWidth": true,
 		  "deferRender": true,
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
@@ -308,8 +308,7 @@ function skillsParse(data) {
 		var tObj={};
 		tObj["name"]=data.values[i][0];
 		tObj["element"]=data.values[i][1];
-		tObj["range"]=data.values[i][2];
-		tObj["effect"]=data.values[i][3];
+		tObj["effect"]=data.values[i][2]+" "+data.values[i][3];
 		tObj["mp"]=data.values[i][4];
 		tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
 		glSkills.push(tObj);
@@ -431,7 +430,6 @@ $(document).on("click", "#syncCancel", function(e){
 		alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
 		localStorage.removeItem("ffbeguideadv");
 		localStorage.removeItem("ffbeguideadvCount");
-		//history.pushState(null, null, location.pathname);
 		location.reload(true);
 	}
 })
