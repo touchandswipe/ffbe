@@ -238,6 +238,8 @@ function initialize(tData) {
 			/*hide loader*/
 			$('#progressModal').modal('hide');
 		  },
+		  { "width": "50", "targets": [ 0 ] },
+		  "search": { "search": urlParam('query') },
 		  "pageLength": 100,
 		  "language": {
 		      "search": "",
