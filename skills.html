@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="description" content="Final Fantasy Brave Exvius - Units Guide (Beta) - A community effort" />
+    <meta name="author" content="Sam GreenPuck" />
+    <meta name="viewport" content="width=device-width, initial-scale=0.75">
+    <title>Final Fantasy Brave Exvius - Skills Guide - A community effort</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/dataTables.bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Custom styles for this template -->
+<style type="text/css">
+.logoShdw {
+-webkit-filter: drop-shadow(0px 0px 6px #CCC);
+filter: drop-shadow(0px 0px 5px #CCC);
+margin-top:-8px;
+margin-left:-4px;
+}
+    .equip {
+    	width:20%;
+    	min-width:30px;
+    	height:auto;
+    }
+    .equipNo {
+	-webkit-filter: grayscale(100%);
+	filter: grayscale(100%);
+	opacity: 0.2;
+    	filter: alpha(opacity=20); /* For IE8 and earlier */
+    }
+    .yellow {color:#ffc300;}
+    .affwhite {
+    	color:#CCC;
+    	padding-right:3px;
+    }
+    .affblack {
+    	color:#000;
+    	padding-right:3px;
+    }
+    .affgreen {
+    	color:#52BE80;
+    	padding-right:3px;
+    }
+    .affblue {
+    	color:#3498DB;
+    	padding-right:3px;
+    }
+    .sHead {
+    	font-weight:bold;
+    	background:#EEE;
+    	width:150px;
+    }
+    .skillIcon {
+    	width:50px;
+    	height:50px;
+    }
+    .middle{
+	text-align: center;
+    }
+    #spinDoc {
+    	height:300px;
+    	text-align:center;
+    }
+    h2 {
+    	clear:both;
+    	line-height:64px;
+    }
+    td {
+	vertical-align: middle !important;
+    }
+    .min50 {
+    	width:50px;
+    }
+    .clear {clear:both;}
+</style>
+<!-- START JSON Code-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<script src="//touchandswipe.github.io/bravefrontier/js/lz-string-1.3.3-min.js"></script>
+<script type='text/javascript' src='https://cdn.datatables.net/1.10.11/js/dataTables.bootstrap.min.js'></script>
+<script src="js/commoncode.js"></script>
+</head>
+
+<!-- MAIN BODY CONTENT -->
+<body>
+    <!-- Static navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+	<div class="navbar-header">
+	  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	    <span class="sr-only">Toggle navigation</span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	    <span class="icon-bar"></span>
+	  </button>
+	  <a class="navbar-brand" href="http://ffbe.summonerscentral.com"><img src="http://ffbe.summonerscentral.com/img/ffbeicon.png" class="img-circle logoShdw" width="64" title="Final Fantasy Brave Exvius"/></a>
+	</div>
+	<!-- Collapse Nav-->
+	<div class="navbar-collapse collapse">
+	<!-- RIGHT NAV -->
+   	<button id="refreshSkills" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Update Latest Skills" style="margin-right:5px;"><i class="fa fa-cloud-download fa-lg"></i> Update Skills</button>
+	</div><!--/.nav-collapse -->
+	
+</div>
+</div>
+
+<!-- Mainbody -->
+<div class="container-fluid">
+<div style="height:60px;"></div>
+
+<!-- Google Manual labnol.org responsive ads-->
+<div class="text-center" style="margin-bottom:5px;">
+<div id="google-ads-1"></div>
+<script type="text/javascript"> 
+ 
+    /* Calculate the width of available ad space */
+    ad = document.getElementById('google-ads-1');
+ 
+    if (ad.getBoundingClientRect().width) {
+	adWidth = ad.getBoundingClientRect().width; // for modern browsers 
+    } else {
+	adWidth = ad.offsetWidth; // for old IE 
+    }
+ 
+    /* Replace ca-pub-XXX with your AdSense Publisher ID */ 
+    google_ad_client = "ca-pub-2145833818900192";
+ 
+    /* Replace 1234567890 with the AdSense Ad Slot ID */ 
+    google_ad_slot = "1402210464";
+  
+    /* Do not change anything after this line */
+    if ( adWidth >= 728 )
+      google_ad_size = ["728", "90"];  /* Leaderboard 728x90 */
+    else if ( adWidth >= 468 )
+      google_ad_size = ["468", "60"];  /* Banner (468 x 60) */
+    else if ( adWidth >= 336 )
+      google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+    else if ( adWidth >= 300 )
+      google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+    else if ( adWidth >= 250 )
+      google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+    else if ( adWidth >= 200 )
+      google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+    else if ( adWidth >= 180 )
+      google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+    else
+      google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+ 
+    document.write (
+     '<ins class="adsbygoogle" style="display:inline-block;width:' 
+      + google_ad_size[0] + 'px;height:' 
+      + google_ad_size[1] + 'px" data-ad-client="' 
+      + google_ad_client + '" data-ad-slot="' 
+      + google_ad_slot + '"></ins>'
+    );
+  
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</div>
+<!--mainbody -->
+<div class="row" id="unitContent">
+  <table id="skillsTable" class="table-bordered table-responsive table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;"></table>
+	<div class="col-md-12" id="spinDoc"><h2 class="text-primary">Loading ... </h2><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div>
+</div>
+
+<!-- ACTIVATION SCRIPTS -->
+<script type="text/javascript">
+var glSkills=[];
+var lbMax={1:3,2:5,3:10,4:15,5:20,6:25};
+var imgprefix="http://ffbe.summonerscentral.com/img/";
+var URLskillsChk="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:A";
+var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:F";
+var urlChk = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:A";
+var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:W";
+/*initialise build*/
+function initialize() {
+/*dtables init*/
+	ffbeTable=$('#skillsTable').dataTable({
+		"data":glSkills,
+		"columns": [
+		    {
+          "className":      'details-control',
+          "orderable":      false,
+          "data":           null,
+          "defaultContent": ''
+        },
+				{ title: "icon", data:"icon" },
+				{ title: "Skill", data:"name" },
+				{ title: "Element", data:"element" },
+				{ title: "Eange", data:"range" },
+				{ title: "Effect", data:"effect" },
+				],
+		  "order": [[ 1, "asc" ]],
+		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
+		  "autoWidth": true,
+		  "deferRender": true,
+		  "initComplete": function( settings, json ) {
+		    var DTapi = this.api();
+			/*Unbind Search*/
+			$('.dataTables_filter input').off();
+			/*custom replace search field*/
+			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div>');
+			$('.searchAffix').affix({
+			  offset: { top: 180 }
+			});
+			/*Show Table upon DRAW and remove progress bar*/
+			$('#skillsTable').show();
+			/*hide loader*/
+			$('#progressModal').modal('hide');
+		  },
+		  "pageLength": pLength,
+		  "language": {
+		      "search": "",
+		      "infoFiltered": " - filtered from _MAX_ Total Skills",
+		      "zeroRecords": "No skills found matching criteria.",
+		      "info": "_START_ to _END_ / _TOTAL_ Skills Found" },
+		  /*Parsing Fields via Datatables*/
+		  "columnDefs":[
+		{ "searchable": false, "targets": [0] },
+		{ "targets": [0],
+		"render": function (skillimg, type, cRow, full )  {
+			if (type ==='display')
+				return '<img src="'+skillimg+'" class="skillIcon" title="'+cRow[1]+'" /></a>';
+			else
+				return skillimg;
+		    }
+		}
+		},
+		/*Rarity*/
+		{ 	"targets":[ 2 ],
+			"render": function(rarity, type, row, full) {
+			    if (type ==='display')
+				return rarity+' <i class="fa fa-star yellow"></i>';
+			    else
+				return rarity;
+			}
+		}] /*End Customs*/
+	}) /*End Datatables Init*/
+}
+
+function dataCheckLoad() {
+	if (localStorage.ffbeguideadv) {
+	    	/*Quick query to check for new entries*/
+	    	var serverUnitsCount=0;
+	    	var localUnitsCount=(!localStorage.ffbeguideadvCount) ? 0 : +(localStorage.ffbeguideadvCount);
+		/*Send the JSONP request*/
+		$.ajax({
+			url: urlChk,
+			success: function (quickData) {
+				serverUnitsCount=quickData.values.length;
+				/*Prompt to Sync*/
+				if (serverUnitsCount > localUnitsCount)
+					bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i> Sync Now</button> <button type="button" class="btn btn-default" id="syncCancel">Cancel</button></div>');
+				else {
+					var guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
+					if (isValidJSON(guideData))
+						initialize(JSON.parse(guideData).values);
+					else {
+						/*LocalStorage Delete and Refresh*/
+						alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
+						localStorage.removeItem("ffbeguideadv");
+						localStorage.removeItem("ffbeguideadvCount");
+						//history.pushState(null, null, location.pathname);
+						location.reload(true);
+					}
+				}
+		  	}
+		})
+    	} else {
+		$.ajax({
+			url: url,
+			success: function (fusionData) {
+				/*Save in local storage*/
+				localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
+				localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
+				initialize(fusionData.values);
+		  	}
+		})
+	} /*End localstorage checknload*/
+}
+
+/*skills parsing func*/
+function skillsParse(data) {
+	/*parse*/
+	for (var i=1;i<data.values.length;i++) {
+		var tObj={};
+		tObj["name"]=data.values[i][0];
+		tObj["element"]=data.values[i][1];
+		tObj["range"]=data.values[i][2];
+		tObj["effect"]=data.values[i][3];
+		tObj["mp"]=data.values[i][4];
+		tObj["icon"]=imgprefix+"skills/"+data.values[i][5]+".png";
+		glSkills.push(tObj);
+	}
+	dataCheckLoad();
+}
+
+$(document).ready( function(e) {
+    /*load data*/
+    if (localStorage.ffbeguideskills) {
+    	/*Quick query to check for new entries*/
+    	var serverSkillsCount=0;
+    	var localSkillsCount=(!localStorage.ffbeguideskillsCount) ? 0 : +(localStorage.ffbeguideskillsCount);
+    	/*fetch 1 column quickly*/
+    	$.ajax({
+			url: URLskillsChk,
+			success: function (skillsdata) {
+				serverSkillsCount=skillsdata.values.length;
+				if (serverSkillsCount > localSkillsCount) {
+					/*Update skills no prompt*/
+					$('#progressModal').modal({
+						keyboard:false,
+						backdrop:'static',
+						toggle:true
+					})
+					/*fetch latest skills*/
+					$.ajax({
+						url: URLskills,
+						success: function(data) {
+							/*Save in local storage*/
+							localStorage.setItem("ffbeguideskills",JSON.stringify(data));
+							localStorage.setItem("ffbeguideskillsCount",data.values.length);
+							$('#progressModal').modal('hide');
+							skillsParse(data);
+					  	}
+					})
+				} else {
+					/*load localstorage*/
+					var skillsLocal=localStorage.ffbeguideskills;
+					if (isValidJSON(skillsLocal))
+						skillsParse(JSON.parse(skillsLocal));
+					else {
+						/*LocalStorage Delete and Refresh*/
+						alert("Corrupted data detected in Skills. Proceed to Fix.");
+						localStorage.removeItem("ffbeguideskills");
+						localStorage.removeItem("ffbeguideskillsCount");
+						//history.pushState(null, null, location.pathname);
+						location.reload(true);
+					}
+				}
+			}
+	})
+    } else {
+	/*first load*/    	
+	$.ajax({
+			url: URLskills,
+			success: function (data) {
+				/*Save in local storage*/
+				localStorage.setItem("ffbeguideskills",JSON.stringify(data));
+				localStorage.setItem("ffbeguideskillsCount",data.values.length);
+				skillsParse(data);
+			}
+	})
+    } /*End of Skillscheck and load*/
+
+/*RESET*/
+$('#refreshSkills').click( function(e) {
+	/*Google analytics*/
+	ga('send', 'pageview', {
+  		'page': '/vurl/syncUnitGuideAdvance_FFBE_Refresh_Skills',
+  		'title': 'FFBE Refresh Skills'
+	});
+    	/*LocalStorage Delete and Refresh*/
+	localStorage.removeItem("ffbeguideskills");
+	localStorage.removeItem("ffbeguideskillsCount");
+	location.reload();
+})
+
+/*New units detect*/
+$(document).on("click", "#syncDetectBtn", function(e){    
+    bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i>Sync Now</button> <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button></div>');
+})
+
+/*New units sync*/
+$(document).on("click", "#syncNewBtn", function(e){
+	/*Force sync*/
+	localStorage.removeItem("ffbeguideadv");
+	localStorage.removeItem("ffbeguideadvCount");
+	//history.pushState(null, null, location.pathname);
+	location.reload(true);
+})
+
+/*Cancel sync*/
+$(document).on("click", "#syncCancel", function(e){    
+	var guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
+	if (isValidJSON(guideData)) {
+		$('#alertmodal').modal('hide');
+		initialize(JSON.parse(guideData));
+	} else {
+		/*LocalStorage Delete and Refresh*/
+		alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
+		localStorage.removeItem("ffbeguideadv");
+		localStorage.removeItem("ffbeguideadvCount");
+		//history.pushState(null, null, location.pathname);
+		location.reload(true);
+	}
+})
+
+})
+</script>
+
+<!-- Google Responsive Ad -->
+<div class="text-center clear" style="width:100%;margin:0 auto;">
+<!-- Google Manual labnol.org responsive ads-->
+<div id="google-ads-2"></div>
+<script type="text/javascript"> 
+ 
+    /* Calculate the width of available ad space */
+    ad = document.getElementById('google-ads-2');
+ 
+    if (ad.getBoundingClientRect().width) {
+	adWidth = ad.getBoundingClientRect().width; // for modern browsers 
+    } else {
+	adWidth = ad.offsetWidth; // for old IE 
+    }
+ 
+    /* Replace ca-pub-XXX with your AdSense Publisher ID */ 
+    google_ad_client = "ca-pub-2145833818900192";
+ 
+    /* Replace 1234567890 with the AdSense Ad Slot ID */ 
+    google_ad_slot = "1402210464";
+  
+    /* Do not change anything after this line */
+    if ( adWidth >= 728 )
+      google_ad_size = ["728", "90"];  /* Leaderboard 728x90 */
+    else if ( adWidth >= 468 )
+      google_ad_size = ["468", "60"];  /* Banner (468 x 60) */
+    else if ( adWidth >= 336 )
+      google_ad_size = ["336", "280"]; /* Large Rectangle (336 x 280) */
+    else if ( adWidth >= 300 )
+      google_ad_size = ["300", "250"]; /* Medium Rectangle (300 x 250) */
+    else if ( adWidth >= 250 )
+      google_ad_size = ["250", "250"]; /* Square (250 x 250) */
+    else if ( adWidth >= 200 )
+      google_ad_size = ["200", "200"]; /* Small Square (200 x 200) */
+    else if ( adWidth >= 180 )
+      google_ad_size = ["180", "150"]; /* Small Rectangle (180 x 150) */
+    else
+      google_ad_size = ["125", "125"]; /* Button (125 x 125) */
+ 
+    document.write (
+     '<ins class="adsbygoogle" style="display:inline-block;width:' 
+      + google_ad_size[0] + 'px;height:' 
+      + google_ad_size[1] + 'px" data-ad-client="' 
+      + google_ad_client + '" data-ad-slot="' 
+      + google_ad_slot + '"></ins>'
+    );
+  
+    (adsbygoogle = window.adsbygoogle || []).push({});
+ 
+</script>
+</div>
+
+<!-- disqus discussion -->
+<div class="row"><div class="col-xs-12">
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+	var disqus_shortname = 'finalfantasybraveexvius';
+	(function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div></div>
+
+</div> <!-- /container -->
+
+<!-- Alert Modal -->
+<div class="modal" id="alertmodal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h3 class="modal-title text-danger"><i class="fa fa-fire"></i> Mog Grumbles Grumbles</h3></div>
+      <div class="modal-body">
+	<div id="alertSpace" class="alert"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Progress-->
+<div class="modal" id="progressModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+	<div class="text-center">
+	    <h3 class="text-primary"><b>New Skills Available</b></h3>
+	    <i class="fa fa-spinner fa-spin fa-5x text-success"></i>
+	    <h4 class="text-primary">Updating ...</h4>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48617906-1', 'auto');
+  ga('send', 'pageview');
+</script>
+</body>
+</html>
