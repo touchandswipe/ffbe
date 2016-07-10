@@ -74,6 +74,13 @@ margin-left:-4px;
     	width:50px;
     }
     .clear {clear:both;}
+    td.details-control {
+    background: url('../resources/details_open.png') no-repeat center center;
+    cursor: pointer;
+    }
+    tr.shown td.details-control {
+	background: url('../resources/details_close.png') no-repeat center center;
+    }
 </style>
 <!-- START JSON Code-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -161,31 +168,65 @@ margin-left:-4px;
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </div>
 <!--mainbody -->
-<div class="row">
-  <table id="skillsTable" class="table-bordered table-responsive table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;"></table>
-</div>
+<table id="skillsTable" class="table-bordered table-responsive table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;"></table>
 
 <!-- ACTIVATION SCRIPTS -->
 <script type="text/javascript">
 var glSkills=[];
+var glUnits=[];
 var lbMax={1:3,2:5,3:10,4:15,5:20,6:25};
 var imgprefix="http://ffbe.summonerscentral.com/img/";
 var URLskillsChk="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:A";
 var URLskills="https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Sheets?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=Skills!A:F";
 var urlChk = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:A";
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:W";
+/*output for expansion*/
+function format ( d ) {
+	var oHTML='<div class="row"><div class="col-md-12">';
+	var oFound=false;
+	/*find matching units*/
+	console.log("searching skill: "+d.name);
+	for (var i in glUnits) {
+		if (glUnits[i][13].search(d.name)!=-1 || glUnits[i][14].search(d.name)!=-1) {
+			oHTML+='<img src="'+imgprefix+'units/'+glUnits[i][1].toLowerCase()+glUnits[i][2]+'.png" width="60"/>';
+			oFound=true;
+		}
+	}
+	oHTML+='</div>';
+	if (oFound)
+		return oHTML;
+	else
+		return '<h2 class="text-danger">No units found with skill.</h2>'
+}
+
 /*initialise build*/
-function initialize() {
-/*dtables init*/
+function initialize(unitsData) {
+	/*units data prep*/
+	var tData=unitsData.values.slice(1);
+	tData.sort(function (x, y) {
+	    if (x[1] > y[1])
+	    	return -1;
+	    if (x[1] < y[1])
+	    	return 1;
+	    return y[2] - x[2];
+	});
+	/*extract highest rarity*/
+	var cName="";
+	for (var i in tData) {
+		if (tData[i][1]!=cName)
+			glUnits.push(tData[i]);
+		cName=tData[i][1];
+	}
+	/*dtables init*/
 	var ffbeTable=$('#skillsTable').dataTable({
 		"data":glSkills,
 		"columns": [
-		    	/*{
+		    	{
 		          "className":      'details-control',
 		          "orderable":      false,
 		          "data":           null,
 		          "defaultContent": ''
-		        }, */
+		        },
 			{ title: "Icon", data:"icon" },
 			{ title: "Skill", data:"name" },
 			{ title: "Element", data:"element" },
@@ -380,6 +421,24 @@ $(document).on("click", "#syncNewBtn", function(e){
 	//history.pushState(null, null, location.pathname);
 	location.reload(true);
 })
+
+// event listener for opening and closing details
+$(document).on('click', 'td.details-control', function () {
+	var ffbeTable = $('#skillsTable').DataTable();
+	var tr = $(this).closest('tr');
+	var row = ffbeTable.row( tr );
+	
+	if ( row.child.isShown() ) {
+	    // This row is already open - close it
+	    row.child.hide();
+	    tr.removeClass('shown');
+	}
+	else {
+	    // Open this row
+	    row.child( format(row.data()) ).show();
+	    tr.addClass('shown');
+	}
+});
 
 /*Cancel sync*/
 $(document).on("click", "#syncCancel", function(e){    
