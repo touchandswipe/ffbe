@@ -222,7 +222,7 @@ function initialize(tData) {
 		],
 		  "order": [[ 1, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
-		  "autoWidth": true,
+		  "autoWidth": false,
 		  "deferRender": true,
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
@@ -238,7 +238,6 @@ function initialize(tData) {
 			/*hide loader*/
 			$('#progressModal').modal('hide');
 		  },
-		  { "width": "50", "targets": [ 0 ] },
 		  "search": { "search": urlParam('query') },
 		  "pageLength": 100,
 		  "language": {
@@ -248,6 +247,7 @@ function initialize(tData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Skills Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
+		{ "width": "50", "targets": [0] },
 		{ "searchable": false, "targets": [0,1] },
 		{ "targets": [1],
 		"render": function (skillimg, type, cRow, full )  {
