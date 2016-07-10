@@ -181,18 +181,18 @@ function initialize() {
 	ffbeTable=$('#skillsTable').dataTable({
 		"data":glSkills,
 		"columns": [
-		    {
-          "className":      'details-control',
-          "orderable":      false,
-          "data":           null,
-          "defaultContent": ''
-        },
-				{ title: "icon", data:"icon" },
-				{ title: "Skill", data:"name" },
-				{ title: "Element", data:"element" },
-				{ title: "Eange", data:"range" },
-				{ title: "Effect", data:"effect" },
-				],
+		    	/*{
+		          "className":      'details-control',
+		          "orderable":      false,
+		          "data":           null,
+		          "defaultContent": ''
+		        }, */
+			{ title: "icon", data:"icon" },
+			{ title: "Skill", data:"name" },
+			{ title: "Element", data:"element" },
+			{ title: "Eange", data:"range" },
+			{ title: "Effect", data:"effect" },
+		],
 		  "order": [[ 1, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
 		  "autoWidth": true,
@@ -211,7 +211,7 @@ function initialize() {
 			/*hide loader*/
 			$('#progressModal').modal('hide');
 		  },
-		  "pageLength": pLength,
+		  "pageLength": 100,
 		  "language": {
 		      "search": "",
 		      "infoFiltered": " - filtered from _MAX_ Total Skills",
