@@ -188,7 +188,7 @@ function format ( d ) {
 	console.log("searching skill: "+d.name);
 	for (var i in glUnits) {
 		if (glUnits[i][13].search(d.name)!=-1 || glUnits[i][14].search(d.name)!=-1) {
-			oHTML+='<div class="col-md-1"><a href="unit.html?q='+glUnits[i][1]+'<img src="'+imgprefix+'unit/'+glUnits[i][1].toLowerCase()+glUnits[i][2]+'.png" /><h4>'+glUnits[i][1]+'</h4></a></div>';
+			oHTML+='<div class="col-md-1"><a href="unit.html?q='+glUnits[i][1]+'"><img src="'+imgprefix+'unit/'+glUnits[i][1].toLowerCase()+glUnits[i][2]+'.png" /><h4>'+glUnits[i][1]+'</h4></a></div>';
 			oFound=true;
 		}
 	}
