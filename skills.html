@@ -445,7 +445,7 @@ var delay = (function(){
 /*Update URL based on search filters*/
     $(document).on("keyup", '.dataTables_filter input', function(e){
 	delay(function(){
-	var ffbeTable = $('#mytable').DataTable();
+	var ffbeTable = $('#skillsTable').DataTable();
 	var sField='.dataTables_filter input';
 	ffbeTable.search( $(sField).val() ).draw();
 	window.scrollTo(0,0);
