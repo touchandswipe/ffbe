@@ -156,7 +156,7 @@ margin-left:-4px;
 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </div>
 <!--mainbody -->
-<table id="skillsTable" class="table-bordered table-responsive table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;"></table>
+<table id="skillsTable" class="table-bordered table-hover table-striped table-condensed" style="display:none;clear:both;width:100%;"></table>
 
 <!-- ACTIVATION SCRIPTS -->
 <script type="text/javascript">
@@ -204,6 +204,12 @@ function initialize(tData) {
 			glUnits.push(tData[i]);
 		cName=tData[i][1];
 	}
+	/*Xtra Columns to hide by resolution*/
+	if ( $( document ).width() >= 1800 ) {
+	var xtraDefCol=[]; var pLength=100;
+	} else if ( ( $( document ).width() < 1800 ) && ( $( document ).width() >= 1100 ) ) { var xtraDefCol=[]; 
+	} else if ( ( $( document ).width() < 1100 ) && ( $( document ).width() >= 800 ) ) { var xtraDefCol=[];
+	} else { var xtraDefCol=[3]; }
 	/*dtables init*/
 	var ffbeTable=$('#skillsTable').dataTable({
 		"data":glSkills,
@@ -222,7 +228,7 @@ function initialize(tData) {
 		],
 		  "order": [[ 1, "asc" ]],
 		  "dom": '<"container-fluid searchAffix"<"row"<"col-md-12 col-xs-12 col-sm-12"<"#cSearchBox"f>>>><"small pull-right"p>rt<"small pull-left"i><"small"p>',
-		  "autoWidth": true,
+		  "autoWidth": false,
 		  "deferRender": true,
 		  "initComplete": function( settings, json ) {
 		    var DTapi = this.api();
