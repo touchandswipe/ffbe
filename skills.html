@@ -282,6 +282,7 @@ function dataCheckLoad() {
 /*skills parsing func*/
 function skillsParse(data) {
 	/*parse*/
+	glSkills.data=[];
 	for (var i=1;i<data.values.length;i++) {
 		var tObj={};
 		tObj["name"]=data.values[i][0];
