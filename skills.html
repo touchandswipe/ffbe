@@ -253,6 +253,7 @@ function initialize(tData) {
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
 		{ "width": "50", "targets": [0] },
+		{ "visible": false, "targets": [].concat(xtraDefCol) },
 		{ "searchable": false, "targets": [0,1] },
 		{ "targets": [1],
 		"render": function (skillimg, type, cRow, full )  {
