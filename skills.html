@@ -200,9 +200,8 @@ function format ( d ) {
 }
 
 /*initialise build*/
-function initialize(unitsData) {
+function initialize(tData) {
 	/*units data prep*/
-	var tData=unitsData.values.slice(1);
 	tData.sort(function (x, y) {
 	    if (x[1] > y[1])
 	    	return -1;
@@ -296,7 +295,7 @@ function dataCheckLoad() {
 				else {
 					var guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 					if (isValidJSON(guideData))
-						initialize(JSON.parse(guideData).values);
+						initialize(JSON.parse(guideData).values.slice(1));
 					else {
 						/*LocalStorage Delete and Refresh*/
 						alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
@@ -315,7 +314,7 @@ function dataCheckLoad() {
 				/*Save in local storage*/
 				localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
 				localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
-				initialize(fusionData.values);
+				initialize(fusionData.values.slice(1));
 		  	}
 		})
 	} /*End localstorage checknload*/
@@ -445,7 +444,7 @@ $(document).on("click", "#syncCancel", function(e){
 	var guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 	if (isValidJSON(guideData)) {
 		$('#alertmodal').modal('hide');
-		initialize(JSON.parse(guideData));
+		initialize(JSON.parse(guideData).slice(1));
 	} else {
 		/*LocalStorage Delete and Refresh*/
 		alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
