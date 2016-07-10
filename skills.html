@@ -178,7 +178,7 @@ function format ( d ) {
 	/*find matching units*/
 	console.log("searching skill: "+d.name);
 	for (var i in glUnits) {
-		if (glUnits[i][13].search(d.name)!=-1 || glUnits[i][14].search(d.name)!=-1) {
+		if (glUnits[i][13].indexOf(d.name)!=-1 || glUnits[i][14].indexOf(d.name)!=-1) {
 			oHTML+='<div class="col-xs-4 col-sm-3 col-md-2 text-center"><a href="unit.html?q='+glUnits[i][1]+'"><img class="unitIcon" src="'+imgprefix+'unit/'+glUnits[i][1].toLowerCase()+glUnits[i][2]+'.png" title="'+glUnits[i][1]+'" /><h5>'+glUnits[i][1]+'</h5></a></div>';
 			oFound=true;
 		}
