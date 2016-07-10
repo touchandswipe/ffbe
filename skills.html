@@ -35,6 +35,8 @@ margin-left:-4px;
     	background:#EEE;
     	width:150px;
     }
+    .affix { position:fixed;left:0px;top:50px;width:100%;z-index:50;background:#E6CCFF;height:95px;padding:30px 10px 0px 10px;margin:0;box-shadow: 0 4px 4px -2px #888888;; }
+    .affix-top { position:static; }
     .skillIcon {
     	width:50px;
     	height:50px;
@@ -227,7 +229,7 @@ function initialize(tData) {
 			/*Unbind Search*/
 			$('.dataTables_filter input').off();
 			/*custom replace search field*/
-			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. Rain or FFBE"></div>');
+			$('.dataTables_filter').html('<div class="input-group input-group-lg text-center" style="width:100%;margin-bottom:8px;"><span class="input-group-addon" style="width:15px;"><i class="fa fa-search"></i></span><input type="search" class="form-control" style="margin-left:0;width:100%;" placeholder="e.g. firaga or blizzara"></div>');
 			$('.searchAffix').affix({
 			  offset: { top: 180 }
 			});
@@ -430,6 +432,22 @@ $(document).on("click", "#syncCancel", function(e){
 		//history.pushState(null, null, location.pathname);
 		location.reload(true);
 	}
+})
+
+/*Update URL based on search filters*/
+    $(document).on("keyup", '.dataTables_filter input', function(e){
+	delay(function(){
+	var ffbeTable = $('#mytable').DataTable();
+	var sField='.dataTables_filter input';
+	ffbeTable.search( $(sField).val() ).draw();
+	window.scrollTo(0,0);
+	/*Enter Key only*/
+	if (e.which == 13) {
+	    var state = { stateFilter: $(sField).val() };
+	    history.pushState(state, "Fstate", "?query="+encodeURIComponent($(sField).val()) );
+	}
+	}, 450 );
+    })
 })
 
 })
