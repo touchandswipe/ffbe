@@ -146,7 +146,7 @@ function initialize(fusionData) {
 		{ "targets": [0],
 		"render": function (unit, type, cRow, full )  {
 			if (type ==='display')
-				return '<a href="unit.html?q='+cRow[1]+'" class="notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" title="'+cRow[1]+' '+cRow[2]+'stars" /></a>';
+				return '<a target="unitcard" href="unit.html?q='+cRow[1]+'" class="notranslate"><img src="'+imgprefix+'unit/'+cRow[1].toLowerCase()+cRow[2]+'.png" class="unitImg" title="'+cRow[1]+' '+cRow[2]+'stars" /></a>';
 			else
 				return unit;
 		    }
@@ -154,7 +154,7 @@ function initialize(fusionData) {
 		{ "targets": [1],
 		"render": function (name, type, cRow, full )  {
 			if (type ==='display')
-				return '<a href="unit.html?q='+cRow[1]+'" class="notranslate">'+name+'</a>';
+				return '<a target="unitcard" href="unit.html?q='+cRow[1]+'" class="notranslate">'+name+'</a>';
 			else
 				return name;
 		    }
