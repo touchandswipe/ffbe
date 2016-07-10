@@ -75,11 +75,11 @@ margin-left:-4px;
     }
     .clear {clear:both;}
     td.details-control {
-    background: url('../resources/details_open.png') no-repeat center center;
+    background: url('http://ffbe.summonerscentral.com/img/details_open.png') no-repeat center center;
     cursor: pointer;
     }
     tr.shown td.details-control {
-	background: url('../resources/details_close.png') no-repeat center center;
+	background: url('http://ffbe.summonerscentral.com/img/details_close.png') no-repeat center center;
     }
 </style>
 <!-- START JSON Code-->
@@ -182,13 +182,13 @@ var urlChk = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr
 var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:W";
 /*output for expansion*/
 function format ( d ) {
-	var oHTML='<div class="row"><div class="col-md-12">';
+	var oHTML='<div class="row">';
 	var oFound=false;
 	/*find matching units*/
 	console.log("searching skill: "+d.name);
 	for (var i in glUnits) {
 		if (glUnits[i][13].search(d.name)!=-1 || glUnits[i][14].search(d.name)!=-1) {
-			oHTML+='<img src="'+imgprefix+'units/'+glUnits[i][1].toLowerCase()+glUnits[i][2]+'.png" width="60"/>';
+			oHTML+='<div class="col-md-1"><a href="unit.html?q='+glUnits[i][1]+'<img src="'+imgprefix+'unit/'+glUnits[i][1].toLowerCase()+glUnits[i][2]+'.png" /><h4>'+glUnits[i][1]+'</h4></a></div>';
 			oFound=true;
 		}
 	}
@@ -258,23 +258,14 @@ function initialize(tData) {
 		      "info": "_START_ to _END_ / _TOTAL_ Skills Found" },
 		  /*Parsing Fields via Datatables*/
 		  "columnDefs":[
-		{ "searchable": false, "targets": [0] },
-		{ "targets": [0],
+		{ "searchable": false, "targets": [0,1] },
+		{ "targets": [1],
 		"render": function (skillimg, type, cRow, full )  {
 			if (type ==='display')
 				return '<img src="'+skillimg+'" class="skillIcon" title="'+cRow[1]+'" /></a>';
 			else
 				return skillimg;
 		    }
-		},
-		/*Rarity*/
-		{ 	"targets":[ 2 ],
-			"render": function(rarity, type, row, full) {
-			    if (type ==='display')
-				return rarity+' <i class="fa fa-star yellow"></i>';
-			    else
-				return rarity;
-			}
 		}] /*End Customs*/
 	}) /*End Datatables Init*/
 }
