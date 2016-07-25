@@ -394,19 +394,19 @@ function initialize(data) {
 			outHTML+='</tr>';
 		}
 	}
-	outHTML+='</table></div>';
+	outHTML+='</table>';
 	/*Exclusive ability*/
-	outHTML+='<div class="col-xs-12 col-sm-12 col-md-6"><h2>Exclusive Abilities</h2><table class="table table-striped table-responsive table-bordered">';
-	outHTML+='<thead><tr><th>LVL</th><th class="min50"><i class="fa fa-star-o"></i></th><th>Icon</th><th>Ability</th><th class="visible-lg">Element</th><th class="visible-lg">Range</th><th>Effects</th><th>MP</th></tr></thead>';
-	if (foundArray[hRarePos][23]=="" || foundArray[hRarePos][23]==null) {
+	outHTML+='<h2>Exclusive Abilities</h2><table class="table table-striped table-responsive table-bordered">';
+	outHTML+='<thead><tr><th>Icon</th><th>Ability</th><th class="visible-lg">Element</th><th class="visible-lg">Range</th><th>Effects</th><th>MP</th></tr></thead>';
+	if (foundArray[hRarePos][21]=="" || foundArray[hRarePos][21]==null) {
 		outHTML+='<td class="text-danger" colspan="6">No Exclusive Abilities</td>';;
 	} else {	
 		/*custom 2nd dimension sort*/
-		foundArray[hRarePos][23].sort( function(a,b){
+		foundArray[hRarePos][21].sort( function(a,b){
 			return a[1] - b[1]
 		})
-		for (var j in foundArray[hRarePos][23]) {
-			var tMagic=foundArray[hRarePos][23][j];
+		for (var j in foundArray[hRarePos][21]) {
+			var tMagic=foundArray[hRarePos][21][j];
 			outHTML+='<tr>';
 			/*match glskills*/
 			if (glSkills.hasOwnProperty(tMagic)) {
