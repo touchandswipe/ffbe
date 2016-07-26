@@ -204,7 +204,7 @@ function initialize(fusionData) {
 	<!-- RIGHT NAV -->
 	<button id="refreshBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Clear filters" style="margin-right:5px;"><i class="fa fa-lg fa-refresh fa-spin"></i></button>
    	<button id="resetBtn" type="button" class="btn nav-tt navbar-right btn-success navbar-btn" data-toggle="tooltip" title="Sync latest data" style="margin-right:5px;"><i class="fa fa-cloud-download fa-lg"></i> Sync</button>
-   	<button class="btn nav-tt navbar-right btn-primary navbar-btn" data-status="Y" id="switchBtn" style="margin-right:5px;">ALL Rarities</button>
+   	<button class="btn nav-tt navbar-right btn-primary navbar-btn" data-status="Y" id="switchBtn" style="margin-right:5px;">ALL <i class="fa fa-star"></i></button>
    	<button class="btn nav-tt navbar-right btn-default navbar-btn" data-col="15" id="globalOnly" style="margin-right:5px;"><span class="text-success">Global</span></button>
    	<button class="btn nav-tt navbar-right btn-default navbar-btn" data-col="16" id="japanOnly" style="margin-right:5px;"><span class="text-danger">日本</span></button>
    	<a href="skills.html" class="btn nav-tt navbar-right btn-default navbar-btn" style="margin-right:5px;"><i class="fa fa-search"></i> View by Skills</a>
@@ -387,11 +387,11 @@ $(document).on("click","#switchBtn", function(e) {
 	var ffbeTable = $('#mytable').DataTable();
 	if ($(this).attr("data-status")=="Y") {
 		ffbeTable.columns(17).search("").draw();
-		$(this).text("MAX Rarities");
+		$(this).text('MAX <i class="fa fa-star"></i>');
 		$(this).attr("data-status","N");
 	} else {
 		ffbeTable.columns(17).search("letitrip").draw();
-		$(this).text("ALL Rarities");
+		$(this).text('ALL <i class="fa fa-star"></i>');
 		$(this).attr("data-status","Y");
 	}
 })
