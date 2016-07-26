@@ -387,11 +387,11 @@ $(document).on("click","#switchBtn", function(e) {
 	var ffbeTable = $('#mytable').DataTable();
 	if ($(this).attr("data-status")=="Y") {
 		ffbeTable.columns(17).search("").draw();
-		$(this).text('MAX <i class="fa fa-star"></i>');
+		$(this).html('MAX <i class="fa fa-star"></i>');
 		$(this).attr("data-status","N");
 	} else {
 		ffbeTable.columns(17).search("letitrip").draw();
-		$(this).text('ALL <i class="fa fa-star"></i>');
+		$(this).html('ALL <i class="fa fa-star"></i>');
 		$(this).attr("data-status","Y");
 	}
 })
