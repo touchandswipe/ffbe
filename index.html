@@ -387,7 +387,7 @@ $(document).on("click","#switchBtn", function(e) {
 	var ffbeTable = $('#mytable').DataTable();
 	if ($(this).attr("data-status")=="Y") {
 		ffbeTable.columns(17).search("").draw();
-		$(this).text("TOP Rarities");
+		$(this).text("MAX Rarities");
 		$(this).attr("data-status","N");
 	} else {
 		ffbeTable.columns(17).search("letitrip").draw();
