@@ -297,7 +297,6 @@ $(document).ready( function(e) {
 				serverUnitsCount+=(quickData.values[i][0]=="Y") ? 1 : 0;
 				serverUnitsCount+=(quickData.values[i][1]=="Y") ? 1 : 0;
 			}
-			console.log("New Count Method: "+serverUnitsCount);
 			serverUnitsCount=quickData.values.length;
 			/*Prompt to Sync*/
 			if (serverUnitsCount > localUnitsCount)
