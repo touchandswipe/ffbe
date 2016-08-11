@@ -297,6 +297,7 @@ $(document).ready( function(e) {
 				serverUnitsCount+=(quickData.values[i][0]=="Y") ? 1 : 0;
 				serverUnitsCount+=(quickData.values[i][1]=="Y") ? 1 : 0;
 			}
+			console.log("New Method: "+serverUnitsCount);
 			/*Prompt to Sync*/
 			if (serverUnitsCount > localUnitsCount)
 				bfpAlert("New Units Detected",'New units available for sync. You can sync now or later at any time. Do you wish to sync now? <div class="text-right"><button type="button" class="btn btn-success" id="syncNewBtn"><i class="fa fa-cloud-download"></i> Sync Now</button> <button type="button" class="btn btn-default" id="syncCancel">Cancel</button></div>');
