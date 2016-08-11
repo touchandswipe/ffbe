@@ -283,7 +283,7 @@ function initialize(fusionData) {
 <script type="text/javascript">
 $(document).ready( function(e) {
     /*LocalStorage Retreival and storage*/
-    var urlChk = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:A";
+    var urlChk = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=W:X";
     var url = "https://sheets.googleapis.com/v4/spreadsheets/1oKx5_qbgx0pCspH9LFr0GV3_thT3VG6AiCXhdt1K56s/values/Units?key=AIzaSyCyF9yZ9Lyl57HAQXtzrd3yONewk4-fGSg&range=A:X";
     if (localStorage.ffbeguideadv) {
     	/*Quick query to check for new entries*/
@@ -293,6 +293,11 @@ $(document).ready( function(e) {
 	$.ajax({
 		url: urlChk,
 		success: function (quickData) {
+			for (var i in quickData.values) {
+				serverUnitsCount+=(quickData.values[i][0]=="Y") ? 1 : 0;
+				serverUnitsCount+=(quickData.values[i][1]=="Y") ? 1 : 0;
+			}
+			console.log("New Count Method: "+serverUnitsCount);
 			serverUnitsCount=quickData.values.length;
 			/*Prompt to Sync*/
 			if (serverUnitsCount > localUnitsCount)
