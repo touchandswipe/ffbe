@@ -278,8 +278,8 @@ function dataCheckLoad() {
 		$.ajax({
 			url: urlChk,
 			success: function (quickData) {
-				var gIndex=quickdata.values[0].indexOf("Global");
-				var jIndex=quickdata.values[0].indexOf("Japan");
+				var gIndex=quickData.values[0].indexOf("Global");
+				var jIndex=quickData.values[0].indexOf("Japan");
 				for (var i in quickData.values) {
 					serverUnitsCount+=(quickData.values[i][0]=="Y") ? 1 : 0;
 					serverUnitsCount+=(quickData.values[i][1]=="Y") ? 1 : 0;
@@ -308,8 +308,8 @@ function dataCheckLoad() {
 			success: function (fusionData) {
 				/*Save in local storage*/
 				localStorage.setItem("ffbeguideadv",LZString.compressToUTF16(JSON.stringify(fusionData)));
-				var gIndex=fusiondata.values[0].indexOf("Global");
-				var jIndex=fusiondata.values[0].indexOf("Japan");
+				var gIndex=fusionData.values[0].indexOf("Global");
+				var jIndex=fusionData.values[0].indexOf("Japan");
 				for (var i in fusionData.values) {
 					serverUnitsCount+=(fusionData.values[i][gIndex]=="Y") ? 1 : 0;
 					serverUnitsCount+=(fusionData.values[i][jIndex]=="Y") ? 1 : 0;
