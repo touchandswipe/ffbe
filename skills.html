@@ -441,7 +441,7 @@ $(document).on('click', 'td.details-control', function () {
 
 /*Cancel sync*/
 $(document).on("click", "#syncCancel", function(e){    
-	var guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
+	guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 	if (isValidJSON(guideData)) {
 		$('#alertmodal').modal('hide');
 		initialize(JSON.parse(guideData).slice(1));
@@ -450,6 +450,7 @@ $(document).on("click", "#syncCancel", function(e){
 		alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
 		localStorage.removeItem("ffbeguideadv");
 		localStorage.removeItem("ffbeguideadvCount");
+		history.pushState(null, null, location.pathname);
 		location.reload(true);
 	}
 })
