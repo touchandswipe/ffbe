@@ -444,7 +444,7 @@ $(document).on("click", "#syncCancel", function(e){
 	guideData=LZString.decompressFromUTF16(localStorage.ffbeguideadv);
 	if (isValidJSON(guideData)) {
 		$('#alertmodal').modal('hide');
-		initialize(JSON.parse(guideData).slice(1));
+		initialize(JSON.parse(guideData).values.slice(1));
 	} else {
 		/*LocalStorage Delete and Refresh*/
 		alert("Corrupted data detected or Data structure has changed. Proceed to Fix.");
