@@ -466,7 +466,7 @@ function dataCheckLoad() {
 					serverUnitsCount+=(fusionData.values[i][22]=="Y") ? 1 : 0;
 					serverUnitsCount+=(fusionData.values[i][23]=="Y") ? 1 : 0;
 				}
-				localStorage.setItem("ffbeguideadvCount",fusionData.values.length);
+				localStorage.setItem("ffbeguideadvCount",serverUnitsCount);
 				initialize(fusionData.values);
 		  	}
 		})
