@@ -1,1 +1,11 @@
-
+#pTitle {
+  display: inline-block;
+  margin: 0 10px;
+  vertical-align: middle;
+}
+#pTitle h1 {
+  font-size: 20px !important;
+  margin-top: 0px !important;
+  padding-top: 0 !important;
+  font-weight: bold;
+}
