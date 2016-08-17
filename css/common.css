@@ -1,3 +1,10 @@
+.logoShdw {
+		-webkit-filter: drop-shadow(0px 0px 6px #CCC);
+		filter: drop-shadow(0px 0px 5px #CCC);
+		margin-top:-8px;
+		margin-left:-4px;
+		display: inline-block !important;
+}
 #pTitle {
   display: inline-block;
   margin: 0 10px;
