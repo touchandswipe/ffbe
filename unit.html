@@ -91,7 +91,7 @@
 	    <span class="icon-bar"></span>
 	  </button>
 	  <a class="navbar-brand" href="http://ffbe.summonerscentral.com"><img src="http://ffbe.summonerscentral.com/img/ffbeicon.png" class="img-circle logoShdw" width="64" title="Final Fantasy Brave Exvius"/></a>
-	  <div id="pTitle"><h1><span class="hidden-xs hidden-sm">Final Fantasy Brave Exvius</span><span class="hidden-md hidden-lg">FFBE</span> Unit Details</h1></div>
+	  <div id="pTitle"><h1><span class="hidden-xs hidden-sm">Final Fantasy Brave Exvius</span><span class="hidden-md hidden-lg">FFBE</span> <span id="unitTitle">Unit Details</span></h1></div>
 	</div>
 	<!-- Collapse Nav-->
 	<div class="navbar-collapse collapse">
@@ -196,6 +196,10 @@ function initialize(data) {
 		return (x[2]-y[2])
 	});
 	var hRarePos=foundArray.length-1;
+	/*update meta-desc and title and header*/
+	$('meta[name=description]').attr('content', 'Final Fantasy Brave Exvius - '+uName+' Unit Card');
+	document.title='Final Fantasy Brave Exvius - '+uName+' Unit Card';
+	$(`#unitTitle`).text(uName);
 	/*artwork*/
 	var outHTML='<div class="col-md-12"><h1><b>'+uName+'</b></h1><div class="table-responsive"><table class="table">';
 	outHTML+='<tr>';
